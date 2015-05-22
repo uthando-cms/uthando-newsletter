@@ -17,12 +17,12 @@ use Zend\Form\Form;
  *
  * @package UthandoNewsletter\Form
  */
-class Newsletter extends Form
+class Subscriber extends Form
 {
     public function init()
     {
         $this->add([
-            'name' => 'newsletterId',
+            'name' => 'subscriberId',
             'type' => 'hidden',
         ]);
 

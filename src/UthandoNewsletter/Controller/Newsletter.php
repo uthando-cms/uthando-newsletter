@@ -2,7 +2,7 @@
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
- * @package   UthandoNewsletter
+ * @package   UthandoNewsletter\Controller
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
  * @license   see LICENSE.txt
@@ -10,17 +10,14 @@
 
 namespace UthandoNewsletter\Controller;
 
-use UthandoCommon\Controller\AbstractCrudController;
+use Zend\Mvc\Controller\AbstractActionController;
 
 /**
  * Class Newsletter
  *
- * @package UthandoNewsletter
+ * @package UthandoNewsletter\Controller
  */
-class Newsletter extends AbstractCrudController
+class Newsletter extends AbstractActionController
 {
-    protected $controllerSearchOverrides = ['sort' => 'newsletterId'];
-    protected $serviceName = 'UthandoNewsletter';
-    protected $route = 'admin/newsletter';
 
 }

@@ -1,0 +1,25 @@
+<?=$this->partial('uthando-admin/partial/search', [
+    'name'			=> 'newsletter-subscriber',
+    'searchInputs'	=> [
+        'Subscribers' => 'email',
+    ],
+]);?>
+
+<div id="table-newsletter-subscriber">
+    <?=$this->partial('uthando-newsletter/subscriber/list', [
+        'models' => $this->models
+    ]); ?>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $('#table-newsletter-subscriber').dataGrid({
+            url : 'subscriber/list',
+            query: { sort : 'subscriberId' },
+            searchForm : $('#search-newsletter-subscriber'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>

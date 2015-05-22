@@ -1,0 +1,45 @@
+
+<?php $this->headTitle('Newsletter') ?>
+
+<?php if (count($this->models) > 0): ?>
+    <div class="panel panel-default">
+        <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+                <th data-field="subscriberId">Id</th>
+                <th data-field="userId">Email</th>
+                <th data-field="dateCreated">Date Created</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php /* @var $row \UthandoNewsletter\Model\Subscriber */ ?>
+            <?php foreach($this->models as $row): ?>
+                <tr>
+                    <td><?=$this->escapeHtml($row->getSubscriberId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getEmail()); ?></td>
+                    <td><?=$this->escapeHtml($this->formatDate($row->getDateCreated())); ?></td>
+                    <td>
+                        <?=$this->partial('uthando-admin/partial/edit-actions', [
+                            'pk'		=> 'newsletterId',
+                            'id'		=> $row->getSubscriberId(),
+                            'tableName'	=> 'newsletter-subscriber',
+                            'route'		=> 'admin/newsletter/subscriber/edit',
+                        ]);?>
+                    </td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
+
+    <?=$this->paginationControl(
+        $this->models,
+        'Elastic',
+        'application/partial/paginate',
+        ['route' => 'admin/newsletter/subscriber/page']
+    ); ?>
+
+<?php else: ?>
+    <h4>There are no Subscribers yet.</h4>
+<?php endif; ?>

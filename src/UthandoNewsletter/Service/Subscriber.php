@@ -17,7 +17,7 @@ use UthandoCommon\Service\AbstractMapperService;
  *
  * @package UthandoNewsletter\Service
  */
-class Newsletter extends AbstractMapperService
+class Subscriber extends AbstractMapperService
 {
-    protected $serviceAlias = 'UthandoNewsletter';
+    protected $serviceAlias = 'UthandoNewsletterSubscriber';
 }

@@ -22,14 +22,14 @@ use Zend\Validator\Hostname;
  * @package UthandoNewsletter\InputFilter
  * @method InputFilterPluginManager getServiceLocator()
  */
-class Newsletter extends InputFilter implements ServiceLocatorAwareInterface
+class Subscriber extends InputFilter implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
 
     public function init()
     {
         $this->add([
-            'name' => 'newsletterId',
+            'name' => 'subscriberId',
             'required' => 'false',
             'filters' => [
                 ['name' => 'stringTrim'],

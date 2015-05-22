@@ -18,7 +18,7 @@ use UthandoCommon\Model\ModelInterface;
  *
  * @package UthandoNewsletter\Model
  */
-class Newsletter implements ModelInterface
+class Subscriber implements ModelInterface
 {
     use Model,
         DateCreatedTrait;
@@ -26,7 +26,7 @@ class Newsletter implements ModelInterface
     /**
      * @var int
      */
-    protected $newsletterId;
+    protected $subscriberId;
 
     /**
      * @var string
@@ -36,18 +36,18 @@ class Newsletter implements ModelInterface
     /**
      * @return int
      */
-    public function getNewsletterId()
+    public function getSubscriberId()
     {
-        return $this->newsletterId;
+        return $this->subscriberId;
     }
 
     /**
-     * @param int $newsletterId
+     * @param int $subscriberId
      * @return $this
      */
-    public function setNewsletterId($newsletterId)
+    public function setSubscriberId($subscriberId)
     {
-        $this->newsletterId = $newsletterId;
+        $this->subscriberId = $subscriberId;
         return $this;
     }
 

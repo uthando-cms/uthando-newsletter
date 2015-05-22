@@ -8,49 +8,49 @@ return [
                     'privileges'    => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoNewsletter\Controller\Newsletter' => ['action' => 'all']],
+                                'UthandoNewsletter\Controller\Subscriber' => ['action' => 'all']],
                         ],
                     ],
                 ],
             ],
             'resources' => [
-                'UthandoNewsletter\Controller\Newsletter',
+                'UthandoNewsletter\Controller\Subscriber',
             ],
         ],
     ],
     'controllers' => [
         'invokables' => [
-            'UthandoNewsletter\Controller\Newsletter' => 'UthandoNewsletter\Controller\Newsletter',
+            'UthandoNewsletter\Controller\Subscriber' => 'UthandoNewsletter\Controller\Subscriber',
         ],
     ],
     'form_elements' => [
         'invokables' => [
-            'UthandoNewsletter' => 'UthandoNewsletter\Form\Newsletter',
+            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Form\Subscriber',
         ],
     ],
     'hydrators' => [
         'invokables' => [
-            'UthandoNewsletter' => 'UthandoNewsletter\Hydrator\Newsletter',
+            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Hydrator\Subscriber',
         ],
     ],
     'input_filters' => [
         'invokables' => [
-            'UthandoNewsletter' => 'UthandoNewsletter\InputFilter\Newsletter',
+            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\InputFilter\Subscriber',
         ],
     ],
     'uthando_mappers' => [
         'invokables' => [
-            'UthandoNewsletter' => 'UthandoNewsletter\Mapper\Newsletter',
+            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Mapper\Subscriber',
         ],
     ],
     'uthando_models' => [
         'invokables' => [
-            'UthandoNewsletter' => 'UthandoNewsletter\Model\Newsletter',
+            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Model\Subscriber',
         ],
     ],
     'uthando_services' => [
         'invokables' => [
-            'UthandoNewsletter' => 'UthandoNewsletter\Service\Newsletter',
+            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Service\Subscriber',
         ],
     ],
     'view_manager' => [
@@ -73,31 +73,45 @@ return [
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
-                            'edit' => [
-                                'type'    => 'Segment',
+                            'subscriber' => [
+                                'type' => 'Segment',
                                 'options' => [
-                                    'route'         => '/[:action[/id/[:id]]]',
-                                    'constraints'   => [
-                                        'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
-                                        'id'		=> '\d+'
-                                    ],
-                                    'defaults'      => [
-                                        'action'        => 'edit',
-                                        'force-ssl'     => 'ssl'
+                                    'route' => '/subscriber',
+                                    'defaults' => [
+                                        'controller' => 'Subscriber',
+                                        'action' => 'index',
+                                        'force-ssl' => 'ssl'
                                     ],
                                 ],
-                            ],
-                            'page' => [
-                                'type'    => 'Segment',
-                                'options' => [
-                                    'route'         => '/page/[:page]',
-                                    'constraints'   => [
-                                        'page'			=> '\d+'
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'edit' => [
+                                        'type'    => 'Segment',
+                                        'options' => [
+                                            'route'         => '/[:action[/id/[:id]]]',
+                                            'constraints'   => [
+                                                'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id'		=> '\d+'
+                                            ],
+                                            'defaults'      => [
+                                                'action'        => 'edit',
+                                                'force-ssl'     => 'ssl'
+                                            ],
+                                        ],
                                     ],
-                                    'defaults'      => [
-                                        'action'        => 'list',
-                                        'page'          => 1,
-                                        'force-ssl'     => 'ssl'
+                                    'page' => [
+                                        'type'    => 'Segment',
+                                        'options' => [
+                                            'route'         => '/page/[:page]',
+                                            'constraints'   => [
+                                                'page'			=> '\d+'
+                                            ],
+                                            'defaults'      => [
+                                                'action'        => 'list',
+                                                'page'          => 1,
+                                                'force-ssl'     => 'ssl'
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
@@ -111,19 +125,19 @@ return [
         'admin' => [
             'newsletter' => [
                 'label' => 'Newsletter',
-                'route' => 'admin/newsletter',
+                'route' => 'admin/newsletter/subscriber',
                 'resource' => 'menu:admin',
                 'pages' => [
                     'list' => [
                         'label'     => 'List All Subscribers',
                         'action'    => 'index',
-                        'route'     => 'admin/newsletter',
+                        'route'     => 'admin/newsletter/subscriber',
                         'resource'  => 'menu:admin'
                     ],
                     'add' => [
                         'label'     => 'Add New Subscriber',
                         'action'    => 'add',
-                        'route'     => 'admin/newsletter/edit',
+                        'route'     => 'admin/newsletter/subscriber/edit',
                         'resource'  => 'menu:admin'
                     ],
                 ],

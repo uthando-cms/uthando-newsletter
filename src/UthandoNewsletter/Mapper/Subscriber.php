@@ -16,8 +16,8 @@ use UthandoCommon\Mapper\AbstractDbMapper;
  *
  * @package UthandoNewsletter\Mapper
  */
-class Newsletter extends AbstractDbMapper
+class Subscriber extends AbstractDbMapper
 {
-    protected $table = 'newsletter';
-    protected $primary = 'newsletterId';
+    protected $table = 'newsletterSubscriber';
+    protected $primary = 'subscriberId';
 }

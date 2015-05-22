@@ -18,7 +18,7 @@ use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
  *
  * @package UthandoNewsletter\Hydrator
  */
-class Newsletter extends AbstractHydrator
+class Subscriber extends AbstractHydrator
 {
     public function __construct()
     {
@@ -27,13 +27,13 @@ class Newsletter extends AbstractHydrator
         $this->addStrategy('dateCreated', new DateTimeStrategy());
     }
     /**
-     * @param \UthandoNewsletter\Model\Newsletter $object
+     * @param \UthandoNewsletter\Model\Subscriber $object
      * @return array
      */
     public function extract($object)
     {
         return [
-            'newsletterId' => $object->getNewsletterId(),
+            'subscriberId' => $object->getSubscriberId(),
             'email'         => $object->getEmail(),
             'dateCreated'   => $this->extractValue('dateCreated', $object->getDateCreated()),
         ];

@@ -3,10 +3,11 @@
 return array(
     'UthandoNewsletter\Module'                 => __DIR__ . '/Module.php',
     'UthandoNewsletter\Controller\Newsletter'  => __DIR__ . '/src/UthandoNewsletter/Controller/Newsletter.php',
-    'UthandoNewsletter\Form\Newsletter'        => __DIR__ . '/src/UthandoNewsletter/Form/Newsletter.php',
-    'UthandoNewsletter\Hydrator\Newsletter'    => __DIR__ . '/src/UthandoNewsletter/Hydrator/Newsletter.php',
-    'UthandoNewsletter\InputFilter\Newsletter' => __DIR__ . '/src/UthandoNewsletter/InputFilter/Newsletter.php',
-    'UthandoNewsletter\Mapper\Newsletter'      => __DIR__ . '/src/UthandoNewsletter/Mapper/Newsletter.php',
-    'UthandoNewsletter\Model\Newsletter'       => __DIR__ . '/src/UthandoNewsletter/Model/Newsletter.php',
-    'UthandoNewsletter\Service\Newsletter'     => __DIR__ . '/src/UthandoNewsletter/Service/Newsletter.php',
+    'UthandoNewsletter\Controller\Subscriber'  => __DIR__ . '/src/UthandoNewsletter/Controller/Subscriber.php',
+    'UthandoNewsletter\Form\Subscriber'        => __DIR__ . '/src/UthandoNewsletter/Form/Subscriber.php',
+    'UthandoNewsletter\Hydrator\Subscriber'    => __DIR__ . '/src/UthandoNewsletter/Hydrator/Subscriber.php',
+    'UthandoNewsletter\InputFilter\Subscriber' => __DIR__ . '/src/UthandoNewsletter/InputFilter/Subscriber.php',
+    'UthandoNewsletter\Mapper\Subscriber'      => __DIR__ . '/src/UthandoNewsletter/Mapper/Subscriber.php',
+    'UthandoNewsletter\Model\Subscriber'       => __DIR__ . '/src/UthandoNewsletter/Model/Subscriber.php',
+    'UthandoNewsletter\Service\Subscriber'     => __DIR__ . '/src/UthandoNewsletter/Service/Subscriber.php',
 );

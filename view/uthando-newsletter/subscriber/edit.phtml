@@ -1,0 +1,14 @@
+
+<?php $this->headTitle('Edit Subscriber') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+    'form' 			=> $this->form,
+    'formName'		=> 'Edit Subscriber',
+    'postUrl'		=> $this->url('admin/newsletter/subscriber/edit', [
+        'id' => $this->model->getSubscriberId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/newsletter/subscriber'),
+    'formElements'	=> [
+        'email', 'subscriberId',
+    ],
+]); ?>
