@@ -18,7 +18,7 @@ return [
             ],
         ],
     ],
-    'controller' => [
+    'controllers' => [
         'invokables' => [
             'UthandoNewsletter\Controller\Newsletter' => 'UthandoNewsletter\Controller\Newsletter',
         ],
@@ -60,17 +60,49 @@ return [
         'routes' => [
             'admin' => [
                 'child_routes' => [
-                    'type' => 'Segment',
-                    'options' => [
-                        'route' => '/newsletter',
-                        'defaults' => [
-                            '__NAMESPACE__' => 'UthandoNewsletter\Controller',
-                            'controller' => 'Newsletter',
-                            'action' => 'index',
-                            'force-ssl' => 'ssl'
+                    'newsletter' => [
+                        'type' => 'Segment',
+                        'options' => [
+                            'route' => '/newsletter',
+                            'defaults' => [
+                                '__NAMESPACE__' => 'UthandoNewsletter\Controller',
+                                'controller' => 'Newsletter',
+                                'action' => 'index',
+                                'force-ssl' => 'ssl'
+                            ],
+                        ],
+                        'may_terminate' => true,
+                        'child_routes' => [
+                            'edit' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'         => '/[:action[/id/[:id]]]',
+                                    'constraints'   => [
+                                        'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                        'id'		=> '\d+'
+                                    ],
+                                    'defaults'      => [
+                                        'action'        => 'edit',
+                                        'force-ssl'     => 'ssl'
+                                    ],
+                                ],
+                            ],
+                            'page' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'         => '/page/[:page]',
+                                    'constraints'   => [
+                                        'page'			=> '\d+'
+                                    ],
+                                    'defaults'      => [
+                                        'action'        => 'list',
+                                        'page'          => 1,
+                                        'force-ssl'     => 'ssl'
+                                    ],
+                                ],
+                            ],
                         ],
                     ],
-                    'may_terminate' => true,
                 ],
             ],
         ],
@@ -80,7 +112,21 @@ return [
             'newsletter' => [
                 'label' => 'Newsletter',
                 'route' => 'admin/newsletter',
-                'resource' => 'menu:admin'
+                'resource' => 'menu:admin',
+                'pages' => [
+                    'list' => [
+                        'label'     => 'List All Subscribers',
+                        'action'    => 'index',
+                        'route'     => 'admin/newsletter',
+                        'resource'  => 'menu:admin'
+                    ],
+                    'add' => [
+                        'label'     => 'Add New Subscriber',
+                        'action'    => 'add',
+                        'route'     => 'admin/newsletter/edit',
+                        'resource'  => 'menu:admin'
+                    ],
+                ],
             ],
         ],
     ],

@@ -8,7 +8,7 @@
  * @license   see LICENSE.txt
  */
 
-namespace UthandoNewsletter;
+namespace UthandoNewsletter\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
 

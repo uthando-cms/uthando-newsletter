@@ -10,7 +10,7 @@
 
 namespace UthandoNewsletter\Form;
 
-use Zend\Form\View\Helper\Form;
+use Zend\Form\Form;
 
 /**
  * Class Newsletter
@@ -21,6 +21,17 @@ class Newsletter extends Form
 {
     public function init()
     {
+        $this->add([
+            'name' => 'newsletterId',
+            'type' => 'hidden',
+        ]);
 
+        $this->add([
+            'name' => 'email',
+            'type' => 'email',
+            'options' => [
+                'label' => 'Email Address',
+            ],
+        ]);
     }
 }
