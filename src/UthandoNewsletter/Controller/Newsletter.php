@@ -19,5 +19,8 @@ use Zend\Mvc\Controller\AbstractActionController;
  */
 class Newsletter extends AbstractActionController
 {
-
+    public function editAction()
+    {
+        return [];
+    }
 }

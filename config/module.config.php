@@ -8,18 +8,22 @@ return [
                     'privileges'    => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoNewsletter\Controller\Subscriber' => ['action' => 'all']],
+                                'UthandoNewsletter\Controller\Newsletter' => ['action' => 'all'],
+                                'UthandoNewsletter\Controller\Subscriber' => ['action' => 'all'],
+                            ],
                         ],
                     ],
                 ],
             ],
             'resources' => [
+                'UthandoNewsletter\Controller\Newsletter',
                 'UthandoNewsletter\Controller\Subscriber',
             ],
         ],
     ],
     'controllers' => [
         'invokables' => [
+            'UthandoNewsletter\Controller\Newsletter' => 'UthandoNewsletter\Controller\Newsletter',
             'UthandoNewsletter\Controller\Subscriber' => 'UthandoNewsletter\Controller\Subscriber',
         ],
     ],
@@ -123,22 +127,26 @@ return [
     ],
     'navigation' => [
         'admin' => [
-            'newsletter' => [
-                'label' => 'Newsletter',
-                'route' => 'admin/newsletter/subscriber',
-                'resource' => 'menu:admin',
+            'modules' => [
                 'pages' => [
-                    'list' => [
-                        'label'     => 'List All Subscribers',
-                        'action'    => 'index',
-                        'route'     => 'admin/newsletter/subscriber',
-                        'resource'  => 'menu:admin'
-                    ],
-                    'add' => [
-                        'label'     => 'Add New Subscriber',
-                        'action'    => 'add',
-                        'route'     => 'admin/newsletter/subscriber/edit',
-                        'resource'  => 'menu:admin'
+                    'newsletter' => [
+                        'label' => 'Newsletter',
+                        'route' => 'admin/newsletter',
+                        'resource' => 'menu:admin',
+                        'pages' => [
+                            'list' => [
+                                'label'     => 'List All Subscribers',
+                                'action'    => 'index',
+                                'route'     => 'admin/newsletter/subscriber',
+                                'resource'  => 'menu:admin'
+                            ],
+                            'add' => [
+                                'label'     => 'Add New Subscriber',
+                                'action'    => 'add',
+                                'route'     => 'admin/newsletter/subscriber/edit',
+                                'resource'  => 'menu:admin'
+                            ],
+                        ],
                     ],
                 ],
             ],
