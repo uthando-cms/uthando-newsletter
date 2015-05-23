@@ -18,12 +18,12 @@ use Zend\Form\Form;
  *
  * @package UthandoNewsletter\Form
  */
-class Subscriber extends Form
+class Newsletter extends Form
 {
     public function init()
     {
         $this->add([
-            'name' => 'subscriberId',
+            'name' => 'newsletterId',
             'type' => 'hidden',
         ]);
 
@@ -37,19 +37,32 @@ class Subscriber extends Form
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
-            ],
+            ]
         ]);
 
         $this->add([
-            'name' => 'email',
-            'type' => 'email',
+            'name' => 'description',
+            'type' => 'text',
             'options' => [
-                'label' => 'Email Address',
+                'label' => 'Description',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
                 'column-size' => 'md-8',
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
+            ]
+        ]);
+
+        $this->add([
+            'name' => 'enabled',
+            'type' => 'checkbox',
+            'options' => [
+                'label' => 'Visible',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'use_hidden_element' => true,
+                'checked_value' => '1',
+                'unchecked_value' => '0',
+                'column-size' => 'sm-8 col-sm-offset-4',
             ],
         ]);
     }

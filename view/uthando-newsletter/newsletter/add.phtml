@@ -1,15 +1,15 @@
 
-<?php $this->headTitle('Edit Newsletter') ?>
+<?php $this->headTitle('Add Newsletter') ?>
 
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
     'form' 			=> $this->form,
-    'formName'		=> 'Edit Newsletter',
+    'formName'		=> 'Add Newsletter',
     'postUrl'		=> $this->url('admin/newsletter/edit', [
-        'id' => $this->model->getNewsletterId(),
+        'action' => 'add',
     ]),
     'cancelUrl'     => $this->url('admin/newsletter'),
     'formWidth'     => 6,
     'formElements'	=> [
-        'name', 'description', 'visible', 'newsletterId',
+        'name', 'description', 'visible',
     ],
 ]); ?>

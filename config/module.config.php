@@ -29,32 +29,38 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
-            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Form\Subscriber',
+            'UthandoNewsletter'             => 'UthandoNewsletter\Form\Newsletter',
+            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Form\Subscriber',
         ],
     ],
     'hydrators' => [
         'invokables' => [
-            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Hydrator\Subscriber',
+            'UthandoNewsletter'             => 'UthandoNewsletter\Hydrator\Newsletter',
+            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Hydrator\Subscriber',
         ],
     ],
     'input_filters' => [
         'invokables' => [
-            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\InputFilter\Subscriber',
+            'UthandoNewsletter'             => 'UthandoNewsletter\InputFilter\Newsletter',
+            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\InputFilter\Subscriber',
         ],
     ],
     'uthando_mappers' => [
         'invokables' => [
-            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Mapper\Subscriber',
+            'UthandoNewsletter'             => 'UthandoNewsletter\Mapper\Newsletter',
+            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Mapper\Subscriber',
         ],
     ],
     'uthando_models' => [
         'invokables' => [
-            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Model\Subscriber',
+            'UthandoNewsletter'             => 'UthandoNewsletter\Model\Newsletter',
+            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Model\Subscriber',
         ],
     ],
     'uthando_services' => [
         'invokables' => [
-            'UthandoNewsletterSubscriber' => 'UthandoNewsletter\Service\Subscriber',
+            'UthandoNewsletter'             => 'UthandoNewsletter\Service\Newsletter',
+            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Service\Subscriber',
         ],
     ],
     'view_manager' => [
@@ -77,6 +83,34 @@ return [
                         ],
                         'may_terminate' => true,
                         'child_routes' => [
+                            'edit' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'         => '/[:action[/id/[:id]]]',
+                                    'constraints'   => [
+                                        'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                        'id'		=> '\d+'
+                                    ],
+                                    'defaults'      => [
+                                        'action'        => 'edit',
+                                        'force-ssl'     => 'ssl'
+                                    ],
+                                ],
+                            ],
+                            'page' => [
+                                'type'    => 'Segment',
+                                'options' => [
+                                    'route'         => '/page/[:page]',
+                                    'constraints'   => [
+                                        'page'			=> '\d+'
+                                    ],
+                                    'defaults'      => [
+                                        'action'        => 'list',
+                                        'page'          => 1,
+                                        'force-ssl'     => 'ssl'
+                                    ],
+                                ],
+                            ],
                             'subscriber' => [
                                 'type' => 'Segment',
                                 'options' => [
@@ -135,17 +169,36 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label'     => 'List All Subscribers',
+                                'label'     => 'List All Newsletters',
                                 'action'    => 'index',
-                                'route'     => 'admin/newsletter/subscriber',
+                                'route'     => 'admin/newsletter',
                                 'resource'  => 'menu:admin'
                             ],
                             'add' => [
-                                'label'     => 'Add New Subscriber',
+                                'label'     => 'Add New Newsletter',
                                 'action'    => 'add',
-                                'route'     => 'admin/newsletter/subscriber/edit',
+                                'route'     => 'admin/newsletter/edit',
                                 'resource'  => 'menu:admin'
                             ],
+                            'subscribers' => [
+                                'label' => 'Subscribers',
+                                'route' => 'admin/newsletter/subscriber',
+                                'resource' => 'menu:admin',
+                                'pages' => [
+                                    'list' => [
+                                        'label'     => 'List All Subscribers',
+                                        'action'    => 'index',
+                                        'route'     => 'admin/newsletter/subscriber',
+                                        'resource'  => 'menu:admin'
+                                    ],
+                                    'add' => [
+                                        'label'     => 'Add New Subscriber',
+                                        'action'    => 'add',
+                                        'route'     => 'admin/newsletter/subscriber/edit',
+                                        'resource'  => 'menu:admin'
+                                    ],
+                                ],
+                            ]
                         ],
                     ],
                 ],

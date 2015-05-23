@@ -10,17 +10,16 @@
 
 namespace UthandoNewsletter\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
+use UthandoCommon\Controller\AbstractCrudController;
 
 /**
  * Class Newsletter
  *
  * @package UthandoNewsletter\Controller
  */
-class Newsletter extends AbstractActionController
+class Newsletter extends AbstractCrudController
 {
-    public function editAction()
-    {
-        return [];
-    }
+    protected $controllerSearchOverrides = ['sort' => 'newsletterId'];
+    protected $serviceName = 'UthandoNewsletter';
+    protected $route = 'admin/newsletter';
 }

@@ -38,6 +38,22 @@ class Subscriber extends InputFilter implements ServiceLocatorAwareInterface
         ]);
 
         $this->add([
+            'name' => 'name',
+            'required' => true,
+            'filters' => [
+                ['name' => 'stringTrim'],
+                ['name' => 'StripTags'],
+            ],
+            'validators' => [
+                ['name' => 'StringLength', 'options' => [
+                    'encoding' => 'UTF-8',
+                    'min'      => 2,
+                    'max'      => 255,
+                ]],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'email',
             'required' => true,
             'filters' => [

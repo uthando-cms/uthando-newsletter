@@ -1,22 +1,26 @@
 
-<?php
-$menu = $this->uthandoNavigation('UthandoAdmin\Navigation')
-    ->uthandoTbMenu()
-    ->setUlClass('dropdown-menu')
-    ->setOnlyActiveBranch(true)
-    ->setRenderParents(false);
+<?=$this->partial('uthando-admin/partial/search', [
+    'name'			=> 'newsletter',
+    'searchInputs'	=> [
+        'Newsletters' => 'name-description',
+    ],
+]);?>
 
-if ($this->menuPartial) {
-    $menu->setPartial($this->menuPartial);
-}
-?>
-
-<div class="dropdown pull-right">
-    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown">
-        Actions
-        <span class="caret"></span>
-    </button>
-    <?=$menu;?>
+<div id="table-newsletter">
+    <?=$this->partial('uthando-newsletter/newsletter/list', [
+        'models' => $this->models
+    ]); ?>
 </div>
 
-<div class=""clearfix">&nbsp;</div>
+
+<script>
+    $(document).ready(function(){
+        $('#table-newsletter').dataGrid({
+            url : 'list',
+            query: { sort : 'newsletterId' },
+            searchForm : $('#search-newsletter'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>

@@ -2,14 +2,15 @@
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
- * @package   ${NAMESPACE}
+ * @package   UthandoNewsletter\Model
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
  * @license   see LICENSE.txt
  */
+
 namespace UthandoNewsletter\Model;
 
-use UthandoCommon\Model\DateCreatedTrait;
+
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
@@ -18,15 +19,14 @@ use UthandoCommon\Model\ModelInterface;
  *
  * @package UthandoNewsletter\Model
  */
-class Subscriber implements ModelInterface
+class Newsletter implements ModelInterface
 {
-    use Model,
-        DateCreatedTrait;
+    use Model;
 
     /**
      * @var int
      */
-    protected $subscriberId;
+    protected $newsletterId;
 
     /**
      * @var string
@@ -36,23 +36,28 @@ class Subscriber implements ModelInterface
     /**
      * @var string
      */
-    protected $email;
+    protected $description;
+
+    /**
+     * @var bool
+     */
+    protected $enabled;
 
     /**
      * @return int
      */
-    public function getSubscriberId()
+    public function getNewsletterId()
     {
-        return $this->subscriberId;
+        return $this->newsletterId;
     }
 
     /**
-     * @param int $subscriberId
+     * @param int $newsletterId
      * @return $this
      */
-    public function setSubscriberId($subscriberId)
+    public function setNewsletterId($newsletterId)
     {
-        $this->subscriberId = $subscriberId;
+        $this->newsletterId = $newsletterId;
         return $this;
     }
 
@@ -77,18 +82,36 @@ class Subscriber implements ModelInterface
     /**
      * @return string
      */
-    public function getEmail()
+    public function getDescription()
     {
-        return $this->email;
+        return $this->description;
     }
 
     /**
-     * @param string $email
+     * @param string $description
      * @return $this
      */
-    public function setEmail($email)
+    public function setDescription($description)
     {
-        $this->email = $email;
+        $this->description = $description;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isEnabled()
+    {
+        return $this->enabled;
+    }
+
+    /**
+     * @param boolean $enabled
+     * @return $this
+     */
+    public function setEnabled($enabled)
+    {
+        $this->enabled = (bool) $enabled;
         return $this;
     }
 }

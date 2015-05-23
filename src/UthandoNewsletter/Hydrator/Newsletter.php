@@ -11,32 +11,33 @@
 namespace UthandoNewsletter\Hydrator;
 
 use UthandoCommon\Hydrator\AbstractHydrator;
-use UthandoCommon\Hydrator\Strategy\DateTime as DateTimeStrategy;
+use UthandoCommon\Hydrator\Strategy\TrueFalse;
 
 /**
  * Class Newsletter
  *
  * @package UthandoNewsletter\Hydrator
  */
-class Subscriber extends AbstractHydrator
+class Newsletter extends AbstractHydrator
 {
     public function __construct()
     {
         parent::__construct();
 
-        $this->addStrategy('dateCreated', new DateTimeStrategy());
+        $this->addStrategy('visible', new TrueFalse());
     }
+
     /**
-     * @param \UthandoNewsletter\Model\Subscriber $object
+     * @param \UthandoNewsletter\Model\Newsletter $object
      * @return array
      */
     public function extract($object)
     {
         return [
-            'subscriberId'  => $object->getSubscriberId(),
+            'newsletterId'  => $object->getNewsletterId(),
             'name'          => $object->getName(),
-            'email'         => $object->getEmail(),
-            'dateCreated'   => $this->extractValue('dateCreated', $object->getDateCreated()),
+            'description'   => $object->getDescription(),
+            'enabled'       => $this->extractValue('visible', $object->isEnabled()),
         ];
     }
 }
