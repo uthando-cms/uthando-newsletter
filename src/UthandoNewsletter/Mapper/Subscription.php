@@ -13,25 +13,25 @@ namespace UthandoNewsletter\Mapper;
 use UthandoCommon\Mapper\AbstractDbMapper;
 
 /**
- * Class Newsletter
+ * Class Subscription
  *
  * @package UthandoNewsletter\Mapper
  */
-class Newsletter extends AbstractDbMapper
+class Subscription extends AbstractDbMapper
 {
-    protected $table = 'newsletter';
-    protected $primary = 'newsletterId';
+    protected $table = 'newsletterSubscription';
+    protected $primary = 'subscriptionId';
 
     /**
+     * @param $id
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
-    public function fetchAllEnabled()
+    public function getSubscriptionsBySubscriberId($id)
     {
         $select = $this->getSelect();
-        $select->where->equalTo('enabled', 1);
+        $select->where->equalTo('subscriberId', $id);
 
         $rowSet = $this->fetchResult($select);
         return $rowSet;
     }
-
 }

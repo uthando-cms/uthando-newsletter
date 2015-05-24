@@ -1,0 +1,25 @@
+<?=$this->partial('uthando-admin/partial/search', [
+    'name'			=> 'newsletter-template',
+    'searchInputs'	=> [
+        'Templates' => 'name',
+    ],
+]);?>
+
+<div id="table-newsletter-template">
+    <?=$this->partial('uthando-newsletter/template/list', [
+        'models' => $this->models
+    ]); ?>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $('#table-newsletter-template').dataGrid({
+            url : 'subscriber/list',
+            query: { sort : 'templateId' },
+            searchForm : $('#search-newsletter-template'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>

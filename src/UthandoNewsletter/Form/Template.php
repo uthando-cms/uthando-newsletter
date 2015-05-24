@@ -14,16 +14,16 @@ use TwbBundle\Form\View\Helper\TwbBundleForm;
 use Zend\Form\Form;
 
 /**
- * Class Newsletter
+ * Class Template
  *
  * @package UthandoNewsletter\Form
  */
-class Subscriber extends Form
+class Template extends Form
 {
     public function init()
     {
         $this->add([
-            'name' => 'subscriberId',
+            'name' => 'templateId',
             'type' => 'hidden',
         ]);
 
@@ -33,37 +33,39 @@ class Subscriber extends Form
             'options' => [
                 'label' => 'Name',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'md-4',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-md-2',
                 ],
             ],
         ]);
 
         $this->add([
-            'name' => 'email',
-            'type' => 'email',
+            'name' => 'params',
+            'type' => 'textarea',
             'options' => [
-                'label' => 'Email Address',
+                'label' => 'Params',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'md-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-md-2',
                 ],
             ],
         ]);
 
         $this->add([
-            'name' => 'subscriptions',
-            'type' => 'UthandoNewsletterSubscriptionList',
+            'name' => 'body',
+            'type' => 'textarea',
             'options' => [
-                'label' => 'Subscriptions',
+                'label' => 'Body',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'md-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-md-2',
                 ],
-                'subscriber_id' => $this->options['subscriber_id'],
+            ],
+            'attributes' => [
+                'rows' => 25,
             ],
         ]);
     }

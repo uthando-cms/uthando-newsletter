@@ -9,4 +9,8 @@ return array(
     'uthando-newsletter/subscriber/edit'  => __DIR__ . '/view/uthando-newsletter/subscriber/edit.phtml',
     'uthando-newsletter/subscriber/index' => __DIR__ . '/view/uthando-newsletter/subscriber/index.phtml',
     'uthando-newsletter/subscriber/list'  => __DIR__ . '/view/uthando-newsletter/subscriber/list.phtml',
+    'uthando-newsletter/template/add'     => __DIR__ . '/view/uthando-newsletter/template/add.phtml',
+    'uthando-newsletter/template/edit'    => __DIR__ . '/view/uthando-newsletter/template/edit.phtml',
+    'uthando-newsletter/template/index'   => __DIR__ . '/view/uthando-newsletter/template/index.phtml',
+    'uthando-newsletter/template/list'    => __DIR__ . '/view/uthando-newsletter/template/list.phtml',
 );

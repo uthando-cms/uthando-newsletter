@@ -23,4 +23,14 @@ class Subscriber extends AbstractCrudController
     protected $serviceName = 'UthandoNewsletterSubscriber';
     protected $route = 'admin/newsletter/subscriber';
 
+    public function editAction()
+    {
+        $id = (int) $this->params('id', 0);
+        $this->getService()->setFormOptions([
+            'subscriber_id' => $id,
+        ]);
+
+        return parent::editAction();
+    }
+
 }

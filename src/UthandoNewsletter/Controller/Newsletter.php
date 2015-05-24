@@ -11,15 +11,46 @@
 namespace UthandoNewsletter\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
+use UthandoNewsletter\Model\Newsletter as NewsletterModel;
 
 /**
  * Class Newsletter
  *
  * @package UthandoNewsletter\Controller
+ * @method \UthandoNewsletter\Service\Newsletter getService()
  */
 class Newsletter extends AbstractCrudController
 {
     protected $controllerSearchOverrides = ['sort' => 'newsletterId'];
     protected $serviceName = 'UthandoNewsletter';
     protected $route = 'admin/newsletter';
+
+    /**
+     * @return \Zend\Http\Response
+     */
+    public function setEnabledAction()
+    {
+        $id = (int) $this->params('id', 0);
+
+        if (!$id) {
+            return $this->redirect()->toRoute($this->getRoute(), [
+                'action' => 'list'
+            ]);
+        }
+
+        try {
+            /* @var $model NewsletterModel */
+            $model = $this->getService()->getById($id);
+            $this->getService()->toggleEnabled($model);
+        } catch (\Exception $e) {
+            $this->setExceptionMessages($e);
+            return $this->redirect()->toRoute($this->getRoute(), [
+                'action' => 'list'
+            ]);
+        }
+
+        return $this->redirect()->toRoute($this->getRoute(), [
+            'action' => 'list'
+        ]);
+    }
 }

@@ -1,0 +1,15 @@
+
+<?php $this->headTitle('Add Template') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+    'form' 			=> $this->form,
+    'formName'		=> 'Add Template',
+    'postUrl'		=> $this->url('admin/newsletter/template/edit', [
+        'action' => 'add',
+    ]),
+    'cancelUrl'     => $this->url('admin/newsletter/template'),
+    'formWidth'     => 12,
+    'formElements'	=> [
+        'name', 'params', 'body'
+    ],
+]); ?>
