@@ -48,6 +48,11 @@ class Message implements ModelInterface
     protected $params;
 
     /**
+     * @var Template
+     */
+    protected $template;
+
+    /**
      * @return int
      */
     public function getMessageId()
@@ -134,6 +139,24 @@ class Message implements ModelInterface
     public function setParams($params)
     {
         $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * @return Template
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @param Template $template
+     * @return $this
+     */
+    public function setTemplate($template)
+    {
+        $this->template = $template;
         return $this;
     }
 }

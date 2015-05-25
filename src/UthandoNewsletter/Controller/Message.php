@@ -10,12 +10,16 @@
 
 namespace UthandoNewsletter\Controller;
 
-
 use UthandoCommon\Controller\AbstractCrudController;
 
+/**
+ * Class Message
+ *
+ * @package UthandoNewsletter\Controller
+ */
 class Message extends  AbstractCrudController
 {
     protected $controllerSearchOverrides = ['sort' => 'messageId'];
-    protected $serviceName = 'UthandoMessage';
+    protected $serviceName = 'UthandoNewsletterMessage';
     protected $route = 'admin/newsletter/message';
 }

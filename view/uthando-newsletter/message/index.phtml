@@ -1,0 +1,26 @@
+
+<?=$this->partial('uthando-admin/partial/search', [
+    'name'			=> 'newsletter-message',
+    'searchInputs'	=> [
+        'Messages' => 'name-subject',
+    ],
+]);?>
+
+<div id="table-newsletter-message">
+    <?=$this->partial('uthando-newsletter/message/list', [
+        'models' => $this->models
+    ]); ?>
+</div>
+
+
+<script>
+    $(document).ready(function(){
+        $('#table-newsletter-message').dataGrid({
+            url : 'list',
+            query: { sort : 'messageId' },
+            searchForm : $('#search-newsletter-message'),
+            paging : 'links',
+            columnSort: true
+        });
+    });
+</script>

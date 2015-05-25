@@ -35,15 +35,18 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
+            'UthandoNewsletterMessage'          => 'UthandoNewsletter\Form\Message',
             'UthandoNewsletter'                 => 'UthandoNewsletter\Form\Newsletter',
             'UthandoNewsletterSubscriber'       => 'UthandoNewsletter\Form\Subscriber',
             'UthandoNewsletterTemplate'         => 'UthandoNewsletter\Form\Template',
 
             'UthandoNewsletterSubscriptionList' => 'UthandoNewsletter\Form\Element\SubscriptionList',
+            'UthandoNewsletterTemplateList'     => 'UthandoNewsletter\Form\Element\TemplateList',
         ],
     ],
     'hydrators' => [
         'invokables' => [
+            'UthandoNewsletterMessage'      => 'UthandoNewsletter\Hydrator\Message',
             'UthandoNewsletter'             => 'UthandoNewsletter\Hydrator\Newsletter',
             'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Hydrator\Subscriber',
             'UthandoNewsletterSubscription' => 'UthandoNewsletter\Hydrator\Subscription',
@@ -52,6 +55,7 @@ return [
     ],
     'input_filters' => [
         'invokables' => [
+            'UthandoNewsletterMessage'      => 'UthandoNewsletter\InputFilter\Message',
             'UthandoNewsletter'             => 'UthandoNewsletter\InputFilter\Newsletter',
             'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\InputFilter\Subscriber',
             'UthandoNewsletterTemplate'     => 'UthandoNewsletter\InputFilter\Template',
@@ -77,6 +81,7 @@ return [
     ],
     'uthando_services' => [
         'invokables' => [
+            'UthandoNewsletterMessage'      => 'UthandoNewsletter\Service\Message',
             'UthandoNewsletter'             => 'UthandoNewsletter\Service\Newsletter',
             'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Service\Subscriber',
             'UthandoNewsletterSubscription' => 'UthandoNewsletter\Service\Subscription',
@@ -128,6 +133,48 @@ return [
                                         'action'        => 'list',
                                         'page'          => 1,
                                         'force-ssl'     => 'ssl'
+                                    ],
+                                ],
+                            ],
+                            'message' => [
+                                'type' => 'Segment',
+                                'options' => [
+                                    'route' => '/message',
+                                    'defaults' => [
+                                        'controller' => 'Message',
+                                        'action' => 'index',
+                                        'force-ssl' => 'ssl'
+                                    ],
+                                ],
+                                'may_terminate' => true,
+                                'child_routes' => [
+                                    'edit' => [
+                                        'type'    => 'Segment',
+                                        'options' => [
+                                            'route'         => '/[:action[/id/[:id]]]',
+                                            'constraints'   => [
+                                                'action'    => '[a-zA-Z][a-zA-Z0-9_-]*',
+                                                'id'		=> '\d+'
+                                            ],
+                                            'defaults'      => [
+                                                'action'        => 'edit',
+                                                'force-ssl'     => 'ssl'
+                                            ],
+                                        ],
+                                    ],
+                                    'page' => [
+                                        'type'    => 'Segment',
+                                        'options' => [
+                                            'route'         => '/page/[:page]',
+                                            'constraints'   => [
+                                                'page'			=> '\d+'
+                                            ],
+                                            'defaults'      => [
+                                                'action'        => 'list',
+                                                'page'          => 1,
+                                                'force-ssl'     => 'ssl'
+                                            ],
+                                        ],
                                     ],
                                 ],
                             ],
@@ -241,6 +288,25 @@ return [
                                 'action'    => 'add',
                                 'route'     => 'admin/newsletter/edit',
                                 'resource'  => 'menu:admin'
+                            ],
+                            'messages' => [
+                                'label' => 'Messages',
+                                'route' => 'admin/newsletter/message',
+                                'resource' => 'menu:admin',
+                                'pages' => [
+                                    'list' => [
+                                        'label'     => 'List All Messages',
+                                        'action'    => 'index',
+                                        'route'     => 'admin/newsletter/message',
+                                        'resource'  => 'menu:admin'
+                                    ],
+                                    'add' => [
+                                        'label'     => 'Add New Message',
+                                        'action'    => 'add',
+                                        'route'     => 'admin/newsletter/message/edit',
+                                        'resource'  => 'menu:admin'
+                                    ],
+                                ],
                             ],
                             'subscribers' => [
                                 'label' => 'Subscribers',

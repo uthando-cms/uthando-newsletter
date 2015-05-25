@@ -1,0 +1,15 @@
+
+<?php $this->headTitle('Edit Message') ?>
+
+<?=$this->partial('uthando-admin/partial/add-edit-form', [
+    'form' 			=> $this->form,
+    'formName'		=> 'Edit Message',
+    'postUrl'		=> $this->url('admin/newsletter/message/edit', [
+        'id' => $this->model->getMessageId(),
+    ]),
+    'cancelUrl'     => $this->url('admin/newsletter/message'),
+    'formWidth'     => 12,
+    'formElements'	=> [
+        'templateId', 'subject', 'params', 'message', 'messageId'
+    ],
+]); ?>

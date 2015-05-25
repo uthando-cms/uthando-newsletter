@@ -1,28 +1,29 @@
-
-<?php $this->headTitle('Newsletter Template') ?>
+<?php $this->headTitle('Newsletter Message') ?>
 
 <?php if (count($this->models) > 0): ?>
     <div class="panel panel-default">
         <table class="table table-hover table-bordered table-condensed">
             <thead>
             <tr>
-                <th data-field="templateId">Id</th>
-                <th data-field="name">Name</th>
+                <th data-field="messageId">Id</th>
+                <th data-field="subject">Subject</th>
+                <th data-field="template">Template</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <?php /* @var $row \UthandoNewsletter\Model\Template */ ?>
+            <?php /* @var $row \UthandoNewsletter\Model\Message */ ?>
             <?php foreach($this->models as $row): ?>
                 <tr>
-                    <td><?=$this->escapeHtml($row->getTemplateId()); ?></td>
-                    <td><?=$this->escapeHtml($row->getName()); ?></td>
+                    <td><?=$this->escapeHtml($row->getMessageId()); ?></td>
+                    <td><?=$this->escapeHtml($row->getSubject()); ?></td>
+                    <td><?=$this->escapeHtml($row->getTemplate()->getName()); ?></td>
                     <td>
                         <?=$this->partial('uthando-admin/partial/edit-actions', [
-                            'pk'		=> 'templateId',
-                            'id'		=> $row->getTemplateId(),
-                            'tableName'	=> 'newsletter-template',
-                            'route'		=> 'admin/newsletter/template/edit',
+                            'pk'		=> 'messageId',
+                            'id'		=> $row->getMessageId(),
+                            'tableName'	=> 'newsletter-message',
+                            'route'		=> 'admin/newsletter/message/edit',
                         ]);?>
                     </td>
                 </tr>
@@ -39,5 +40,5 @@
     ); ?>
 
 <?php else: ?>
-    <h4>There are no Templates yet.</h4>
+    <h4>There are no Messages yet.</h4>
 <?php endif; ?>

@@ -81,6 +81,7 @@ class Subscriber extends AbstractRelationalMapperService
         $subscriber = $this->getSubscriberWithSubscriptions($subscriberId);
 
         $subscribe = $model->getSubscribe();
+        $result = false;
 
         // if we have a subscriber id then update subscriptions
         // where values are positive
