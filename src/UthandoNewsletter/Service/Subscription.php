@@ -21,5 +21,27 @@ use UthandoCommon\Service\AbstractMapperService;
  */
 class Subscription extends AbstractMapperService
 {
+    /**
+     * @var string
+     */
     protected $serviceAlias = 'UthandoNewsletterSubscription';
+
+    /**
+     * @param $id
+     * @return array
+     */
+    public function getSubscriptionsBySubscriberId($id)
+    {
+        $id = (int) $id;
+
+        $subscriptions = $this->getMapper()->getSubscriptionsBySubscriberId($id);
+
+        $newsletterSubscriptions = [];
+
+        foreach ($subscriptions as $subscription) {
+            $newsletterSubscriptions[] = $subscription;
+        }
+
+        return $newsletterSubscriptions;
+    }
 }

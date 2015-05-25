@@ -54,7 +54,7 @@ class Subscriber extends Form
         ]);
 
         $this->add([
-            'name' => 'subscriptions',
+            'name' => 'subscribe',
             'type' => 'UthandoNewsletterSubscriptionList',
             'options' => [
                 'label' => 'Subscriptions',
