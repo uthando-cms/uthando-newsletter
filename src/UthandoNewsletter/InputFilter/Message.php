@@ -50,7 +50,7 @@ class Message extends InputFilter
 
         $this->add([
             'name' => 'params',
-            'required' => true,
+            'required' => false,
             'filters' => [
                 ['name' => 'StripTags'],
                 ['name' => 'StringTrim'],

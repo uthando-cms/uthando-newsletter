@@ -61,6 +61,12 @@ return [
             'UthandoNewsletterTemplate'     => 'UthandoNewsletter\InputFilter\Template',
         ],
     ],
+    'service_manager' => [
+        'factories' => [
+            'ViewNewsletterRenderer' => 'UthandoNewsletter\Mvc\Service\ViewNewsletterRendererFactory',
+            'ViewNewsletterStrategy' => 'UthandoNewsletter\Mvc\Service\ViewNewsletterStrategyFactory',
+        ]
+    ],
     'uthando_mappers' => [
         'invokables' => [
             'UthandoNewsletterMessage'      => 'UthandoNewsletter\Mapper\Message',
@@ -89,6 +95,9 @@ return [
         ],
     ],
     'view_manager' => [
+        'strategies' => [
+            'ViewNewsletterStrategy',
+        ],
         'template_map' => include __DIR__ . '/../template_map.php'
     ],
     'router' => [

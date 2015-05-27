@@ -34,6 +34,11 @@ class Message extends AbstractRelationalMapperService
         ],
     ];
 
+    /**
+     * @param $id
+     * @param null $cols
+     * @return array|null|\UthandoNewsletter\Model\Message
+     */
     public function getById($id, $cols = null)
     {
         $model = parent::getById($id, $cols);

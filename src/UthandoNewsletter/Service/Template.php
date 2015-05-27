@@ -10,9 +10,14 @@
 
 namespace UthandoNewsletter\Service;
 
-
 use UthandoCommon\Service\AbstractMapperService;
 
+/**
+ * Class Template
+ *
+ * @package UthandoNewsletter\Service
+ * @method \UthandoNewsletter\Model\Template|array|null getById($id, $col = null)
+ */
 class Template extends AbstractMapperService
 {
     protected $serviceAlias = 'UthandoNewsletterTemplate';

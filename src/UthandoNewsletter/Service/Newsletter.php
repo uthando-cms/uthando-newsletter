@@ -17,6 +17,7 @@ use UthandoNewsletter\Model\Newsletter as NewsletterModel;
  * Class Newsletter
  *
  * @package UthandoNewsletter\Service
+ * @method \UthandoNewsletter\Model\Newsletter|array|null getById($id, $col = null)
  * @method \UthandoNewsletter\Mapper\Newsletter getMapper($mapperClass = null, array $options = [])
  */
 class Newsletter extends AbstractMapperService

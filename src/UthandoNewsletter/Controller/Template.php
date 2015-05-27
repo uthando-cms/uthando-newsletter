@@ -11,6 +11,7 @@
 namespace UthandoNewsletter\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
+use UthandoNewsletter\View\Model\NewsletterModel;
 
 /**
  * Class Template
@@ -22,4 +23,13 @@ class Template extends AbstractCrudController
     protected $controllerSearchOverrides = ['sort' => 'templateId'];
     protected $serviceName = 'UthandoNewsletterTemplate';
     protected $route = 'admin/newsletter/template';
+
+    public function previewAction()
+    {
+        $id = $this->params()->fromRoute('id', 0);
+        $viewModel = new NewsletterModel();
+        $viewModel->setTemplate('template/' . $id);
+
+        return $viewModel;
+    }
 }
