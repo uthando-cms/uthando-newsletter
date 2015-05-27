@@ -52,6 +52,8 @@ class NewsletterResolver implements ResolverInterface
                 $model = $this->getMessageService()
                     ->getById($name[1]);
                 break;
+            default:
+                $model = null;
         }
 
         return $model;

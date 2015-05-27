@@ -1,6 +1,18 @@
 <?php
 
 return [
+    'asset_manager' => [
+        'resolver_configs' => [
+            'collections' => [
+                'css/uthando-admin.css' => [
+                    'css/newsletter-admin.css'
+                ],
+            ],
+            'paths' => [
+                'UthandoNewsletter' => __DIR__ . '/../public',
+            ],
+        ],
+    ],
     'uthando_user' => [
         'acl' => [
             'roles' => [

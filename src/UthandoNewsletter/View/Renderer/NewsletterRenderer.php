@@ -13,7 +13,6 @@ namespace UthandoNewsletter\View\Renderer;
 use UthandoNewsletter\Model\Message;
 use UthandoNewsletter\Model\Template;
 use UthandoNewsletter\View\Model\NewsletterModel;
-use UthandoNewsletter\View\Renderer\NewsletterEngine;
 use UthandoNewsletter\View\Resolver\NewsletterResolver;
 use Zend\View\Exception\DomainException;
 use Zend\View\Exception\RuntimeException;

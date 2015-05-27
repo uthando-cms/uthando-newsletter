@@ -16,6 +16,11 @@ use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
 use Zend\View\ViewEvent;
 
+/**
+ * Class NewsletterStrategy
+ *
+ * @package UthandoNewsletter\View\Strategy
+ */
 class NewsletterStrategy extends AbstractListenerAggregate
 {
     /**
@@ -36,7 +41,7 @@ class NewsletterStrategy extends AbstractListenerAggregate
     /**
      * Retrieve the composed renderer
      *
-     * @return PhpRenderer
+     * @return NewsletterRenderer
      */
     public function getRenderer()
     {
@@ -67,7 +72,7 @@ class NewsletterStrategy extends AbstractListenerAggregate
             return $this->renderer;
         }
 
-        return;
+        return false;
     }
 
     public function injectResponse(ViewEvent $e)

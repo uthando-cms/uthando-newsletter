@@ -20,6 +20,11 @@
                     <td><?=$this->escapeHtml($row->getTemplate()->getName()); ?></td>
                     <td>
                         <a href="<?=$this->url('admin/newsletter/message/edit', [
+                            'action' => 'send',
+                            'id' => $row->getMessageId(),
+                        ]);?>" class="edit-button">
+                            <i class="fa fa-paper-plane-o fa-2x"></i></a>&nbsp;
+                        <a href="<?=$this->url('admin/newsletter/message/edit', [
                             'action' => 'preview',
                             'id' => $row->getMessageId(),
                         ]);?>" id="newsletter-message-preview-button" class="edit-button message-preview">
@@ -55,7 +60,7 @@
 
         bootbox.dialog({
             title: "Newsletter Message Preview",
-            message: '<iframe src="' + url + '" width="100%" height="600"></iframe>',
+            message: '<iframe class="newsletter-preview" src="' + url + '"></iframe>',
             buttons: {
                 main: {
                     label: "Close",
