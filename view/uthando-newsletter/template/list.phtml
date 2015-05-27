@@ -18,6 +18,11 @@
                     <td><?=$this->escapeHtml($row->getTemplateId()); ?></td>
                     <td><?=$this->escapeHtml($row->getName()); ?></td>
                     <td>
+                        <a href="<?=$this->url('admin/newsletter/template/edit', [
+                            'action' => 'preview',
+                            'id' => $row->getTemplateId(),
+                        ]);?>" id="newsletter-message-preview-button" class="edit-button message-preview">
+                            <i class="fa fa-eye fa-2x"></i></a>&nbsp;
                         <?=$this->partial('uthando-admin/partial/edit-actions', [
                             'pk'		=> 'templateId',
                             'id'		=> $row->getTemplateId(),
@@ -41,3 +46,21 @@
 <?php else: ?>
     <h4>There are no Templates yet.</h4>
 <?php endif; ?>
+
+<script>
+    $('table').on('click', 'a.message-preview', function(e) {
+        e.preventDefault();
+        var url = $(this).attr('href');
+
+        bootbox.dialog({
+            title: "Newsletter Template Preview",
+            message: '<iframe src="' + url + '" width="100%" height="600"></iframe>',
+            buttons: {
+                main: {
+                    label: "Close",
+                    className: "btn-default"
+                }
+            }
+        });
+    });
+</script>
