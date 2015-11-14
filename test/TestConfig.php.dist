@@ -2,8 +2,8 @@
 return [
     'modules' => [
         'Application',
-        'UthandoNewsletter',
         'UthandoCommon',
+        'UthandoNewsletter',
     ],
     'module_listener_options' => [
         'module_paths' => [
