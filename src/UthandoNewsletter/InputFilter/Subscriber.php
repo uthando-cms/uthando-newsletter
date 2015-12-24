@@ -30,7 +30,7 @@ class Subscriber extends InputFilter implements ServiceLocatorAwareInterface
     {
         $this->add([
             'name' => 'subscriberId',
-            'required' => 'false',
+            'required' => false,
             'filters' => [
                 ['name' => 'stringTrim'],
                 ['name' => 'StripTags'],

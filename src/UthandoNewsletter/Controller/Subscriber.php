@@ -33,4 +33,9 @@ class Subscriber extends AbstractCrudController
         return parent::editAction();
     }
 
+    public function addSubscriberAction()
+    {
+
+    }
+
 }

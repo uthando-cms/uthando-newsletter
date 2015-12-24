@@ -63,7 +63,7 @@ class Subscriber extends Form
                 'label_attributes' => [
                     'class' => 'col-md-4',
                 ],
-                'subscriber_id' => $this->options['subscriber_id'],
+                'subscriber_id' => $this->getOption('subscriber_id'),
             ],
         ]);
     }

@@ -20,4 +20,13 @@ class Subscriber extends AbstractDbMapper
 {
     protected $table = 'newsletterSubscriber';
     protected $primary = 'subscriberId';
+
+    /**
+     * @param $email
+     * @return array|\UthandoCommon\Model\ModelInterface
+     */
+    public function getByEmail($email)
+    {
+        return $this->getById($email, 'email');
+    }
 }

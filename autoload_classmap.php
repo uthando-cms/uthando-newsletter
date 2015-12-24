@@ -4,8 +4,10 @@ return array(
     'UthandoNewsletter\Module'                                    => __DIR__ . '/Module.php',
     'UthandoNewsletter\Controller\Message'                        => __DIR__ . '/src/UthandoNewsletter/Controller/Message.php',
     'UthandoNewsletter\Controller\Newsletter'                     => __DIR__ . '/src/UthandoNewsletter/Controller/Newsletter.php',
+    'UthandoNewsletter\Controller\Preferences'                    => __DIR__ . '/src/UthandoNewsletter/Controller/Preferences.php',
     'UthandoNewsletter\Controller\Subscriber'                     => __DIR__ . '/src/UthandoNewsletter/Controller/Subscriber.php',
     'UthandoNewsletter\Controller\Template'                       => __DIR__ . '/src/UthandoNewsletter/Controller/Template.php',
+    'UthandoNewsletter\Event\UserListener'                        => __DIR__ . '/src/UthandoNewsletter/Event/UserListener.php',
     'UthandoNewsletter\Form\Element\SubscriptionList'             => __DIR__ . '/src/UthandoNewsletter/Form/Element/SubscriptionList.php',
     'UthandoNewsletter\Form\Element\TemplateList'                 => __DIR__ . '/src/UthandoNewsletter/Form/Element/TemplateList.php',
     'UthandoNewsletter\Form\Message'                              => __DIR__ . '/src/UthandoNewsletter/Form/Message.php',
@@ -43,4 +45,7 @@ return array(
     'UthandoNewsletter\View\Renderer\NewsletterRenderer'          => __DIR__ . '/src/UthandoNewsletter/View/Renderer/NewsletterRenderer.php',
     'UthandoNewsletter\View\Resolver\NewsletterResolver'          => __DIR__ . '/src/UthandoNewsletter/View/Resolver/NewsletterResolver.php',
     'UthandoNewsletter\View\Strategy\NewsletterStrategy'          => __DIR__ . '/src/UthandoNewsletter/View/Strategy/NewsletterStrategy.php',
+    'UthandoNewsletter\View\SubscribeForm'                        => __DIR__ . '/src/UthandoNewsletter/View/SubscribeForm.php',
+    'UthandoNewsletterTest\Bootstrap'                             => __DIR__ . '/test/Bootstrap.php',
+    'UthandoNewsletterTest\Framework\TestCase'                    => __DIR__ . '/test/UthandoNewsletterTest/Framework/TestCase.php',
 );

@@ -11,17 +11,41 @@
 
 namespace UthandoNewsletter;
 
+use UthandoCommon\Config\ConfigInterface;
+use UthandoCommon\Config\ConfigTrait;
+use UthandoNewsletter\Event\UserListener;
+use Zend\Mvc\MvcEvent;
+
 /**
  * Class Module
  * @package UthandoNewsletter
  */
-class Module
+class Module implements ConfigInterface
 {
+    use ConfigTrait;
+
+    /**
+     * @param MvcEvent $e
+     */
+    public function onBootStrap(MvcEvent $e)
+    {
+        $app = $e->getApplication();
+        $eventManager = $app->getEventManager();
+
+        $eventManager->attachAggregate(new UserListener());
+    }
+
+    /**
+     * @return array
+     */
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
 
+    /**
+     * @return array
+     */
     public function getAutoloaderConfig()
     {
         return [

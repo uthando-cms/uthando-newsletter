@@ -19,6 +19,7 @@ use Zend\EventManager\Event;
  * Class Newsletter
  *
  * @package UthandoNewsletter\Service
+ * @method SubscriberModel getModel($model = null)
  */
 class Subscriber extends AbstractRelationalMapperService
 {
@@ -41,8 +42,13 @@ class Subscriber extends AbstractRelationalMapperService
     public function attachEvents()
     {
         $this->getEventManager()->attach([
-            'post.edit',
+            'post.edit', 'post.add',
         ], [$this, 'updateSubscriptions']);
+    }
+
+    public function getSubscriberByEmail($email)
+    {
+        return $this->getMapper()->getByEmail($email);
     }
 
     /**

@@ -35,6 +35,29 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
     protected $subscriberId;
 
     /**
+     * @var bool
+     */
+    protected $labelPrepend = false;
+
+    /**
+     * @var string
+     */
+    protected $labelHtml = '<i></i>';
+
+    /**
+     * @var bool
+     */
+    protected $preSelect = false;
+
+    /**
+     * Setup class
+     */
+    public function init()
+    {
+        $this->setName('subscribe');
+    }
+
+    /**
      * @return int
      */
     public function getSubscriberId()
@@ -97,13 +120,74 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
                 }
             }
 
-            $valueOptions[] = [
+            $options = [
                 'label' => $row->getName(),
                 'value' => $row->getNewsletterId(),
-                'selected' => $subscribed,
+                'selected' => ($this->isPreSelect()) ? true : $subscribed,
             ];
+
+            if ($this->isLabelPrepend()) {
+                $options['label'] =  $this->getLabelHtml() . $options['label'];
+                $options['label_options']['disable_html_escape'] = true;
+            }
+
+            $valueOptions[] = $options;
         }
 
         return $valueOptions;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isLabelPrepend()
+    {
+        return $this->labelPrepend;
+    }
+
+    /**
+     * @param boolean $labelPrepend
+     * @return $this
+     */
+    public function setLabelPrepend($labelPrepend)
+    {
+        $this->labelPrepend = $labelPrepend;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getLabelHtml()
+    {
+        return $this->labelHtml;
+    }
+
+    /**
+     * @param string $labelHtml
+     * @return $this
+     */
+    public function setLabelHtml($labelHtml)
+    {
+        $this->labelHtml = $labelHtml;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isPreSelect()
+    {
+        return $this->preSelect;
+    }
+
+    /**
+     * @param boolean $preSelect
+     * @return $this
+     */
+    public function setPreSelect($preSelect)
+    {
+        $this->preSelect = $preSelect;
+        return $this;
     }
 }
