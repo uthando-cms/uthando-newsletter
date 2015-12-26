@@ -37,7 +37,7 @@ class Newsletter extends AbstractHydrator
             'newsletterId'  => $object->getNewsletterId(),
             'name'          => $object->getName(),
             'description'   => $object->getDescription(),
-            'enabled'       => $this->extractValue('visible', $object->isEnabled()),
+            'visible'       => $this->extractValue('visible', $object->isVisible()),
         ];
     }
 }

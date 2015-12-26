@@ -11,11 +11,13 @@
 namespace UthandoNewsletter\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
+use Zend\View\Model\ViewModel;
 
 /**
  * Class Subscriber
  *
  * @package UthandoNewsletter\Controller
+ * @method \UthandoNewsletter\Service\Subscriber getService()
  */
 class Subscriber extends AbstractCrudController
 {
@@ -35,7 +37,26 @@ class Subscriber extends AbstractCrudController
 
     public function addSubscriberAction()
     {
+        $request = $this->getRequest();
 
+        if (!$request->isPost() && !$request->isXmlHttpRequest()) {
+            return $this->redirect()->toRoute('home');
+        }
+
+        $viewModel = new ViewModel();
+        $viewModel->setTerminal(true);
+
+        $post = $this->params()->fromPost();
+
+        try {
+            $result = $this->getService()
+                ->add($post);
+        } catch (\Exception $e) {
+            $result = false;
+            $viewModel->setTemplate('uthando-newsletter/subscriber/error');
+        }
+
+        return $viewModel->setVariable('result', $result);
     }
 
 }

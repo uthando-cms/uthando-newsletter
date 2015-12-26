@@ -28,7 +28,7 @@ class Newsletter extends AbstractCrudController
     /**
      * @return \Zend\Http\Response
      */
-    public function setEnabledAction()
+    public function setVisibleAction()
     {
         $id = (int) $this->params('id', 0);
 
@@ -41,7 +41,7 @@ class Newsletter extends AbstractCrudController
         try {
             /* @var $model NewsletterModel */
             $model = $this->getService()->getById($id);
-            $this->getService()->toggleEnabled($model);
+            $this->getService()->toggleVisible($model);
         } catch (\Exception $e) {
             $this->setExceptionMessages($e);
             return $this->redirect()->toRoute($this->getRoute(), [

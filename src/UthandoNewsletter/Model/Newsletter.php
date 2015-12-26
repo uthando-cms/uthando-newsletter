@@ -41,7 +41,7 @@ class Newsletter implements ModelInterface
     /**
      * @var bool
      */
-    protected $enabled;
+    protected $visible;
 
     /**
      * @return int
@@ -100,18 +100,18 @@ class Newsletter implements ModelInterface
     /**
      * @return boolean
      */
-    public function isEnabled()
+    public function isVisible()
     {
-        return $this->enabled;
+        return $this->visible;
     }
 
     /**
-     * @param boolean $enabled
+     * @param boolean $visible
      * @return $this
      */
-    public function setEnabled($enabled)
+    public function setVisible($visible)
     {
-        $this->enabled = (bool) $enabled;
+        $this->visible = (bool) $visible;
         return $this;
     }
 }

@@ -50,6 +50,11 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
     protected $preSelect = false;
 
     /**
+     * @var bool
+     */
+    protected $includeHidden = false;
+
+    /**
      * Setup class
      */
     public function init()
@@ -102,7 +107,7 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
         /* @var $subscriptionsService Subscription */
         $subscriptionsService = $sm->get('UthandoNewsletterSubscription');
 
-        $newsletters = $newsletterService->getMapper()->fetchAll();
+        $newsletters = ($this->isIncludeHidden()) ? $newsletterService->fetchAll() : $newsletterService->fetchVisibleNewsletters();
         $subscriptions = $subscriptionsService->getMapper()
             ->getSubscriptionsBySubscriberId($this->getSubscriberId());
 
@@ -188,6 +193,24 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
     public function setPreSelect($preSelect)
     {
         $this->preSelect = $preSelect;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isIncludeHidden()
+    {
+        return $this->includeHidden;
+    }
+
+    /**
+     * @param boolean $includeHidden
+     * @return $this
+     */
+    public function setIncludeHidden($includeHidden)
+    {
+        $this->includeHidden = $includeHidden;
         return $this;
     }
 }

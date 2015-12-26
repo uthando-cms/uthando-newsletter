@@ -1,6 +1,8 @@
 
 <?php $this->headTitle('Add Subscriber') ?>
 
+<?php $this->form->get('subscribe')->setIncludeHidden(true);?>
+
 <?=$this->partial('uthando-admin/partial/add-edit-form', [
     'form' 			=> $this->form,
     'formName'		=> 'Add Subscriber',

@@ -9,21 +9,19 @@
                 <th data-field="newsletterId">Id</th>
                 <th data-field="name">Name</th>
                 <th data-field="description">Description</th>
-                <th data-field="enabled">Enabled</th>
+                <th data-field="visible">Visible</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <?php /* @var $row \UthandoNewsletter\Model\Newsletter */ ?>
             <?php foreach($this->models as $row): ?>
+                <?php $icon = ($row->isVisible()) ? 'check' : 'times'; ?>
                 <tr>
                     <td><?=$this->escapeHtml($row->getNewsletterId()); ?></td>
                     <td><?=$this->escapeHtml($row->getName()); ?></td>
                     <td><?=$this->escapeHtml($row->getDescription()); ?></td>
-                    <td><?=$this->enabled($row, [
-                        'table' => 'newsletter',
-                        'route' => 'admin/newsletter/edit',
-                    ]); ?></td>
+                    <td><i class="fa fa-<?=$icon;?>"</i></td>
                     <td>
                         <?=$this->partial('uthando-admin/partial/edit-actions', [
                             'pk'		=> 'newsletterId',

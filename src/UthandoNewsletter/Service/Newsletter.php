@@ -28,17 +28,26 @@ class Newsletter extends AbstractMapperService
     protected $serviceAlias = 'UthandoNewsletter';
 
     /**
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
+    public function fetchVisibleNewsletters()
+    {
+        $models = $this->getMapper()->fetchAllVisible();
+        return $models;
+    }
+
+    /**
      * @param NewsletterModel $model
      * @return int
      * @throws \UthandoCommon\Service\ServiceException
      */
-    public function toggleEnabled(NewsletterModel $model)
+    public function toggleVisible(NewsletterModel $model)
     {
         $this->removeCacheItem($model->getNewsletterId());
 
-        $enabled = (true === $model->isEnabled()) ? false : true;
+        $visible = (true === $model->isVisible()) ? false : true;
 
-        $model->setEnabled($enabled);
+        $model->setVisible($visible);
 
         return parent::save($model);
     }

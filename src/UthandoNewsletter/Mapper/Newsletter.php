@@ -25,10 +25,10 @@ class Newsletter extends AbstractDbMapper
     /**
      * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
      */
-    public function fetchAllEnabled()
+    public function fetchAllVisible()
     {
         $select = $this->getSelect();
-        $select->where->equalTo('enabled', 1);
+        $select->where->equalTo('visible', 1);
 
         $rowSet = $this->fetchResult($select);
         return $rowSet;
