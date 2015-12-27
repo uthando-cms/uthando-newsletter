@@ -107,7 +107,7 @@ class UserListener implements ListenerAggregateInterface
 
                 $subscriber = $subscriberService->getSubscriberByEmail($model->getEmail());
 
-                if (!$subscriber instanceof Subscriber || null === $subscriber->getSubscriberId()) {
+                if (!$subscriber instanceof Subscriber || $subscriber->getSubscriberId()) {
                     return false;
                 }
 
