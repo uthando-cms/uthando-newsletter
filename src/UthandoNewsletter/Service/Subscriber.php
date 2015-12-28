@@ -46,14 +46,20 @@ class Subscriber extends AbstractRelationalMapperService
         ], [$this, 'updateSubscriptions']);
     }
 
+    /**
+     * @param $email
+     * @return SubscriberModel|null
+     */
     public function getSubscriberByEmail($email)
     {
-        return $this->getMapper()->getByEmail($email);
+        $model = $this->getMapper()->getByEmail($email);
+
+        return $model;
     }
 
     /**
      * @param $id
-     * @return \UthandoNewsletter\Model\Subscriber
+     * @return SubscriberModel
      */
     public function getSubscriberWithSubscriptions($id)
     {

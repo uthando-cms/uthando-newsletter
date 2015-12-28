@@ -54,7 +54,7 @@ class Newsletter extends Form
         ]);
 
         $this->add([
-            'name' => 'enabled',
+            'name' => 'visible',
             'type' => 'checkbox',
             'options' => [
                 'label' => 'Visible',

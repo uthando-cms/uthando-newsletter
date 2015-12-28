@@ -91,7 +91,7 @@ return [
     'router' => [
         'routes' => [
             'newsletter' => [
-                'type' => 'Segment',
+                'type' => 'Literal',
                 'options' => [
                     'route' => '/newsletter',
                     'defaults' => [
@@ -104,12 +104,23 @@ return [
                 'may_terminate' => true,
                 'child_routes' => [
                     'subscribe' => [
-                        'type' => 'Segment',
+                        'type' => 'Literal',
                         'options' => [
                             'route' => '/subscribe',
                             'defaults' => [
                                 'controller' => 'Subscriber',
                                 'action' => 'add-subscriber',
+                                'force-ssl' => true,
+                            ],
+                        ],
+                    ],
+                    'update' => [
+                        'type' => 'Literal',
+                        'options' => [
+                            'route' => '/update',
+                            'defaults' => [
+                                'controller' => 'Subscriber',
+                                'action' => 'update-subscription',
                                 'force-ssl' => true,
                             ],
                         ],

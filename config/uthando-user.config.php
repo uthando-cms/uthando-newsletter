@@ -13,6 +13,15 @@ return [
                         ],
                     ],
                 ],
+                'registered' => [
+                    'privileges'    => [
+                        'allow' => [
+                            'controllers' => [
+                                'UthandoNewsletter\Controller\Subscriber' => ['action' => ['update-subscription']],
+                            ],
+                        ],
+                    ],
+                ],
                 'admin' => [
                     'privileges'    => [
                         'allow' => [

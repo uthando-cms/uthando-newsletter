@@ -4,7 +4,6 @@ return array(
     'UthandoNewsletter\Module'                                    => __DIR__ . '/Module.php',
     'UthandoNewsletter\Controller\Message'                        => __DIR__ . '/src/UthandoNewsletter/Controller/Message.php',
     'UthandoNewsletter\Controller\Newsletter'                     => __DIR__ . '/src/UthandoNewsletter/Controller/Newsletter.php',
-    'UthandoNewsletter\Controller\Preferences'                    => __DIR__ . '/src/UthandoNewsletter/Controller/Preferences.php',
     'UthandoNewsletter\Controller\Subscriber'                     => __DIR__ . '/src/UthandoNewsletter/Controller/Subscriber.php',
     'UthandoNewsletter\Controller\Template'                       => __DIR__ . '/src/UthandoNewsletter/Controller/Template.php',
     'UthandoNewsletter\Event\UserListener'                        => __DIR__ . '/src/UthandoNewsletter/Event/UserListener.php',

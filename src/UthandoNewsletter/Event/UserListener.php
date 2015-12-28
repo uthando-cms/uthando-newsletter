@@ -120,7 +120,6 @@ class UserListener implements ListenerAggregateInterface
                 $subscriberService->add($subscriberData);
             }
         }
-
     }
 
     /**
