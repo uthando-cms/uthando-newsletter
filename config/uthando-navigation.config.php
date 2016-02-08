@@ -5,6 +5,9 @@ return [
         'admin' => [
             'newsletter' => [
                 'label' => 'Newsletter',
+                'params' => [
+                    'icon' => 'fa-envelope-o',
+                ],
                 'route' => 'admin/newsletter',
                 'resource' => 'menu:admin',
                 'pages' => [
