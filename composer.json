@@ -19,7 +19,7 @@
     }
   ],
   "require": {
-    "php": ">=7.0",
+    "php": ">=5.5",
     "zendframework/zend-inputfilter": "2.*",
     "uthando-cms/uthando-common": "2.*",
     "uthando-cms/uthando-mail": "2.*",
