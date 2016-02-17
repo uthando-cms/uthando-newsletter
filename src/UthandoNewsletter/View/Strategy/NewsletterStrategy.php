@@ -81,7 +81,7 @@ class NewsletterStrategy extends AbstractListenerAggregate
     public function injectResponse(ViewEvent $e)
     {
         $renderer = $e->getRenderer();
-        \FB::info(get_class($renderer), __METHOD__);
+
         if ($renderer !== $this->renderer) {
             return;
         }
