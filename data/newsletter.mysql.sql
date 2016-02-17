@@ -3,16 +3,15 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 21, 2015 at 02:53 PM
--- Server version: 10.0.19-MariaDB-1~trusty-log
--- PHP Version: 5.5.9-1ubuntu4.9
+-- Generation Time: Feb 17, 2016 at 09:56 PM
+-- Server version: 5.5.47-MariaDB-1ubuntu0.14.04.1
+-- PHP Version: 5.5.9-1ubuntu4.14
 
-SET FOREIGN_KEY_CHECKS=0;
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
 
 --
--- Database: `charisma-beads`
+-- Database: `uthando-cms`
 --
 
 -- --------------------------------------------------------
@@ -27,19 +26,7 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `visible` int(1) unsigned NOT NULL DEFAULT '1'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `newsletterMailQueue`
---
-
-DROP TABLE IF EXISTS `newsletterMailQueue`;
-CREATE TABLE IF NOT EXISTS `newsletterMailQueue` (
-  `subscriberId` int(11) unsigned NOT NULL,
-  `mailQueueId` int(11) unsigned NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -51,10 +38,11 @@ DROP TABLE IF EXISTS `newsletterMessage`;
 CREATE TABLE IF NOT EXISTS `newsletterMessage` (
   `messageId` int(10) unsigned NOT NULL,
   `templateId` int(10) unsigned NOT NULL,
+  `newsletterId` int(10) unsigned NOT NULL,
   `subject` varchar(255) NOT NULL,
   `message` text NOT NULL,
   `params` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -68,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `newsletterSubscriber` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=MyISAM AUTO_INCREMENT=1558 DEFAULT CHARSET=utf8 ROW_FORMAT=FIXED;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -81,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `newsletterSubscription` (
   `subscriptionId` int(10) unsigned NOT NULL,
   `subscriberId` int(10) unsigned NOT NULL,
   `newsletterId` int(10) unsigned NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -95,7 +83,7 @@ CREATE TABLE IF NOT EXISTS `newsletterTemplate` (
   `name` varchar(255) NOT NULL,
   `params` text NOT NULL,
   `body` text NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Indexes for dumped tables
@@ -105,31 +93,68 @@ CREATE TABLE IF NOT EXISTS `newsletterTemplate` (
 -- Indexes for table `newsletter`
 --
 ALTER TABLE `newsletter`
-  ADD PRIMARY KEY (`newsletterId`);
+ADD PRIMARY KEY (`newsletterId`);
 
 --
 -- Indexes for table `newsletterMessage`
 --
 ALTER TABLE `newsletterMessage`
-  ADD PRIMARY KEY (`messageId`);
+ADD PRIMARY KEY (`messageId`);
 
 --
 -- Indexes for table `newsletterSubscriber`
 --
 ALTER TABLE `newsletterSubscriber`
-  ADD PRIMARY KEY (`subscriberId`), ADD UNIQUE KEY `email` (`email`);
+ADD PRIMARY KEY (`subscriberId`), ADD UNIQUE KEY `email` (`email`);
 
 --
 -- Indexes for table `newsletterSubscription`
 --
 ALTER TABLE `newsletterSubscription`
-  ADD PRIMARY KEY (`subscriptionId`);
+ADD PRIMARY KEY (`subscriptionId`), ADD KEY `subscriberId` (`subscriberId`), ADD KEY `newsletterId` (`newsletterId`);
 
 --
 -- Indexes for table `newsletterTemplate`
 --
 ALTER TABLE `newsletterTemplate`
-  ADD PRIMARY KEY (`templateId`);
+ADD PRIMARY KEY (`templateId`);
 
-SET FOREIGN_KEY_CHECKS=1;
+--
+-- AUTO_INCREMENT for dumped tables
+--
 
+--
+-- AUTO_INCREMENT for table `newsletter`
+--
+ALTER TABLE `newsletter`
+MODIFY `newsletterId` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `newsletterMessage`
+--
+ALTER TABLE `newsletterMessage`
+MODIFY `messageId` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `newsletterSubscriber`
+--
+ALTER TABLE `newsletterSubscriber`
+MODIFY `subscriberId` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `newsletterSubscription`
+--
+ALTER TABLE `newsletterSubscription`
+MODIFY `subscriptionId` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+--
+-- AUTO_INCREMENT for table `newsletterTemplate`
+--
+ALTER TABLE `newsletterTemplate`
+MODIFY `templateId` int(10) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `newsletterSubscription`
+--
+ALTER TABLE `newsletterSubscription`
+ADD CONSTRAINT `newsletterSubscription_ibfk_1` FOREIGN KEY (`subscriberId`) REFERENCES `newsletterSubscriber` (`subscriberId`) ON DELETE CASCADE,
+ADD CONSTRAINT `newsletterSubscription_ibfk_2` FOREIGN KEY (`newsletterId`) REFERENCES `newsletter` (`newsletterId`) ON DELETE CASCADE;
