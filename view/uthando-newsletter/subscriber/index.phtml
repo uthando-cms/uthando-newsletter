@@ -1,14 +1,32 @@
-<?=$this->partial('uthando-admin/partial/search', [
-    'name'			=> 'newsletter-subscriber',
-    'searchInputs'	=> [
-        'Subscribers' => 'name-email',
-    ],
-]);?>
 
-<div id="table-newsletter-subscriber">
-    <?=$this->partial('uthando-newsletter/subscriber/list', [
-        'models' => $this->models
-    ]); ?>
+<?php $this->headTitle('Newsletter Subscriber') ?>
+<?php $this->layout()->pageTitle = $this->translate('Newsletter Subscriber');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/newsletter/subscriber/edit', [
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Subscriber');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Newsletter Subscriber List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'newsletter-subscriber',
+            'searchInputs'	=> [
+                $this->translate('Subscribers') => 'name-email',
+            ],
+        ]);?>
+    </div>
+    <div id="table-newsletter-subscriber" class="admin-table">
+        <?=$this->partial('uthando-newsletter/subscriber/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
 

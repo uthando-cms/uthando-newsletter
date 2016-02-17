@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\Form
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\Form;
@@ -33,9 +33,9 @@ class Subscriber extends Form
             'options' => [
                 'label' => 'Name',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -46,9 +46,9 @@ class Subscriber extends Form
             'options' => [
                 'label' => 'Email Address',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -59,12 +59,17 @@ class Subscriber extends Form
             'options' => [
                 'label' => 'Subscriptions',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
                 'subscriber_id' => $this->getOption('subscriber_id'),
             ],
+        ]);
+
+        $this->add([
+            'name' => 'security',
+            'type' => 'csrf',
         ]);
     }
 }

@@ -1,14 +1,12 @@
 
-<?php $this->headTitle('Newsletter Template') ?>
-
 <?php if (count($this->models) > 0): ?>
     <div class="panel panel-default">
         <table class="table table-hover table-bordered table-condensed">
             <thead>
             <tr>
-                <th data-field="templateId">Id</th>
-                <th data-field="name">Name</th>
-                <th>Actions</th>
+                <th data-field="templateId"><?=$this->translate('Template Id');?></th>
+                <th data-field="name"><?=$this->translate('Name');?></th>
+                <th><?=$this->translate('Actions');?></th>
             </tr>
             </thead>
             <tbody>
@@ -21,8 +19,8 @@
                         <a href="<?=$this->url('admin/newsletter/template/edit', [
                             'action' => 'preview',
                             'id' => $row->getTemplateId(),
-                        ]);?>" id="newsletter-message-preview-button" class="edit-button message-preview">
-                            <i class="fa fa-eye fa-2x"></i></a>&nbsp;
+                        ]);?>" class="btn btn-default message-preview" data-toggle="tooltip" title="<?=$this->translate('View');?>">
+                            <i class="fa fa-eye"></i></a>&nbsp;
                         <?=$this->partial('uthando-admin/partial/edit-actions', [
                             'pk'		=> 'templateId',
                             'id'		=> $row->getTemplateId(),
@@ -44,7 +42,7 @@
     ); ?>
 
 <?php else: ?>
-    <h4>There are no Templates yet.</h4>
+    <h4><?=$this->translate('There are no Templates yet.');?></h4>
 <?php endif; ?>
 
 <script>
@@ -53,11 +51,11 @@
         var url = $(this).attr('href');
 
         bootbox.dialog({
-            title: "Newsletter Template Preview",
+            title: "<?=$this->translate('Newsletter Template Preview');?>",
             message: '<iframe class="newsletter-preview" src="' + url + '"></iframe>',
             buttons: {
                 main: {
-                    label: "Close",
+                    label: "<?=$this->translate('Close');?>",
                     className: "btn-default"
                 }
             }

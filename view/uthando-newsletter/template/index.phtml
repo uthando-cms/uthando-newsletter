@@ -1,14 +1,32 @@
-<?=$this->partial('uthando-admin/partial/search', [
-    'name'			=> 'newsletter-template',
-    'searchInputs'	=> [
-        'Templates' => 'name',
-    ],
-]);?>
 
-<div id="table-newsletter-template">
-    <?=$this->partial('uthando-newsletter/template/list', [
-        'models' => $this->models
-    ]); ?>
+<?php $this->headTitle('Newsletter Template') ?>
+<?php $this->layout()->pageTitle = $this->translate('Newsletter Template');?>
+
+<?php $this->placeholder('header-buttons')->captureStart();?>
+<a href="<?=$this->url('admin/newsletter/template/edit', [
+    'action' => 'add'
+]);?>" type="submit" data-toggle="tooltip" title="<?=$this->translate('Add Newsletter');?>" class="btn btn-primary">
+    <i class="fa fa-plus"></i>
+</a>
+<?php $this->placeholder('header-buttons')->captureEnd();?>
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title"><i class="fa fa-list"></i> <?=$this->translate('Newsletter Template List');?></h3>
+    </div>
+    <div class="panel-body">
+        <?=$this->partial('uthando-admin/partial/search', [
+            'name'			=> 'newsletter-template',
+            'searchInputs'	=> [
+                'Templates' => 'name',
+            ],
+        ]);?>
+    </div>
+    <div id="table-newsletter-template" class="admin-table">
+        <?=$this->partial('uthando-newsletter/template/list', [
+            'models' => $this->models
+        ]); ?>
+    </div>
 </div>
 
 

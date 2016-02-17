@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\Form
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\Form;
@@ -33,9 +33,9 @@ class Newsletter extends Form
             'options' => [
                 'label' => 'Name',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ]
         ]);
@@ -46,9 +46,9 @@ class Newsletter extends Form
             'options' => [
                 'label' => 'Description',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-8',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-4',
+                    'class' => 'col-sm-2',
                 ],
             ]
         ]);
@@ -62,8 +62,13 @@ class Newsletter extends Form
                 'use_hidden_element' => true,
                 'checked_value' => '1',
                 'unchecked_value' => '0',
-                'column-size' => 'sm-8 col-sm-offset-4',
+                'column-size' => 'sm-10 col-sm-offset-2',
             ],
+        ]);
+
+        $this->add([
+            'name' => 'security',
+            'type' => 'csrf',
         ]);
     }
 }

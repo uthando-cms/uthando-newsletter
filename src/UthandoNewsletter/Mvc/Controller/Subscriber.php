@@ -2,13 +2,13 @@
 /**
  * Uthando CMS (http://www.shaunfreeman.co.uk/)
  *
- * @package   UthandoNewsletter
+ * @package   UthandoNewsletter\Mvc\Controller
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
-namespace UthandoNewsletter\Controller;
+namespace UthandoNewsletter\Mvc\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
 use UthandoNewsletter\Form\Subscriber as SubscriberForm;
@@ -18,7 +18,7 @@ use Zend\View\Model\ViewModel;
 /**
  * Class Subscriber
  *
- * @package UthandoNewsletter\Controller
+ * @package UthandoNewsletter\Mvc\Controller
  * @method \UthandoNewsletter\Service\Subscriber getService()
  * @method \UthandoUser\Model\User identity()
  */

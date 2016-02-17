@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\Mapper
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\Mapper;
@@ -32,6 +32,20 @@ class Subscription extends AbstractDbMapper
         $select->where->equalTo('subscriberId', $id);
 
         $rowSet = $this->fetchResult($select);
+        return $rowSet;
+    }
+
+    /**
+     * @param $id
+     * @return \Zend\Db\ResultSet\HydratingResultSet|\Zend\Db\ResultSet\ResultSet|\Zend\Paginator\Paginator
+     */
+    public function getSubscriptionsByNewsletterId($id)
+    {
+        $select = $this->getSelect();
+        $select->where->equalTo('newsletterId', $id);
+
+        $rowSet = $this->fetchResult($select);
+
         return $rowSet;
     }
 }

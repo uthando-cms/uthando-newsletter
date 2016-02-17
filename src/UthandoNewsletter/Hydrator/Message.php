@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\Hydrator
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\Hydrator;
@@ -27,6 +27,7 @@ class Message extends AbstractHydrator
     {
         return [
             'messageId'     => $object->getMessageId(),
+            'newsletterId'  => $object->getNewsletterId(),
             'templateId'    => $object->getTemplateId(),
             'subject'       => $object->getSubject(),
             'params'        => $object->getParams(),

@@ -15,10 +15,10 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'UthandoNewsletter\Controller\Message'      => 'UthandoNewsletter\Controller\Message',
-            'UthandoNewsletter\Controller\Newsletter'   => 'UthandoNewsletter\Controller\Newsletter',
-            'UthandoNewsletter\Controller\Subscriber'   => 'UthandoNewsletter\Controller\Subscriber',
-            'UthandoNewsletter\Controller\Template'     => 'UthandoNewsletter\Controller\Template',
+            'UthandoNewsletter\Controller\Message'      => 'UthandoNewsletter\Mvc\Controller\Message',
+            'UthandoNewsletter\Controller\Newsletter'   => 'UthandoNewsletter\Mvc\Controller\Newsletter',
+            'UthandoNewsletter\Controller\Subscriber'   => 'UthandoNewsletter\Mvc\Controller\Subscriber',
+            'UthandoNewsletter\Controller\Template'     => 'UthandoNewsletter\Mvc\Controller\Template',
         ],
     ],
     'form_elements' => [
@@ -28,6 +28,7 @@ return [
             'UthandoNewsletterSubscriber'       => 'UthandoNewsletter\Form\Subscriber',
             'UthandoNewsletterTemplate'         => 'UthandoNewsletter\Form\Template',
 
+            'UthandoNewsletterList'             => 'UthandoNewsletter\Form\Element\NewsletterList',
             'UthandoNewsletterSubscriptionList' => 'UthandoNewsletter\Form\Element\SubscriptionList',
             'UthandoNewsletterTemplateList'     => 'UthandoNewsletter\Form\Element\TemplateList',
         ],

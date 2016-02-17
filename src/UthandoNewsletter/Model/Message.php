@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\Model
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\Model;
@@ -30,6 +30,11 @@ class Message implements ModelInterface
     /**
      * @var int
      */
+    protected $newsletterId;
+
+    /**
+     * @var int
+     */
     protected $templateId;
 
     /**
@@ -46,6 +51,11 @@ class Message implements ModelInterface
      * @var string
      */
     protected $params;
+
+    /**
+     * @var Newsletter
+     */
+    protected $newsletter;
 
     /**
      * @var Template
@@ -67,6 +77,24 @@ class Message implements ModelInterface
     public function setMessageId($messageId)
     {
         $this->messageId = $messageId;
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNewsletterId()
+    {
+        return $this->newsletterId;
+    }
+
+    /**
+     * @param int $newsletterId
+     * @return $this
+     */
+    public function setNewsletterId($newsletterId)
+    {
+        $this->newsletterId = $newsletterId;
         return $this;
     }
 
@@ -139,6 +167,24 @@ class Message implements ModelInterface
     public function setParams($params)
     {
         $this->params = $params;
+        return $this;
+    }
+
+    /**
+     * @return Newsletter
+     */
+    public function getNewsletter()
+    {
+        return $this->newsletter;
+    }
+
+    /**
+     * @param Newsletter $newsletter
+     * @return $this
+     */
+    public function setNewsletter($newsletter)
+    {
+        $this->newsletter = $newsletter;
         return $this;
     }
 

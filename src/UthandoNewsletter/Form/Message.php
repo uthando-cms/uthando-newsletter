@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\Form
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\Form;
@@ -28,14 +28,27 @@ class Message extends Form
         ]);
 
         $this->add([
+            'name' => 'newsletterId',
+            'type' => 'UthandoNewsletterList',
+            'options' => [
+                'label' => 'Newsletter',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+            ],
+        ]);
+
+        $this->add([
             'name' => 'templateId',
             'type' => 'UthandoNewsletterTemplateList',
             'options' => [
                 'label' => 'Template',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -46,9 +59,9 @@ class Message extends Form
             'options' => [
                 'label' => 'Subject',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-4',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -59,9 +72,9 @@ class Message extends Form
             'options' => [
                 'label' => 'Params',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-10',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
             ],
         ]);
@@ -72,14 +85,19 @@ class Message extends Form
             'options' => [
                 'label' => 'Body',
                 'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
-                'column-size' => 'md-10',
+                'column-size' => 'sm-10',
                 'label_attributes' => [
-                    'class' => 'col-md-2',
+                    'class' => 'col-sm-2',
                 ],
             ],
             'attributes' => [
                 'rows' => 25,
             ],
+        ]);
+
+        $this->add([
+            'name' => 'security',
+            'type' => 'csrf',
         ]);
     }
 }

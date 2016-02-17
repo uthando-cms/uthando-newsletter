@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\InputFilter
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\InputFilter;
@@ -24,6 +24,15 @@ class Message extends InputFilter
         $this->add([
             'name' => 'messageId',
             'required' => false,
+            'filters' => [
+                ['name' => 'StripTags'],
+                ['name' => 'StringTrim'],
+            ],
+        ]);
+
+        $this->add([
+            'name' => 'newsletterId',
+            'required' => true,
             'filters' => [
                 ['name' => 'StripTags'],
                 ['name' => 'StringTrim'],

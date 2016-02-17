@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\View\Strategy
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\View\Strategy;
@@ -75,9 +75,13 @@ class NewsletterStrategy extends AbstractListenerAggregate
         return false;
     }
 
+    /**
+     * @param ViewEvent $e
+     */
     public function injectResponse(ViewEvent $e)
     {
         $renderer = $e->getRenderer();
+        \FB::info(get_class($renderer), __METHOD__);
         if ($renderer !== $this->renderer) {
             return;
         }

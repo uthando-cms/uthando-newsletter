@@ -1,16 +1,14 @@
 
-<?php $this->headTitle('Newsletter Subscriber') ?>
-
 <?php if (count($this->models) > 0): ?>
     <div class="panel panel-default">
         <table class="table table-hover table-bordered table-condensed">
             <thead>
             <tr>
-                <th data-field="subscriberId">Id</th>
-                <th data-field="name">Name</th>
-                <th data-field="email">Email</th>
-                <th data-field="dateCreated">Date Created</th>
-                <th>Actions</th>
+                <th data-field="subscriberId"><?=$this->translate('Subscriber Id');?></th>
+                <th data-field="name"><?=$this->translate('Name');?></th>
+                <th data-field="email"><?=$this->translate('Email');?></th>
+                <th data-field="dateCreated"><?=$this->translate('Date Created');?></th>
+                <th><?=$this->translate('Actions');?></th>
             </tr>
             </thead>
             <tbody>
@@ -43,5 +41,5 @@
     ); ?>
 
 <?php else: ?>
-    <h4>There are no Subscribers yet.</h4>
+    <h4><?=$this->translate('There are no Subscribers yet.');?></h4>
 <?php endif; ?>

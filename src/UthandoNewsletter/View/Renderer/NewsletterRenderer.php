@@ -5,7 +5,7 @@
  * @package   UthandoNewsletter\View\Renderer
  * @author    Shaun Freeman <shaun@shaunfreeman.co.uk>
  * @copyright Copyright (c) 2014 Shaun Freeman. (http://www.shaunfreeman.co.uk)
- * @license   see LICENSE.txt
+ * @license   see LICENSE
  */
 
 namespace UthandoNewsletter\View\Renderer;
@@ -16,6 +16,7 @@ use UthandoNewsletter\View\Model\NewsletterModel;
 use UthandoNewsletter\View\Resolver\NewsletterResolver;
 use Zend\View\Exception\DomainException;
 use Zend\View\Exception\RuntimeException;
+use Zend\View\Model\ModelInterface;
 use Zend\View\Renderer\RendererInterface;
 use Zend\View\Resolver\ResolverInterface;
 
@@ -87,12 +88,16 @@ class NewsletterRenderer implements RendererInterface
         if ($nameOrModel instanceof NewsletterModel) {
             $model       = $nameOrModel;
             $nameOrModel = $model->getTemplate();
+
             if (empty($nameOrModel)) {
                 throw new DomainException(sprintf(
                     '%s: received View Model argument, but template is empty',
                     __METHOD__
                 ));
             }
+
+            $parseImages = $model->getOption('parse_images');
+            $this->getEngine()->setParseImages($parseImages);
 
             $this->getEngine()->setVariables($model->getVariables());
             unset($model);
