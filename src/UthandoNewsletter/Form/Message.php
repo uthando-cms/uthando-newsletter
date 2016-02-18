@@ -91,6 +91,7 @@ class Message extends Form
                 ],
             ],
             'attributes' => [
+                'class' => 'editable-textarea',
                 'rows' => 25,
             ],
         ]);

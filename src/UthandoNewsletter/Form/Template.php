@@ -65,6 +65,8 @@ class Template extends Form
                 ],
             ],
             'attributes' => [
+                'id'    => 'code',
+                'class' => 'editable-textarea',
                 'rows' => 25,
             ],
         ]);

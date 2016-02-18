@@ -27,3 +27,13 @@
         <?=$this->form($this->form);?>
     </div>
 </div>
+
+<script>
+    $(document).ready(function() {
+        var editor = CodeMirror.fromTextArea(document.getElementById("code"), {
+            lineNumbers: true,
+            mode: "text/html",
+            extraKeys: {"Ctrl-Space": "autocomplete"}
+        });
+    });
+</script>
