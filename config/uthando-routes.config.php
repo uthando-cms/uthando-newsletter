@@ -93,7 +93,7 @@ return [
                                 'options' => [
                                     'route' => '/subscriber',
                                     'defaults' => [
-                                        'controller' => 'Subscriber',
+                                        'controller' => 'SubscriberAdmin',
                                         'action' => 'index',
                                         'force-ssl' => 'ssl'
                                     ],

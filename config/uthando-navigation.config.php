@@ -2,6 +2,13 @@
 
 return [
     'navigation' => [
+        'user' => [
+            'update_subscription' => [
+                'label'     => 'Newsletter Preferences',
+                'route'     => 'newsletter/update',
+                'resource'  => 'menu:user',
+            ],
+        ],
         'admin' => [
             'newsletter' => [
                 'label' => 'Newsletter',

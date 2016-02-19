@@ -15,10 +15,11 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'UthandoNewsletter\Controller\Message'      => 'UthandoNewsletter\Mvc\Controller\Message',
-            'UthandoNewsletter\Controller\Newsletter'   => 'UthandoNewsletter\Mvc\Controller\Newsletter',
-            'UthandoNewsletter\Controller\Subscriber'   => 'UthandoNewsletter\Mvc\Controller\Subscriber',
-            'UthandoNewsletter\Controller\Template'     => 'UthandoNewsletter\Mvc\Controller\Template',
+            'UthandoNewsletter\Controller\Message'          => 'UthandoNewsletter\Mvc\Controller\Message',
+            'UthandoNewsletter\Controller\Newsletter'       => 'UthandoNewsletter\Mvc\Controller\Newsletter',
+            'UthandoNewsletter\Controller\Subscriber'       => 'UthandoNewsletter\Mvc\Controller\Subscriber',
+            'UthandoNewsletter\Controller\SubscriberAdmin'  => 'UthandoNewsletter\Mvc\Controller\SubscriberAdmin',
+            'UthandoNewsletter\Controller\Template'         => 'UthandoNewsletter\Mvc\Controller\Template',
         ],
     ],
     'form_elements' => [

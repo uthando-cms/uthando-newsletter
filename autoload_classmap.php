@@ -32,6 +32,7 @@ return array(
     'UthandoNewsletter\Mvc\Controller\Message'                    => __DIR__ . '/src/UthandoNewsletter/Mvc/Controller/Message.php',
     'UthandoNewsletter\Mvc\Controller\Newsletter'                 => __DIR__ . '/src/UthandoNewsletter/Mvc/Controller/Newsletter.php',
     'UthandoNewsletter\Mvc\Controller\Subscriber'                 => __DIR__ . '/src/UthandoNewsletter/Mvc/Controller/Subscriber.php',
+    'UthandoNewsletter\Mvc\Controller\SubscriberAdmin'            => __DIR__ . '/src/UthandoNewsletter/Mvc/Controller/SubscriberAdmin.php',
     'UthandoNewsletter\Mvc\Controller\Template'                   => __DIR__ . '/src/UthandoNewsletter/Mvc/Controller/Template.php',
     'UthandoNewsletter\Mvc\Service\ViewNewsletterRendererFactory' => __DIR__ . '/src/UthandoNewsletter/Mvc/Service/ViewNewsletterRendererFactory.php',
     'UthandoNewsletter\Mvc\Service\ViewNewsletterStrategyFactory' => __DIR__ . '/src/UthandoNewsletter/Mvc/Service/ViewNewsletterStrategyFactory.php',

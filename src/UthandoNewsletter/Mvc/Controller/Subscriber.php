@@ -10,9 +10,10 @@
 
 namespace UthandoNewsletter\Mvc\Controller;
 
-use UthandoCommon\Controller\AbstractCrudController;
+use UthandoCommon\Service\ServiceTrait;
 use UthandoNewsletter\Form\Subscriber as SubscriberForm;
 use Zend\Http\PhpEnvironment\Response;
+use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
 
 /**
@@ -22,20 +23,18 @@ use Zend\View\Model\ViewModel;
  * @method \UthandoNewsletter\Service\Subscriber getService()
  * @method \UthandoUser\Model\User identity()
  */
-class Subscriber extends AbstractCrudController
+class Subscriber extends AbstractActionController
 {
-    protected $controllerSearchOverrides = ['sort' => 'subscriberId'];
-    protected $serviceName = 'UthandoNewsletterSubscriber';
-    protected $route = 'admin/newsletter/subscriber';
+    use ServiceTrait;
 
-    public function editAction()
+    /**
+     * @var \UthandoUser\Service\User
+     */
+    protected $userService;
+
+    public function __construct()
     {
-        $id = (int) $this->params('id', 0);
-        $this->getService()->setFormOptions([
-            'subscriber_id' => $id,
-        ]);
-
-        return parent::editAction();
+        $this->serviceName = 'UthandoNewsletterSubscriber';
     }
 
     public function addSubscriberAction()
