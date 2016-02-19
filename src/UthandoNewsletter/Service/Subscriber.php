@@ -42,6 +42,10 @@ class Subscriber extends AbstractRelationalMapperService
     public function attachEvents()
     {
         $this->getEventManager()->attach([
+            'pre.edit', 'pre.add',
+        ], [$this, 'addAllSubscriptionsToForm']);
+
+        $this->getEventManager()->attach([
             'post.edit', 'post.add',
         ], [$this, 'updateSubscriptions']);
     }
@@ -70,6 +74,12 @@ class Subscriber extends AbstractRelationalMapperService
         return $model;
     }
 
+    public function addAllSubscriptionsToForm(Event $e)
+    {
+        $form = $e->getParam('form');
+        $form->get('subscribe')->setIncludeHidden(true);
+    }
+
     /**
      * @param Event $e
      * @throws \UthandoCommon\Service\ServiceException
@@ -80,7 +90,7 @@ class Subscriber extends AbstractRelationalMapperService
         $form = $e->getParam('form');
         /* @var $model SubscriberModel */
         $model = $form->getData();
-        $subscriberId = $e->getParam('saved', $model->getSubscriberId());
+        $subscriberId = $model->getSubscriberId();
 
         /* @var $newsletterService \UthandoNewsletter\Service\Newsletter */
         $newsletterService = $this->getService('UthandoNewsletter');
