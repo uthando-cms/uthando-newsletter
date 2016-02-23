@@ -32,7 +32,7 @@ class Module implements ConfigInterface
         $app = $e->getApplication();
         $eventManager = $app->getEventManager();
 
-        $eventManager->attachAggregate(new UserListener());
+        $eventManager->attach(new UserListener());
     }
 
     /**

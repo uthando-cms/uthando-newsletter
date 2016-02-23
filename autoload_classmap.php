@@ -9,6 +9,7 @@ return array(
     'UthandoNewsletter\Form\Message'                              => __DIR__ . '/src/UthandoNewsletter/Form/Message.php',
     'UthandoNewsletter\Form\Newsletter'                           => __DIR__ . '/src/UthandoNewsletter/Form/Newsletter.php',
     'UthandoNewsletter\Form\Subscriber'                           => __DIR__ . '/src/UthandoNewsletter/Form/Subscriber.php',
+    'UthandoNewsletter\Form\SubscriberUserEdit'                   => __DIR__ . '/src/UthandoNewsletter/Form/SubscriberUserEdit.php',
     'UthandoNewsletter\Form\Template'                             => __DIR__ . '/src/UthandoNewsletter/Form/Template.php',
     'UthandoNewsletter\Hydrator\Message'                          => __DIR__ . '/src/UthandoNewsletter/Hydrator/Message.php',
     'UthandoNewsletter\Hydrator\Newsletter'                       => __DIR__ . '/src/UthandoNewsletter/Hydrator/Newsletter.php',

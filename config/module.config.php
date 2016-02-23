@@ -24,14 +24,15 @@ return [
     ],
     'form_elements' => [
         'invokables' => [
-            'UthandoNewsletterMessage'          => 'UthandoNewsletter\Form\Message',
-            'UthandoNewsletter'                 => 'UthandoNewsletter\Form\Newsletter',
-            'UthandoNewsletterSubscriber'       => 'UthandoNewsletter\Form\Subscriber',
-            'UthandoNewsletterTemplate'         => 'UthandoNewsletter\Form\Template',
+            'UthandoNewsletterMessage'              => 'UthandoNewsletter\Form\Message',
+            'UthandoNewsletter'                     => 'UthandoNewsletter\Form\Newsletter',
+            'UthandoNewsletterSubscriber'           => 'UthandoNewsletter\Form\Subscriber',
+            'UthandoNewsletterSubscriberUserEdit'   => 'UthandoNewsletter\Form\SubscriberUserEdit',
+            'UthandoNewsletterTemplate'             => 'UthandoNewsletter\Form\Template',
 
-            'UthandoNewsletterList'             => 'UthandoNewsletter\Form\Element\NewsletterList',
-            'UthandoNewsletterSubscriptionList' => 'UthandoNewsletter\Form\Element\SubscriptionList',
-            'UthandoNewsletterTemplateList'     => 'UthandoNewsletter\Form\Element\TemplateList',
+            'UthandoNewsletterList'                 => 'UthandoNewsletter\Form\Element\NewsletterList',
+            'UthandoNewsletterSubscriptionList'     => 'UthandoNewsletter\Form\Element\SubscriptionList',
+            'UthandoNewsletterTemplateList'         => 'UthandoNewsletter\Form\Element\TemplateList',
         ],
     ],
     'hydrators' => [

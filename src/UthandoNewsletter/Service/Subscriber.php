@@ -42,10 +42,6 @@ class Subscriber extends AbstractRelationalMapperService
     public function attachEvents()
     {
         $this->getEventManager()->attach([
-            'pre.edit', 'pre.add',
-        ], [$this, 'addAllSubscriptionsToForm']);
-
-        $this->getEventManager()->attach([
             'post.edit', 'post.add',
         ], [$this, 'updateSubscriptions']);
     }
@@ -72,12 +68,6 @@ class Subscriber extends AbstractRelationalMapperService
         $this->populate($model, true);
 
         return $model;
-    }
-
-    public function addAllSubscriptionsToForm(Event $e)
-    {
-        $form = $e->getParam('form');
-        $form->get('subscribe')->setIncludeHidden(true);
     }
 
     /**

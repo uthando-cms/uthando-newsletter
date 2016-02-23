@@ -86,6 +86,10 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
             $this->subscriberId = $options['subscriber_id'];
         }
 
+        if (isset($options['include_hidden'])) {
+            $this->setIncludeHidden($options['include_hidden']);
+        }
+
         parent::setOptions($options);
     }
 

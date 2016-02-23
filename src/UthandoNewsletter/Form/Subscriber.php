@@ -64,6 +64,7 @@ class Subscriber extends Form
                     'class' => 'col-sm-2',
                 ],
                 'subscriber_id' => $this->getOption('subscriber_id'),
+                'include_hidden' => true,
             ],
         ]);
 

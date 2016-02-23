@@ -51,6 +51,7 @@
         var url = $(this).attr('href');
 
         bootbox.dialog({
+            size: 'large',
             title: "<?=$this->translate('Newsletter Template Preview');?>",
             message: '<iframe class="newsletter-preview" src="' + url + '"></iframe>',
             buttons: {

@@ -11,7 +11,7 @@
 namespace UthandoNewsletter\Mvc\Controller;
 
 use UthandoCommon\Service\ServiceTrait;
-use UthandoNewsletter\Form\Subscriber as SubscriberForm;
+use UthandoNewsletter\Form\SubscriberUserEdit as SubscriberForm;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -67,9 +67,13 @@ class Subscriber extends AbstractActionController
 
         $subscriber = $this->getService()
             ->getSubscriberByEmail($this->identity()->getEmail());
-        $this->getService()->setFormOptions([
-            'subscriber_id' => $subscriber->getSubscriberId(),
-        ]);
+
+
+        /** @var \UthandoNewsletter\Form\SubscriberUserEdit $form */
+        $form = $this->getService('FormElementManager')
+            ->get('UthandoNewsletterSubscriberUserEdit', [
+                'subscriber_id' => $subscriber->getSubscriberId(),
+            ]);
 
         if ($prg instanceof Response) {
             return $prg;
@@ -80,26 +84,45 @@ class Subscriber extends AbstractActionController
             }
 
             return [
-                'form' => $this->getService()->getForm($subscriber)
+                'form' => $form->bind($subscriber),
             ];
         }
 
+        $inputFilter = $this->getService()->getInputFilter();
+        $hydrator = $this->getService()->getHydrator();
+
+        $form->setInputFilter($inputFilter);
+        $form->setHydrator($hydrator);
+        $form->bind($subscriber);
+
         if (null === $subscriber->getSubscriberId()) {
             $result = $this->getService()
-                ->add($prg);
+                ->add($prg, $form);
         } else {
             $result = $this->getService()
-                ->edit($subscriber, $prg);
+                ->edit($subscriber, $prg, $form);
         }
 
         if ($result instanceof SubscriberForm) {
+            $this->flashMessenger()->addErrorMessage(
+                'There were one or more issues with your submission. Please correct them as indicated below.'
+            );
+
             $form = $result;
         } else {
+            if ($result) {
+                $this->flashMessenger()->addSuccessMessage(
+                    'Your settings were updated.'
+                );
+            } else {
+                $this->flashMessenger()->addInfoMessage(
+                    'No changes were made.'
+                );
+            }
             $subscriber = $this->getService()
                 ->getSubscriberByEmail($this->identity()->getEmail());
-            $this->getService()
-                ->setFormOptions(['subscriber_id' => $subscriber->getSubscriberId()]);
-            $form = $this->getService()->getForm($subscriber);
+
+            $form->bind($subscriber);
         }
 
         return [
