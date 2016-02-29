@@ -147,6 +147,27 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
     }
 
     /**
+     * This is not a required element so we override parent method.
+     *
+     * @return array
+     */
+    public function getInputSpecification()
+    {
+        $spec = [
+            'name' => $this->getName(),
+            'required' => false,
+        ];
+
+        if ($validator = $this->getValidator()) {
+            $spec['validators'] = [
+                $validator,
+            ];
+        }
+
+        return $spec;
+    }
+
+    /**
      * @return boolean
      */
     public function isLabelPrepend()

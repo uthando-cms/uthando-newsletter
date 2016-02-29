@@ -20,6 +20,26 @@ use Zend\Form\Form;
  */
 class Subscriber extends Form
 {
+    /**
+     * Subscriber constructor.
+     *
+     * @param null $name
+     * @param array $options
+     */
+    public function __construct($name = null, array $options = [])
+    {
+        if (is_array($name)) {
+            $options = $name;
+            $name = (isset($options['name'])) ? $options['name'] : null;
+            unset($options['name']);
+        }
+
+        parent::__construct($name, $options);
+    }
+
+    /**
+     * Setup elements
+     */
     public function init()
     {
         $this->add([
@@ -66,6 +86,23 @@ class Subscriber extends Form
                 'subscriber_id' => $this->getOption('subscriber_id'),
                 'include_hidden' => true,
             ],
+        ]);
+
+        $this->add([
+            'name' => 'dateCreated',
+            'type' => 'DateTime',
+            'options' => [
+                'label' => 'Date Created',
+                'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+                'column-size' => 'sm-10',
+                'label_attributes' => [
+                    'class' => 'col-sm-2',
+                ],
+                'format' => 'd/m/Y H:i:s'
+            ],
+            'attributes' => [
+                'disabled' => true,
+            ]
         ]);
 
         $this->add([

@@ -25,6 +25,7 @@ class SubscriberAdmin extends AbstractCrudController
 
     public function editAction()
     {
+        \FB::info(__METHOD__);
         $id = (int) $this->params('id', 0);
         $this->getService()->setFormOptions([
             'subscriber_id' => $id,

@@ -10,9 +10,10 @@
 
 namespace UthandoNewsletter\Event;
 
+use TwbBundle\Form\View\Helper\TwbBundleForm;
 use UthandoNewsletter\Model\Subscriber;
+use UthandoUser\Form\Register;
 use UthandoUser\Model\User;
-use UthandoUser\Model\User as UserModel;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -23,7 +24,7 @@ class UserListener implements ListenerAggregateInterface
     use ListenerAggregateTrait;
 
     /**
-     * @var UserModel
+     * @var User
      */
     protected $userEmail;
 
@@ -36,7 +37,7 @@ class UserListener implements ListenerAggregateInterface
 
         $this->listeners[] = $events->attach([
             'UthandoUser\Service\User',
-        ], ['pre.add'], [$this, 'getSubscriptionList']);
+        ], ['pre.add', 'post.form.init'], [$this, 'getSubscriptionList']);
 
         $this->listeners[] = $events->attach([
             'UthandoUser\Service\User',
@@ -65,20 +66,30 @@ class UserListener implements ListenerAggregateInterface
         $form = $e->getParam('form');
         $post = $e->getParam('post');
 
+        if (!$form instanceof Register) {
+            return;
+        }
+
         /* @var \UthandoNewsletter\Form\Element\SubscriptionList $subscriptionList */
         $subscriptionList = $e->getTarget()
             ->getServiceLocator()
             ->get('FormElementManager')
             ->get('UthandoNewsletterSubscriptionList');
 
+        $subscriptionList->setOptions([
+            'label' => 'Subscriptions',
+            'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
+            'column-size' => 'sm-10',
+            'label_attributes' => [
+                'class' => 'col-sm-2',
+            ],
+        ]);
+
         if (isset($post['subscribe'])) {
             $subscriptionList->setValue($post['subscribe']);
         }
 
         $form->add($subscriptionList);
-
-        $inputFilter = $form->getInputFilter();
-        $inputFilter->add($subscriptionList->getInputSpecification());
 
         $validationGroup = $form->getValidationGroup();
         $validationGroup[] = 'subscribe';
@@ -89,26 +100,24 @@ class UserListener implements ListenerAggregateInterface
 
     /**
      * @param Event $e
-     * @return bool
      */
     public function addSubscriber(Event $e)
     {
         $data = $e->getParam('post');
 
         if (isset($data['subscribe'])) {
-            /* @var User $model */
             $userId = $e->getParam('saved', null);
-            /* @var UserModel $model */
+            /* @var User $model */
             $model = $e->getTarget()->getById($userId);
 
-            if ($model instanceof UserModel) {
+            if ($model instanceof User) {
                 /* @var $subscriberService \UthandoNewsletter\Service\Subscriber */
                 $subscriberService = $e->getTarget()->getService('UthandoNewsletterSubscriber');
 
                 $subscriber = $subscriberService->getSubscriberByEmail($model->getEmail());
 
                 if (!$subscriber instanceof Subscriber || $subscriber->getSubscriberId()) {
-                    return false;
+                    return;
                 }
 
                 $subscriberData = [
@@ -117,14 +126,16 @@ class UserListener implements ListenerAggregateInterface
                     'subscribe' => $data['subscribe'],
                 ];
 
-                $subscriberService->add($subscriberData);
+                $form = $subscriberService->prepareForm($subscriber, $subscriberData, true, true);
+                $form->setValidationGroup(['name', 'email', 'subscribe']);
+
+                $subscriberService->add($subscriberData, $form);
             }
         }
     }
 
     /**
      * @param Event $e
-     * @return bool
      */
     public function emailUpdate(Event $e)
     {
@@ -136,7 +147,7 @@ class UserListener implements ListenerAggregateInterface
         $subscriber = $subscriberService->getSubscriberByEmail($this->userEmail);
 
         if (!$subscriber instanceof Subscriber || null === $subscriber->getSubscriberId()) {
-            return false;
+            return;
         }
 
         if ($this->userEmail !== $data['email']) {

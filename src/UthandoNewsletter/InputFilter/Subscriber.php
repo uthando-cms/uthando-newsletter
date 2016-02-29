@@ -77,6 +77,15 @@ class Subscriber extends InputFilter implements ServiceLocatorAwareInterface
                 ['name' => 'StripTags'],
             ],
         ]);
+
+        $this->add([
+            'name' => 'dateCreated',
+            'required' => false,
+            'filters' => [
+                ['name' => 'stringTrim'],
+                ['name' => 'StripTags'],
+            ],
+        ]);
     }
 
     public function addEmailNoRecordExists($exclude = null)

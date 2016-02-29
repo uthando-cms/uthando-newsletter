@@ -80,7 +80,7 @@ class Subscriber extends AbstractRelationalMapperService
         $form = $e->getParam('form');
         /* @var $model SubscriberModel */
         $model = $form->getData();
-        $subscriberId = $model->getSubscriberId();
+        $subscriberId = ($model->getSubscriberId()) ?: $e->getParam('saved');
 
         /* @var $newsletterService \UthandoNewsletter\Service\Newsletter */
         $newsletterService = $this->getService('UthandoNewsletter');
