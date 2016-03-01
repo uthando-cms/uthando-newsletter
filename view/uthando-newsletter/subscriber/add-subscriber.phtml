@@ -19,9 +19,9 @@
                 'id' => 'newsletter_email',
                 'placeholder' => 'E-mail Address',
             ]));?>
-            <span class="input-group-btn">
+            <div class="input-group-btn">
                 <button class="btn btn-primary">SUBMIT</button>
-            </span>
+            </div>
         </div>
         <span class="help-block">
             <?=$this->formElementErrors($newsletter->get('email'), [
@@ -33,6 +33,7 @@
                 ->setLabelOption('disable_html_escape', true)
                 ->setLabelPrepend(true)
                 ->setPreSelect(true)
+                ->setIncludeHidden(false)
         );?>
     </form>
 <?php else: ?>
