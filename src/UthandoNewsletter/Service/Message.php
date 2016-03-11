@@ -59,6 +59,7 @@ class Message extends AbstractRelationalMapperService
 
     /**
      * @param int $id
+     * @return int
      */
     public function sendMessage($id)
     {
@@ -82,6 +83,8 @@ class Message extends AbstractRelationalMapperService
         $subscriberMapper = $this->getService('UthandoNewsletterSubscriber')->getMapper();
         $subscribers = $subscriberMapper->getSubscribersById($subscriberIds);
 
+        $count = 0;
+
         /* @var $subscriber SubscriberModel */
         foreach ($subscribers as $subscriber) {
             $this->getEventManager()->trigger('mail.queue', $this, [
@@ -95,8 +98,9 @@ class Message extends AbstractRelationalMapperService
                 'renderer' => 'ViewNewsletterRenderer',
                 'transport' => 'default',
             ]);
+            $count++;
         }
 
-
+        return $count;
     }
 }

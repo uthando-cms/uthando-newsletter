@@ -19,7 +19,7 @@ use UthandoNewsletter\View\Model\NewsletterModel;
  * @package UthandoNewsletter\Mvc\Controller
  * @method \UthandoNewsletter\Service\Message getService($service = null, $options = [])
  */
-class Message extends  AbstractCrudController
+class Message extends AbstractCrudController
 {
     protected $controllerSearchOverrides = ['sort' => 'messageId'];
     protected $serviceName = 'UthandoNewsletterMessage';
@@ -39,6 +39,12 @@ class Message extends  AbstractCrudController
     public function sendAction()
     {
         $id = $this->params()->fromRoute('id', 0);
-        $this->getService()->sendMessage($id);
+        $result = $this->getService()->sendMessage($id);
+
+        $this->flashMessenger()->addSuccessMessage(
+            $result . ' Messages added to Mail Queue.'
+        );
+
+        return $this->redirect()->toRoute($this->getRoute());
     }
 }

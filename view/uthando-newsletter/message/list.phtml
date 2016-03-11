@@ -23,7 +23,7 @@
                         <a href="<?=$this->url('admin/newsletter/message/edit', [
                             'action' => 'send',
                             'id' => $row->getMessageId(),
-                        ]);?>" class="btn btn-primary">
+                        ]);?>" class="btn btn-primary send-message">
                             <i class="fa fa-paper-plane-o"></i></a>&nbsp;
                         <a href="<?=$this->url('admin/newsletter/message/edit', [
                             'action' => 'preview',
@@ -53,22 +53,3 @@
 <?php else: ?>
     <h4><?=$this->translate('There are no Messages yet.');?></h4>
 <?php endif; ?>
-
-<script>
-    $('table').on('click', 'a.message-preview', function(e) {
-        e.preventDefault();
-        var url = $(this).attr('href');
-
-        bootbox.dialog({
-            size: 'large',
-            title: "<?=$this->translate('Newsletter Message Preview');?>",
-            message: '<iframe class="newsletter-preview" src="' + url + '"></iframe>',
-            buttons: {
-                main: {
-                    label: "Close",
-                    className: "btn-default"
-                }
-            }
-        });
-    });
-</script>
