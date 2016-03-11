@@ -12,6 +12,7 @@ namespace UthandoNewsletter\View\Renderer;
 
 use UthandoNewsletter\Model\Message;
 use UthandoNewsletter\Model\Template;
+use Zend\View\Helper\Url;
 
 /**
  * Class NewsletterEngine
@@ -29,6 +30,29 @@ class NewsletterEngine
      * @var bool
      */
     protected $parseImages = false;
+
+    /**
+     * @var Url
+     */
+    protected $urlHelper;
+
+    /**
+     * @return Url
+     */
+    public function getUrlHelper()
+    {
+        return $this->urlHelper;
+    }
+
+    /**
+     * @param Url $urlHelper
+     * @return $this
+     */
+    public function setUrlHelper($urlHelper)
+    {
+        $this->urlHelper = $urlHelper;
+        return $this;
+    }
 
     /**
      * @return boolean
@@ -54,6 +78,23 @@ class NewsletterEngine
     public function getVariables()
     {
         return $this->variables;
+    }
+
+    /**
+     * @param $name
+     * @return null|mixed
+     */
+    public function getVariable($name)
+    {
+        if (isset($this->variables[$name])) {
+            $var = $this->variables[$name];
+        } elseif (isset($this->variables[strtoupper($name)])) {
+            $var = $this->variables[strtoupper($name)];
+        } else {
+            $var = null;
+        }
+
+        return $var;
     }
 
     /**
@@ -83,6 +124,12 @@ class NewsletterEngine
      */
     public function parseVariables($html)
     {
+        $unsubscribeLink = $this->getVariable('unsubscribe');
+
+        if (!$unsubscribeLink) {
+            $this->setUnsubscribeLink();
+        }
+
         foreach ($this->getVariables() as $key => $variable) {
             $html = str_replace('{' . strtoupper($key) . '}', $variable, $html);
         }
@@ -119,6 +166,17 @@ class NewsletterEngine
         }
 
         $this->setVariables($params);
+    }
+
+    /**
+     * Set the unsubscribe link
+     */
+    public function setUnsubscribeLink()
+    {
+        $urlHelper  = $this->getUrlHelper();
+        $url        = $urlHelper('newsletter');
+
+        $this->setVariable('unsubscribe', $url);
     }
 
     /**

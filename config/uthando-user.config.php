@@ -8,6 +8,7 @@ return [
                     'privileges'    => [
                         'allow' => [
                             'controllers' => [
+                                'UthandoNewsletter\Controller\Preferences' => ['action' => ['index',]],
                                 'UthandoNewsletter\Controller\Subscriber' => ['action' => ['add-subscriber']],
                             ],
                         ],
@@ -38,6 +39,7 @@ return [
             'resources' => [
                 'UthandoNewsletter\Controller\Message',
                 'UthandoNewsletter\Controller\Newsletter',
+                'UthandoNewsletter\Controller\Preferences',
                 'UthandoNewsletter\Controller\Subscriber',
                 'UthandoNewsletter\Controller\SubscriberAdmin',
                 'UthandoNewsletter\Controller\Template',

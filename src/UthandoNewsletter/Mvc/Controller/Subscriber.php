@@ -12,6 +12,8 @@ namespace UthandoNewsletter\Mvc\Controller;
 
 use UthandoCommon\Service\ServiceTrait;
 use UthandoNewsletter\Form\SubscriberUserEdit as SubscriberForm;
+use UthandoNewsletter\Service\Subscriber as SubscriberService;
+use UthandoUser\Model\User;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
@@ -20,17 +22,12 @@ use Zend\View\Model\ViewModel;
  * Class Subscriber
  *
  * @package UthandoNewsletter\Mvc\Controller
- * @method \UthandoNewsletter\Service\Subscriber getService()
- * @method \UthandoUser\Model\User identity()
+ * @method SubscriberService getService()
+ * @method User identity()
  */
 class Subscriber extends AbstractActionController
 {
     use ServiceTrait;
-
-    /**
-     * @var \UthandoUser\Service\User
-     */
-    protected $userService;
 
     public function __construct()
     {
@@ -129,10 +126,4 @@ class Subscriber extends AbstractActionController
             'form' => $form,
         ];
     }
-
-    public function unsubscribeAction()
-    {
-
-    }
-
 }

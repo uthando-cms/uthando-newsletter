@@ -29,18 +29,22 @@ class ViewNewsletterRendererFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $serviceLocator = $serviceLocator->get('UthandoServiceManager');
-        $templateService = $serviceLocator->get('UthandoNewsletterTemplate');
-        $messageService = $serviceLocator->get('UthandoNewsletterMessage');
+        $serviceLocator     = $serviceLocator->get('UthandoServiceManager');
+        $templateService    = $serviceLocator->get('UthandoNewsletterTemplate');
+        $messageService     = $serviceLocator->get('UthandoNewsletterMessage');
+        $urlHelper          = $serviceLocator->get('ViewHelperManager')->get('url');
 
-        $viewResolver = new NewsletterResolver();
+        $viewResolver       = new NewsletterResolver();
+        $newsletterRenderer = new NewsletterRenderer();
+        $engine             = new NewsletterEngine();
 
         $viewResolver->setTemplateService($templateService);
         $viewResolver->setMessageService($messageService);
 
-        $newsletterRenderer = new NewsletterRenderer();
+        $engine->setUrlHelper($urlHelper);
+
         $newsletterRenderer->setResolver($viewResolver);
-        $newsletterRenderer->setEngine(new NewsletterEngine());
+        $newsletterRenderer->setEngine($engine);
 
         return $newsletterRenderer;
     }

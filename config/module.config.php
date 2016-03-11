@@ -17,6 +17,7 @@ return [
         'invokables' => [
             'UthandoNewsletter\Controller\Message'          => 'UthandoNewsletter\Mvc\Controller\Message',
             'UthandoNewsletter\Controller\Newsletter'       => 'UthandoNewsletter\Mvc\Controller\Newsletter',
+            'UthandoNewsletter\Controller\Preferences'      => 'UthandoNewsletter\Mvc\Controller\Preferences',
             'UthandoNewsletter\Controller\Subscriber'       => 'UthandoNewsletter\Mvc\Controller\Subscriber',
             'UthandoNewsletter\Controller\SubscriberAdmin'  => 'UthandoNewsletter\Mvc\Controller\SubscriberAdmin',
             'UthandoNewsletter\Controller\Template'         => 'UthandoNewsletter\Mvc\Controller\Template',
@@ -26,6 +27,7 @@ return [
         'invokables' => [
             'UthandoNewsletterMessage'              => 'UthandoNewsletter\Form\Message',
             'UthandoNewsletter'                     => 'UthandoNewsletter\Form\Newsletter',
+            'UthandoNewsletterPreferences'           => 'UthandoNewsletter\Form\Preferences',
             'UthandoNewsletterSubscriber'           => 'UthandoNewsletter\Form\Subscriber',
             'UthandoNewsletterSubscriberUserEdit'   => 'UthandoNewsletter\Form\SubscriberUserEdit',
             'UthandoNewsletterTemplate'             => 'UthandoNewsletter\Form\Template',
@@ -125,6 +127,9 @@ return [
                                 'controller' => 'Subscriber',
                                 'action' => 'update-subscription',
                                 'force-ssl' => true,
+                            ],
+                            'constraints'   => [
+                                'email'    => '[a-zA-Z][a-zA-Z0-9]*',
                             ],
                         ],
                     ],

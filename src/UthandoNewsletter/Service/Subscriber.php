@@ -11,6 +11,7 @@
 namespace UthandoNewsletter\Service;
 
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use UthandoNewsletter\Form\Preferences;
 use UthandoNewsletter\Form\Subscriber as SubscriberForm;
 use UthandoNewsletter\Model\Subscriber as SubscriberModel;
 use Zend\EventManager\Event;
@@ -55,6 +56,35 @@ class Subscriber extends AbstractRelationalMapperService
         $model = $this->getMapper()->getByEmail($email);
 
         return $model;
+    }
+
+    /**
+     * @param array $post
+     * @param Preferences $form
+     * @return bool|int|Preferences
+     */
+    public function removeSubscriberFromList(array $post, Preferences $form)
+    {
+        $form->setInputFilter($this->getInputFilter());
+        $form->setValidationGroup(['email', 'captcha', 'security']);
+
+        $form->setData($post);
+
+        if (!$form->isValid()) {
+            return $form;
+        }
+
+        $data = $form->getData();
+
+        $subscriber = $this->getSubscriberByEmail($data['email']);
+
+        $result = false;
+
+        if ($subscriber->getSubscriberId()) {
+            $result = $this->delete($subscriber->getSubscriberId());
+        }
+
+        return $result;
     }
 
     /**
