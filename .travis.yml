@@ -18,12 +18,12 @@ before_script:
   - cd module/UthandoNewsletter/test
 
 script:
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then phpdbg -qrr ../../../vendor/bin/phpunit -v
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then phpdbg -qrr ../../../vendor/bin/phpunit -v; fi
 
 after_script:
   - cd ../
   - cp -R ../../vendor ./vendor
-  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then php vendor/bin/test-reporter --coverage-report=build/logs/clover.xml
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then php vendor/bin/test-reporter --coverage-report=build/logs/clover.xml; fi
 
 matrix:
   allow_failures:
