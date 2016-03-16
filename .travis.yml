@@ -1,12 +1,16 @@
 language: php
 
 php:
+  - 5.5
+  - 5.6
   - 7.0
+  - hhvm
 
 before_script:
   - cd ..
   - git clone git://github.com/uthando-cms/uthando.git
   - git clone git://github.com/uthando-cms/uthando-common.git
+  - cp -R ./uthando-dompdf/test/composer.test.json ./uthando/composer.json
   - cd uthando
   - composer install
   - cp -R ../uthando-newsletter ./module/UthandoNewsletter
@@ -14,9 +18,13 @@ before_script:
   - cd module/UthandoNewsletter/test
 
 script:
-  - phpdbg -qrr ../../../vendor/bin/phpunit -v
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then phpdbg -qrr ../../../vendor/bin/phpunit -v
 
 after_script:
   - cd ../
   - cp -R ../../vendor ./vendor
-  - php vendor/bin/test-reporter --coverage-report=build/logs/clover.xml
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then php vendor/bin/test-reporter --coverage-report=build/logs/clover.xml
+
+matrix:
+  allow_failures:
+    - php: hhvm
