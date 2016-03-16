@@ -10,6 +10,7 @@
 
 namespace UthandoNewsletter\Mvc\Controller;
 
+use UthandoCommon\Controller\SettingsTrait;
 use Zend\Mvc\Controller\AbstractActionController;
 
 /**

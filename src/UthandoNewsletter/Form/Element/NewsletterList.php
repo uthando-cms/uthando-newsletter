@@ -24,7 +24,18 @@ class NewsletterList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
 
-    public function init()
+    /**
+     * @return array
+     */
+    public function getValueOptions()
+    {
+        return ($this->valueOptions) ?: $this->getNewsletters();
+    }
+
+    /**
+     * return array
+     */
+    public function getNewsletters()
     {
         $newsletters = $this->getServiceLocator()
             ->getServiceLocator()
@@ -39,6 +50,6 @@ class NewsletterList extends Select implements ServiceLocatorAwareInterface
             $newsletterOptions[$newsletter->getNewsletterId()] = $newsletter->getName();
         }
 
-        $this->setValueOptions($newsletterOptions);
+        return $newsletterOptions;
     }
 }

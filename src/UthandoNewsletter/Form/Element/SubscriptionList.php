@@ -80,6 +80,9 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
         return $this;
     }
 
+    /**
+     * @param array|\Traversable $options
+     */
     public function setOptions($options)
     {
         if (isset($options['subscriber_id'])) {
@@ -93,11 +96,17 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
         parent::setOptions($options);
     }
 
+    /**
+     * @return array
+     */
     public function getValueOptions()
     {
         return ($this->valueOptions) ?: $this->getSubscribers();
     }
 
+    /**
+     * @return array
+     */
     public function getSubscribers()
     {
         /* @var $sm \UthandoCommon\Service\ServiceManager */
@@ -116,7 +125,6 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
             ->getSubscriptionsBySubscriberId($this->getSubscriberId());
 
         $valueOptions = [];
-
         /* @var $row NewsletterModel */
         foreach ($newsletters as $row) {
 

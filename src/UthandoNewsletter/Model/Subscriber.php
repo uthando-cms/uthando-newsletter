@@ -153,7 +153,7 @@ class Subscriber implements ModelInterface
      * @param array $subscribe
      * @return $this
      */
-    public function setSubscribe($subscribe)
+    public function setSubscribe(array $subscribe)
     {
         $this->subscribe = $subscribe;
         return $this;

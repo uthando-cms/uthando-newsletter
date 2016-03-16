@@ -26,7 +26,18 @@ class TemplateList extends Select implements ServiceLocatorAwareInterface
 {
     use ServiceLocatorAwareTrait;
 
-    public function init()
+    /**
+     * @return array
+     */
+    public function getValueOptions()
+    {
+        return ($this->valueOptions) ?: $this->getTemplates();
+    }
+
+    /**
+     * @return array
+     */
+    public function getTemplates()
     {
         $templates = $this->getServiceLocator()
             ->getServiceLocator()
@@ -41,6 +52,6 @@ class TemplateList extends Select implements ServiceLocatorAwareInterface
             $templateOptions[$template->getTemplateId()] = $template->getName();
         }
 
-        $this->setValueOptions($templateOptions);
+        return $templateOptions;
     }
 }

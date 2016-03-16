@@ -54,5 +54,10 @@ class Preferences extends Subscriber
             ],
         ]);
 
+        $this->add([
+            'name' => 'security',
+            'type' => 'csrf',
+        ]);
+
     }
 }

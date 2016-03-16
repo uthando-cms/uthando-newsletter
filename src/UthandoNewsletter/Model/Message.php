@@ -182,7 +182,7 @@ class Message implements ModelInterface
      * @param Newsletter $newsletter
      * @return $this
      */
-    public function setNewsletter($newsletter)
+    public function setNewsletter(Newsletter $newsletter)
     {
         $this->newsletter = $newsletter;
         return $this;
@@ -200,7 +200,7 @@ class Message implements ModelInterface
      * @param Template $template
      * @return $this
      */
-    public function setTemplate($template)
+    public function setTemplate(Template $template)
     {
         $this->template = $template;
         return $this;
