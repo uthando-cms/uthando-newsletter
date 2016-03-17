@@ -11,6 +11,7 @@
 namespace UthandoNewsletterTest\Form\Element;
 
 use UthandoNewsletter\Form\Element\TemplateList;
+use UthandoNewsletter\Model\Template;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class TemplateListTest extends TestCase
@@ -27,6 +28,10 @@ class TemplateListTest extends TestCase
 
     public function testGetTemplates()
     {
+        $model = new Template();
+        $model->setTemplateId(1)
+            ->setName('Test');
+
         $mapperMock = $this->getMockBuilder('UthandoNewsletter\Mapper\Template')
             ->disableOriginalConstructor()
             ->getMock();
@@ -37,7 +42,7 @@ class TemplateListTest extends TestCase
 
         $mapperMock->expects($this->once())
             ->method('fetchAll')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue(array($model)));
 
         $serviceManagerMock->expects($this->once())
             ->method('get')
@@ -51,6 +56,6 @@ class TemplateListTest extends TestCase
         $form = $this->serviceManager->get('FormElementManager')
             ->get('UthandoNewsLetterTemplateList');
 
-        $this->assertSame([], $form->getValueOptions());
+        $this->assertSame([1 => 'Test'], $form->getValueOptions());
     }
 }

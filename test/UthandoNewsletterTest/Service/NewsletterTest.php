@@ -10,6 +10,7 @@
 
 namespace UthandoNewsletterTest\Service;
 
+use UthandoNewsletter\Model\Newsletter as NewsletterModel;
 use UthandoNewsletter\Service\Newsletter;
 use UthandoNewsletterTest\Framework\TestCase;
 
@@ -22,5 +23,55 @@ class NewsletterTest extends TestCase
             ->get('UthandoNewsletter');
 
         $this->assertInstanceOf(Newsletter::class, $service);
+    }
+
+    public function testFetchVisibleNewsletters()
+    {
+        $model = new NewsletterModel();
+        $model->setNewsletterId(1)
+            ->setDescription('Test newsletter')
+            ->setName('Test')
+            ->setVisible(true);
+
+        $newsletterMapperMock = $this->getMock('UthandoNewsletter\Mapper\Newsletter');
+        $newsletterMapperMock->expects($this->once())->method('fetchAllVisible')->willReturn([$model]);
+
+        $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
+        $this->serviceManager->get('UthandoMapperManager')->setService('UthandoNewsletter', $newsletterMapperMock);
+
+        /* @var Newsletter $service */
+        $service = $this->serviceManager
+            ->get('UthandoServiceManager')
+            ->get('UthandoNewsletter');
+
+        $result = $service->fetchVisibleNewsletters();
+
+        $this->assertSame($result[0], $model);
+    }
+
+    public function testToggleVisible()
+    {
+        $model = new NewsletterModel();
+        $model->setNewsletterId(1)
+            ->setDescription('Test newsletter')
+            ->setName('Test')
+            ->setVisible(true);
+
+        $newsletterMapperMock = $this->getMock('UthandoNewsletter\Mapper\Newsletter');
+        $newsletterMapperMock->expects($this->once())->method('update')->willReturn(1);
+        $newsletterMapperMock->expects($this->once())->method('getPrimaryKey')->willReturn('newsletterId');
+        $newsletterMapperMock->expects($this->once())->method('getById')->willReturn($model);
+
+        $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
+        $this->serviceManager->get('UthandoMapperManager')->setService('UthandoNewsletter', $newsletterMapperMock);
+
+        /* @var Newsletter $service */
+        $service = $this->serviceManager
+            ->get('UthandoServiceManager')
+            ->get('UthandoNewsletter');
+
+        $result = $service->toggleVisible($model);
+
+        $this->assertSame(1, $result);
     }
 }
