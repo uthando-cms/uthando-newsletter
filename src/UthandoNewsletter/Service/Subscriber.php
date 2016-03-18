@@ -123,6 +123,7 @@ class Subscriber extends AbstractRelationalMapperService
         $subscriber = $this->getSubscriberWithSubscriptions($subscriberId);
 
         $subscribe = $model->getSubscribe();
+
         $result = false;
 
         // if we have a subscriber id then update subscriptions
@@ -149,8 +150,6 @@ class Subscriber extends AbstractRelationalMapperService
             }
         }
 
-        if ($result) {
-            $e->setParam('result', $result);
-        }
+        $e->setParam('result', $result);
     }
 }

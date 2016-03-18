@@ -19,7 +19,7 @@ before_script:
 
 script:
   - if [[ $TRAVIS_PHP_VERSION =~ ^hhvm ]]; then echo 'xdebug.enable = On' >> /etc/hhvm/php.ini; fi
-  - php ../../../vendor/bin/phpunit
+  - if [[ ${TRAVIS_PHP_VERSION:0:3} == "7.0" ]]; then phpdbg -qrr ../../../vendor/bin/phpunit -v; else php ../../../vendor/bin/phpunit; fi
 
 after_script:
   - cd ../
