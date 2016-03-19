@@ -110,6 +110,10 @@ class MessageTest extends TestCase
         $this->assertSame(1, $result);
     }
 
+    /**
+     * @expectedException \UthandoCommon\UthandoException
+     * @expectExceptionMessage Cannot send message out again.
+     */
     public function testSendMessageWillNotSendAlreadySentMessage()
     {
         $messageModel = new MessageModel();
@@ -140,9 +144,6 @@ class MessageTest extends TestCase
         $this->serviceManager->get('UthandoServiceManager')->setAllowOverride(true);
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletter', $newsletterServiceMock);
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterTemplate', $templateServiceMock);
-
-        $this->expectException(UthandoException::class);
-        $this->expectExceptionMessage('Cannot send message out again.');
 
         /* @var Message $service */
         $service = $this->serviceManager
