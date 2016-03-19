@@ -10,6 +10,8 @@
 
 namespace UthandoNewsletter\Model;
 
+use DateTime;
+use UthandoCommon\Model\DateCreatedTrait;
 use UthandoCommon\Model\Model;
 use UthandoCommon\Model\ModelInterface;
 
@@ -20,7 +22,8 @@ use UthandoCommon\Model\ModelInterface;
  */
 class Message implements ModelInterface
 {
-    use Model;
+    use Model,
+        DateCreatedTrait;
 
     /**
      * @var int
@@ -61,6 +64,16 @@ class Message implements ModelInterface
      * @var Template
      */
     protected $template;
+
+    /**
+     * @var bool
+     */
+    protected $sent;
+
+    /**
+     * @var DateTime
+     */
+    protected $dateSent;
 
     /**
      * @return int
@@ -203,6 +216,42 @@ class Message implements ModelInterface
     public function setTemplate(Template $template)
     {
         $this->template = $template;
+        return $this;
+    }
+
+    /**
+     * @return DateTime
+     */
+    public function getDateSent()
+    {
+        return $this->dateSent;
+    }
+
+    /**
+     * @param DateTime $dateSent
+     * @return $this
+     */
+    public function setDateSent(DateTime $dateSent = null)
+    {
+        $this->dateSent = $dateSent;
+        return $this;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isSent()
+    {
+        return $this->sent;
+    }
+
+    /**
+     * @param boolean $sent
+     * @return $this
+     */
+    public function setSent($sent)
+    {
+        $this->sent = $sent;
         return $this;
     }
 }

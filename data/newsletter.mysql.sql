@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
   `name` varchar(255) NOT NULL,
   `description` varchar(255) NOT NULL,
   `visible` int(1) unsigned NOT NULL DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -35,14 +35,17 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
 --
 
 DROP TABLE IF EXISTS `newsletterMessage`;
-CREATE TABLE IF NOT EXISTS `newsletterMessage` (
-  `messageId` int(10) unsigned NOT NULL,
-  `templateId` int(10) unsigned NOT NULL,
-  `newsletterId` int(10) unsigned NOT NULL,
-  `subject` varchar(255) NOT NULL,
-  `message` text NOT NULL,
-  `params` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+REATE TABLE IF NOT EXISTS `newsletterMessage` (
+`messageId` int(10) unsigned NOT NULL,
+`templateId` int(10) unsigned NOT NULL,
+`newsletterId` int(10) unsigned NOT NULL,
+`subject` varchar(255) NOT NULL,
+`message` mediumtext NOT NULL,
+`params` text NOT NULL,
+`sent` int(1) unsigned NOT NULL,
+`dateCreated` datetime NOT NULL,
+`dateSent` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -56,7 +59,7 @@ CREATE TABLE IF NOT EXISTS `newsletterSubscriber` (
   `name` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `dateCreated` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -69,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `newsletterSubscription` (
   `subscriptionId` int(10) unsigned NOT NULL,
   `subscriberId` int(10) unsigned NOT NULL,
   `newsletterId` int(10) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- --------------------------------------------------------
 
@@ -83,7 +86,7 @@ CREATE TABLE IF NOT EXISTS `newsletterTemplate` (
   `name` varchar(255) NOT NULL,
   `params` text NOT NULL,
   `body` text NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 --
 -- Indexes for dumped tables

@@ -22,7 +22,21 @@ class MessageTest extends MapperTestCase
             ->get('UthandoNewsletterMessage');
 
         $this->assertInstanceOf(Message::class, $mapper);
-        $this->assertSame('messageId', $mapper->getPrimaryKey());
-        $this->assertSame('newsletterMessage', $mapper->getTable());
+    }
+
+    public function testHasPrimaryKeySet()
+    {
+        $pk = 'messageId';
+        $mapper = new Message();
+
+        $this->assertEquals($pk, $mapper->getPrimaryKey());
+    }
+
+    public function testHasTableNameSet()
+    {
+        $table = 'newsletterMessage';
+        $mapper = new Message();
+
+        $this->assertEquals($table, $mapper->getTable());
     }
 }

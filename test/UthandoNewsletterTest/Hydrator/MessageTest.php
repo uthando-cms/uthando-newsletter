@@ -11,6 +11,8 @@
 namespace UthandoNewsletterTest\Hydrator;
 
 
+use UthandoCommon\Hydrator\Strategy\DateTime;
+use UthandoCommon\Hydrator\Strategy\TrueFalse;
 use UthandoNewsletter\Hydrator\Message;
 use UthandoNewsletter\Model\Message as MessageModel;
 use UthandoNewsletterTest\Framework\TestCase;
@@ -25,6 +27,19 @@ class MessageTest extends TestCase
         $this->assertInstanceOf(Message::class, $hydrator);
     }
 
+    public function testHydratorHasCorrectStrategiesSet()
+    {
+        $hydrator = new Message();
+
+        $this->assertTrue($hydrator->hasStrategy('sent'));
+        $this->assertTrue($hydrator->hasStrategy('dateCreated'));
+        $this->assertTrue($hydrator->hasStrategy('dateSent'));
+
+        $this->assertInstanceOf(TrueFalse::class , $hydrator->getStrategy('sent'));
+        $this->assertInstanceOf(DateTime::class, $hydrator->getStrategy('dateCreated'));
+        $this->assertInstanceOf(DateTime::class, $hydrator->getStrategy('dateSent'));
+    }
+
     public function testExtract()
     {
         $data = [
@@ -34,6 +49,9 @@ class MessageTest extends TestCase
             'subject'       => 'Test',
             'params'        => 'test=test',
             'message'       => '<h1>Message</h1>',
+            'sent'          => 1,
+            'dateCreated'   => '2016-02-19 18:12:21',
+            'dateSent'      => '2016-02-19 18:12:21',
         ];
 
         $hydrator = new Message();

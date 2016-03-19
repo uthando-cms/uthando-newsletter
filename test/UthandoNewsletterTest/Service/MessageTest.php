@@ -10,6 +10,7 @@
 
 namespace UthandoNewsletterTest\Service;
 
+use UthandoCommon\UthandoException;
 use UthandoNewsletter\Model\Message as MessageModel;
 use UthandoNewsletter\Model\Newsletter as NewsletterModel;
 use UthandoNewsletter\Model\Subscriber;
@@ -74,6 +75,7 @@ class MessageTest extends TestCase
 
         $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\Message');
         $messageMapperMock->expects($this->once())->method('getById')->willReturn($messageModel);
+        $messageMapperMock->expects($this->once())->method('getPrimaryKey')->willReturn('messageId');
 
         $subscriptionMapperMock = $this->getMock('UthandoNewsletter\Mapper\Subscription');
         $subscriptionMapperMock->expects($this->once())->method('getSubscriptionsByNewsletterId')->willReturn($subscriptions);
@@ -106,5 +108,48 @@ class MessageTest extends TestCase
         $result = $service->sendMessage(1);
 
         $this->assertSame(1, $result);
+    }
+
+    public function testSendMessageWillNotSendAlreadySentMessage()
+    {
+        $messageModel = new MessageModel();
+        $messageModel->setNewsletterId(1)
+            ->setSent(true);
+
+        $subscriptions = [
+            new Subscription(),
+        ];
+
+        $subscribers = [
+            new Subscriber(),
+        ];
+
+        $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\Message');
+        $messageMapperMock->expects($this->once())->method('getById')->willReturn($messageModel);
+
+        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\Newsletter');
+        $newsletterServiceMock->expects($this->once())->method('getById')->willReturn(new NewsletterModel());
+
+        $templateServiceMock = $this->getMock('UthandoNewsletter\Service\Template');
+        $templateServiceMock->expects($this->once())->method('getById')->willReturn(new TemplateModel());
+
+
+        $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
+        $this->serviceManager->get('UthandoMapperManager')->setService('UthandoNewsletterMessage', $messageMapperMock);
+
+        $this->serviceManager->get('UthandoServiceManager')->setAllowOverride(true);
+        $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletter', $newsletterServiceMock);
+        $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterTemplate', $templateServiceMock);
+
+        $this->expectException(UthandoException::class);
+        $this->expectExceptionMessage('Cannot send message out again.');
+
+        /* @var Message $service */
+        $service = $this->serviceManager
+            ->get('UthandoServiceManager')
+            ->get('UthandoNewsletterMessage');
+        $service->setUseCache(false);
+
+        $result = $service->sendMessage(1);
     }
 }

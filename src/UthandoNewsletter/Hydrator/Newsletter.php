@@ -20,6 +20,9 @@ use UthandoCommon\Hydrator\Strategy\TrueFalse;
  */
 class Newsletter extends AbstractHydrator
 {
+    /**
+     * Newsletter constructor. Set up strategies
+     */
     public function __construct()
     {
         parent::__construct();

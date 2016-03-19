@@ -10,6 +10,7 @@
 
 namespace UthandoNewsletterTest\Model;
 
+use DateTime;
 use UthandoNewsletter\Model\Message;
 use UthandoNewsletter\Model\Newsletter;
 use UthandoNewsletter\Model\Template;
@@ -75,5 +76,23 @@ class MessageTest extends TestCase
     {
         $this->model->setTemplate(new Template());
         $this->assertInstanceOf(Template::class, $this->model->getTemplate());
+    }
+
+    public function testSetGetSent()
+    {
+        $this->model->setSent(true);
+        $this->assertTrue($this->model->isSent());
+    }
+
+    public function testSetGetDateCreated()
+    {
+        $this->model->setDateCreated(new DateTime());
+        $this->assertInstanceOf(DateTime::class, $this->model->getDateCreated());
+    }
+
+    public function testSetGetDateSent()
+    {
+        $this->model->setDateSent(new DateTime());
+        $this->assertInstanceOf(DateTime::class, $this->model->getDateSent());
     }
 }

@@ -8,6 +8,8 @@
                 <th data-field="newsletter"><?=$this->translate('Newsletter');?></th>
                 <th data-field="subject"><?=$this->translate('Subject');?></th>
                 <th data-field="template"><?=$this->translate('Template');?></th>
+                <th data-field="sent"><?=$this->translate('Sent');?></th>
+                <th data-field="dateSent"><?=$this->translate('Date Sent');?></th>
                 <th><?=$this->translate('Actions');?></th>
             </tr>
             </thead>
@@ -19,6 +21,8 @@
                     <td><?=$this->escapeHtml($row->getNewsletter()->getName()); ?></td>
                     <td><?=$this->escapeHtml($row->getSubject()); ?></td>
                     <td><?=$this->escapeHtml($row->getTemplate()->getName()); ?></td>
+                    <td><?=$this->escapeHtml($row->isSent()) ? 'yes' : 'no'; ?></td>
+                    <td><?=$row->isSent() ? $this->escapeHtml($this->formatDate($row->getDateSent())) : 'n/a'; ?></td>
                     <td>
                         <a href="<?=$this->url('admin/newsletter/message/edit', [
                             'action' => 'send',

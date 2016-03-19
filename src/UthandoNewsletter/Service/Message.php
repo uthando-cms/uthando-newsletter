@@ -11,6 +11,7 @@
 namespace UthandoNewsletter\Service;
 
 use UthandoCommon\Service\AbstractRelationalMapperService;
+use UthandoCommon\UthandoException;
 use UthandoNewsletter\Mapper\Subscriber as SubscriberMapper;
 use UthandoNewsletter\Mapper\Subscription as SubscriptionMapper;
 use UthandoNewsletter\Model\Subscriber as SubscriberModel;
@@ -46,7 +47,7 @@ class Message extends AbstractRelationalMapperService
     /**
      * @param $id
      * @param null $cols
-     * @return array|null|\UthandoNewsletter\Model\Message
+     * @return \UthandoNewsletter\Model\Message
      */
     public function getById($id, $cols = null)
     {
@@ -60,10 +61,15 @@ class Message extends AbstractRelationalMapperService
     /**
      * @param int $id
      * @return int
+     * @throws UthandoException
      */
     public function sendMessage($id)
     {
         $message = $this->getById($id);
+
+        if ($message->isSent()) {
+            throw new UthandoException('Cannot send message out again.');
+        }
 
         $viewModel = new NewsletterModel();
         $viewModel->setTemplate('message/' . $message->getMessageId());
@@ -100,6 +106,11 @@ class Message extends AbstractRelationalMapperService
             ]);
             $count++;
         }
+
+        // set message as sent and save to database.
+        $message->setDateSent(null)
+            ->setSent(true);
+        $this->save($message);
 
         return $count;
     }

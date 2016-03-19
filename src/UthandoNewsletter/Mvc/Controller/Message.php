@@ -11,6 +11,7 @@
 namespace UthandoNewsletter\Mvc\Controller;
 
 use UthandoCommon\Controller\AbstractCrudController;
+use UthandoCommon\UthandoException;
 use UthandoNewsletter\View\Model\NewsletterModel;
 
 /**
@@ -39,12 +40,16 @@ class Message extends AbstractCrudController
     public function sendAction()
     {
         $id = $this->params()->fromRoute('id', 0);
-        $result = $this->getService()->sendMessage($id);
 
-        $this->flashMessenger()->addSuccessMessage(
-            $result . ' Messages added to Mail Queue.'
-        );
-
+        try {
+            $result = $this->getService()->sendMessage($id);
+            $this->flashMessenger()->addSuccessMessage(
+                $result . ' Messages added to Mail Queue.'
+            );
+        } catch (UthandoException $e) {
+            $this->setExceptionMessages($e);
+        }
+        
         return $this->redirect()->toRoute($this->getRoute());
     }
 }
