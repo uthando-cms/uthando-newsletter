@@ -22,6 +22,7 @@ before_script:
   - cp -R ../uthando-common ./module/UthandoCommon
   - cp -R ../uthando-admin ./module/UthandoAdmin
   - cp -R ../uthando-navigation ./module/UthandoNavigation
+  - cp -R ../uthando-theme-manager ./module/UthandoThemeManager
   - cp -R ../uthando-user ./module/UthandoUser
   - cp -R ../uthando-session-manager ./module/UthandoSessionManager
   - cd module/UthandoNewsletter/test
