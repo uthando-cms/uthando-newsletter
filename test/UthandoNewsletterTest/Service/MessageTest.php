@@ -10,7 +10,6 @@
 
 namespace UthandoNewsletterTest\Service;
 
-use UthandoCommon\UthandoException;
 use UthandoNewsletter\Model\Message as MessageModel;
 use UthandoNewsletter\Model\Newsletter as NewsletterModel;
 use UthandoNewsletter\Model\Subscriber;

@@ -27,7 +27,7 @@ return [
         'invokables' => [
             'UthandoNewsletterMessage'              => 'UthandoNewsletter\Form\Message',
             'UthandoNewsletter'                     => 'UthandoNewsletter\Form\Newsletter',
-            'UthandoNewsletterPreferences'           => 'UthandoNewsletter\Form\Preferences',
+            'UthandoNewsletterPreferences'          => 'UthandoNewsletter\Form\Preferences',
             'UthandoNewsletterSubscriber'           => 'UthandoNewsletter\Form\Subscriber',
             'UthandoNewsletterSubscriberUserEdit'   => 'UthandoNewsletter\Form\SubscriberUserEdit',
             'UthandoNewsletterTemplate'             => 'UthandoNewsletter\Form\Template',

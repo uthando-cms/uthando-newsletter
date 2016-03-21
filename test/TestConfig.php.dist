@@ -3,9 +3,17 @@ return [
     'modules' => [
         'Application',
         'UthandoCommon',
+        'UthandoAdmin',
+        'UthandoSessionManager',
+        'UthandoThemeManager',
+        'UthandoNavigation',
+        'UthandoUser',
         'UthandoNewsletter',
     ],
     'module_listener_options' => [
+        'config_glob_paths' => [
+            __DIR__ . '/autoload/{,*.}{global,local}.php',
+        ],
         'module_paths' => [
             './module',
             './devmodules',

@@ -10,6 +10,7 @@
 
 namespace UthandoNewsletterTest\Hydrator;
 
+use UthandoCommon\Hydrator\Strategy\DateTime;
 use UthandoNewsletter\Hydrator\Subscriber;
 use UthandoNewsletter\Model\Subscriber as SubscriberModel;
 use UthandoNewsletterTest\Framework\TestCase;
@@ -22,6 +23,14 @@ class SubscriberTest extends TestCase
             ->get('HydratorManager')
             ->get('UthandoNewsletterSubscriber');
         $this->assertInstanceOf(Subscriber::class, $hydrator);
+    }
+
+    public function testHydratorHasCorrectStrategiesSet()
+    {
+        $hydrator = new Subscriber();
+        
+        $this->assertTrue($hydrator->hasStrategy('dateCreated'));
+        $this->assertInstanceOf(DateTime::class, $hydrator->getStrategy('dateCreated'));
     }
 
     public function testExtract()

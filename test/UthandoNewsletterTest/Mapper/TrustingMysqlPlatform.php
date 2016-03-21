@@ -10,9 +10,9 @@
 
 namespace UthandoNewsletterTest\Mapper;
 
-use Zend\Db\Adapter\Platform\Sql92;
+use Zend\Db\Adapter\Platform\Mysql;
 
-class TrustingSql92Platform extends Sql92
+class TrustingMysqlPlatform extends Mysql
 {
     /**
     * {@inheritDoc}

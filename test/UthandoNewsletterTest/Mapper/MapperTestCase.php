@@ -30,7 +30,7 @@ class MapperTestCase extends TestCase
         $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         // setup mock adapter
-        $this->mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, [$mockDriver, new TrustingSql92Platform()]);
+        $this->mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, [$mockDriver, new TrustingMysqlPlatform()]);
 
         $this->serviceManager->setAllowOverride(true);
         $this->serviceManager->setService('Zend\Db\Adapter\Adapter', $this->mockAdapter);

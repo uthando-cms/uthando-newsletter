@@ -10,7 +10,6 @@
 
 namespace UthandoNewsletterTest\Hydrator;
 
-
 use UthandoCommon\Hydrator\Strategy\DateTime;
 use UthandoCommon\Hydrator\Strategy\TrueFalse;
 use UthandoNewsletter\Hydrator\Message;

@@ -10,11 +10,20 @@ before_script:
   - cd ..
   - git clone git://github.com/uthando-cms/uthando.git
   - git clone git://github.com/uthando-cms/uthando-common.git
+  - git clone git://github.com/uthando-cms/uthando-admin.git
+  - git clone git://github.com/uthando-cms/uthando-navigation.git
+  - git clone git://github.com/uthando-cms/uthando-theme-manager.git
+  - git clone git://github.com/uthando-cms/uthando-user.git
+  - git clone git://github.com/uthando-cms/uthando-session-manager.git
   - cp -R ./uthando-newsletter/test/composer.test.json ./uthando/composer.json
   - cd uthando
   - composer install
   - cp -R ../uthando-newsletter ./module/UthandoNewsletter
   - cp -R ../uthando-common ./module/UthandoCommon
+  - cp -R ../uthando-admin ./module/UthandoAdmin
+  - cp -R ../uthando-navigation ./module/UthandoNavigation
+  - cp -R ../uthando-user ./module/UthandoUser
+  - cp -R ../uthando-session-manager ./module/UthandoSessionManager
   - cd module/UthandoNewsletter/test
 
 script:
