@@ -30,7 +30,7 @@ class TemplateTest extends TestCase
             'templateId'    => 1,
             'name'          => 'Test',
             'params'        => 'title=Test',
-            'body'          => file_get_contents(__DIR__ . '/../assets/body.phtml'),
+            'body'          => file_get_contents(__DIR__ . '/../TestAssets/body.phtml'),
         ];
 
         $hydrator = new Template();

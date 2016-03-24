@@ -29,6 +29,7 @@ return [
                             'controllers' => [
                                 'UthandoNewsletter\Controller\Message' => ['action' => 'all'],
                                 'UthandoNewsletter\Controller\Newsletter' => ['action' => 'all'],
+                                'UthandoNewsletter\Controller\Settings' => ['action' => 'all'],
                                 'UthandoNewsletter\Controller\SubscriberAdmin' => ['action' => 'all'],
                                 'UthandoNewsletter\Controller\Template' => ['action' => 'all'],
                             ],
@@ -40,6 +41,7 @@ return [
                 'UthandoNewsletter\Controller\Message',
                 'UthandoNewsletter\Controller\Newsletter',
                 'UthandoNewsletter\Controller\Preferences',
+                'UthandoNewsletter\Controller\Settings',
                 'UthandoNewsletter\Controller\Subscriber',
                 'UthandoNewsletter\Controller\SubscriberAdmin',
                 'UthandoNewsletter\Controller\Template',

@@ -26,49 +26,20 @@ class MessageTest extends ApplicationTestCase
         $serviceManager->setAllowOverride(true);
         $serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterMessage', $messageServiceMock);
     }
-    
-    public function testAclRules()
+
+    public function testPreviewAction()
     {
-        $serviceManager = $this->getApplicationServiceLocator();
-
-        $resource = 'UthandoNewsletter\Controller\Message';
         $controller = new Message();
-        $controller->setServiceLocator($serviceManager);
-        $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
-        /* @var \UthandoUser\Controller\Plugin\IsAllowed $acl */
-        $acl = $controller->plugin('isAllowed');
+    }
 
-        // guest rules
-        $this->assertFalse($acl->isAllowed($resource, 'index'));
-        $this->assertFalse($acl->isAllowed($resource, 'list'));
-        $this->assertFalse($acl->isAllowed($resource, 'add'));
-        $this->assertFalse($acl->isAllowed($resource, 'edit'));
-        $this->assertFalse($acl->isAllowed($resource, 'delete'));
-        $this->assertFalse($acl->isAllowed($resource, 'preview'));
-        $this->assertFalse($acl->isAllowed($resource, 'send'));
-
-        // registered user rules
-        $identity = $this->getRegisteredUser();
-        $acl->setIdentity($controller->identity());
-        $this->assertEquals($identity, $acl->getIdentity());
-        $this->assertFalse($acl->isAllowed($resource, 'index'));
-        $this->assertFalse($acl->isAllowed($resource, 'list'));
-        $this->assertFalse($acl->isAllowed($resource, 'add'));
-        $this->assertFalse($acl->isAllowed($resource, 'edit'));
-        $this->assertFalse($acl->isAllowed($resource, 'delete'));
-        $this->assertFalse($acl->isAllowed($resource, 'preview'));
-        $this->assertFalse($acl->isAllowed($resource, 'send'));
-
-        // admin user rules
-        $identity = $this->getAdminUser();
-        $acl->setIdentity($controller->identity());
-        $this->assertEquals($identity, $acl->getIdentity());
-        $this->assertTrue($acl->isAllowed($resource, 'index'));
-        $this->assertTrue($acl->isAllowed($resource, 'list'));
-        $this->assertTrue($acl->isAllowed($resource, 'add'));
-        $this->assertTrue($acl->isAllowed($resource, 'edit'));
-        $this->assertTrue($acl->isAllowed($resource, 'delete'));
-        $this->assertTrue($acl->isAllowed($resource, 'preview'));
-        $this->assertTrue($acl->isAllowed($resource, 'send'));
+    public function testIndexActionCanBeAccessed()
+    {
+        $this->getAdminUser();
+        $this->dispatch('/admin/newsletter/message');
+        $this->assertResponseStatusCode(200);
+        $this->assertModuleName('UthandoNewsletter');
+        $this->assertControllerName('UthandoNewsletter\Controller\Message');
+        $this->assertControllerClass('Message');
+        $this->assertMatchedRouteName('admin/newsletter/message');
     }
 }

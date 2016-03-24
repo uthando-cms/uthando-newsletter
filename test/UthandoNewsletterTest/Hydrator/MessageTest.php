@@ -53,8 +53,21 @@ class MessageTest extends TestCase
             'dateSent'      => '2016-02-19 18:12:21',
         ];
 
+        $object = new MessageModel();
+        $object->setMessageId($data['messageId'])
+            ->setNewsletterId($data['newsletterId'])
+            ->setTemplateId($data['templateId'])
+            ->setSubject($data['subject'])
+            ->setParams($data['params'])
+            ->setMessage($data['message'])
+            ->setSent(true)
+            ->setDateCreated(new \DateTime($data['dateCreated']))
+            ->setDateSent(new \DateTime($data['dateSent']));
+
         $hydrator = new Message();
         $model = $hydrator->hydrate($data, new MessageModel());
+
+        $this->assertEquals($object, $model);
         $this->assertSame($data, $hydrator->extract($model));
 
     }

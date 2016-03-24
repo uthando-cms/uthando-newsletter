@@ -42,9 +42,9 @@ class TemplateTest extends TestCase
 
     public function testSetGetBody()
     {
-        $body = file_get_contents(__DIR__ . '/../assets/body.phtml');
+        $body = file_get_contents(__DIR__ . '/../TestAssets/body.phtml');
         $this->model->setBody($body);
-        $this->assertStringEqualsFile(__DIR__ . '/../assets/body.phtml', $this->model->getBody());
+        $this->assertStringEqualsFile(__DIR__ . '/../TestAssets/body.phtml', $this->model->getBody());
     }
 
     public function testSetGetParams()

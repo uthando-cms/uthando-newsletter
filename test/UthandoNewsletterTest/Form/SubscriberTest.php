@@ -10,8 +10,14 @@
 
 namespace UthandoNewsletterTest\Form;
 
+use UthandoNewsletter\Form\Element\SubscriptionList;
 use UthandoNewsletter\Form\Subscriber;
 use UthandoNewsletterTest\Framework\TestCase;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\DateTime;
+use Zend\Form\Element\Email;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Text;
 
 class SubscriberTest extends TestCase
 {
@@ -23,12 +29,12 @@ class SubscriberTest extends TestCase
 
         $this->assertInstanceOf(Subscriber::class, $form);
 
-        $this->assertTrue($form->has('subscriberId'));
-        $this->assertTrue($form->has('name'));
-        $this->assertTrue($form->has('email'));
-        $this->assertTrue($form->has('subscribe'));
-        $this->assertTrue($form->has('dateCreated'));
-        $this->assertTrue($form->has('security'));
+        $this->assertInstanceOf(Hidden::class, $form->get('subscriberId'));
+        $this->assertInstanceOf(Text::class, $form->get('name'));
+        $this->assertInstanceOf(Email::class, $form->get('email'));
+        $this->assertInstanceOf(SubscriptionList::class, $form->get('subscribe'));
+        $this->assertInstanceOf(DateTime::class, $form->get('dateCreated'));
+        $this->assertInstanceOf(Csrf::class, $form->get('security'));
     }
 
     public function testCanUseNameAsOptions()

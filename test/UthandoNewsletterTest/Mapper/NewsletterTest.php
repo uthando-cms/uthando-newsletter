@@ -14,6 +14,7 @@ use UthandoNewsletter\Hydrator\Newsletter as NewsletterHydrator;
 use UthandoNewsletter\Mapper\Newsletter;
 use UthandoNewsletter\Model\Newsletter as NewsletterModel;
 use Zend\Db\ResultSet\HydratingResultSet;
+use Zend\Db\Sql\Select;
 
 class NewsletterTest extends MapperTestCase
 {
@@ -36,6 +37,8 @@ class NewsletterTest extends MapperTestCase
         $mapper->setHydrator(new NewsletterHydrator());
         $mapper->setModel(new NewsletterModel());
 
-        $this->assertInstanceOf(HydratingResultSet::class, $mapper->fetchAllVisible());
+        $result = $mapper->fetchAllVisible();
+
+        $this->assertInstanceOf(HydratingResultSet::class, $result);
     }
 }

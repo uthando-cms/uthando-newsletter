@@ -10,8 +10,15 @@
 
 namespace UthandoNewsletterTest\Form;
 
+use UthandoNewsletter\Form\Element\SubscriptionList;
 use UthandoNewsletter\Form\SubscriberUserEdit;
 use UthandoNewsletterTest\Framework\TestCase;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\DateTime;
+use Zend\Form\Element\Email;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Submit;
+use Zend\Form\Element\Text;
 
 class SubscriberUserEditTest extends TestCase
 {
@@ -23,12 +30,12 @@ class SubscriberUserEditTest extends TestCase
 
         $this->assertInstanceOf(SubscriberUserEdit::class, $form);
 
-        $this->assertTrue($form->has('subscriberId'));
-        $this->assertTrue($form->has('name'));
-        $this->assertTrue($form->has('email'));
-        $this->assertTrue($form->has('subscribe'));
-        $this->assertTrue($form->has('dateCreated'));
-        $this->assertTrue($form->has('security'));
-        $this->assertTrue($form->has('submit'));
+        $this->assertInstanceOf(Hidden::class, $form->get('subscriberId'));
+        $this->assertInstanceOf(Text::class, $form->get('name'));
+        $this->assertInstanceOf(Email::class, $form->get('email'));
+        $this->assertInstanceOf(SubscriptionList::class, $form->get('subscribe'));
+        $this->assertInstanceOf(DateTime::class, $form->get('dateCreated'));
+        $this->assertInstanceOf(Csrf::class, $form->get('security'));
+        $this->assertInstanceOf(Submit::class, $form->get('submit'));
     }
 }

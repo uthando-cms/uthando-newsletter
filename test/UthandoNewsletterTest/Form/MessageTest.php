@@ -10,8 +10,14 @@
 
 namespace UthandoNewsletterTest\Form;
 
+use UthandoNewsletter\Form\Element\NewsletterList;
+use UthandoNewsletter\Form\Element\TemplateList;
 use UthandoNewsletter\Form\Message;
 use UthandoNewsletterTest\Framework\TestCase;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
 
 class MessageTest extends TestCase
 {
@@ -23,12 +29,12 @@ class MessageTest extends TestCase
 
         $this->assertInstanceOf(Message::class, $form);
 
-        $this->assertTrue($form->has('messageId'));
-        $this->assertTrue($form->has('newsletterId'));
-        $this->assertTrue($form->has('templateId'));
-        $this->assertTrue($form->has('subject'));
-        $this->assertTrue($form->has('params'));
-        $this->assertTrue($form->has('message'));
-        $this->assertTrue($form->has('security'));
+        $this->assertInstanceOf(Hidden::class, $form->get('messageId'));
+        $this->assertInstanceOf(NewsletterList::class, $form->get('newsletterId'));
+        $this->assertInstanceOf(TemplateList::class, $form->get('templateId'));
+        $this->assertInstanceOf(Text::class, $form->get('subject'));
+        $this->assertInstanceOf(Textarea::class, $form->get('params'));
+        $this->assertInstanceOf(Textarea::class, $form->get('message'));
+        $this->assertInstanceOf(Csrf::class, $form->get('security'));
     }
 }

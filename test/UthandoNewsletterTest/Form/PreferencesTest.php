@@ -10,8 +10,12 @@
 
 namespace UthandoNewsletterTest\Form;
 
+use UthandoCommon\Form\Element\Captcha;
 use UthandoNewsletter\Form\Preferences;
 use UthandoNewsletterTest\Framework\TestCase;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Email;
+use Zend\Form\Element\Submit;
 
 class PreferencesTest extends TestCase
 {
@@ -23,9 +27,9 @@ class PreferencesTest extends TestCase
 
         $this->assertInstanceOf(Preferences::class, $form);
 
-        $this->assertTrue($form->has('email'));
-        $this->assertTrue($form->has('captcha'));
-        $this->assertTrue($form->has('submit'));
-        $this->assertTrue($form->has('security'));
+        $this->assertInstanceOf(Email::class, $form->get('email'));
+        $this->assertInstanceOf(Captcha::class, $form->get('captcha'));
+        $this->assertInstanceOf(Submit::class, $form->get('submit'));
+        $this->assertInstanceOf(Csrf::class, $form->get('security'));
     }
 }

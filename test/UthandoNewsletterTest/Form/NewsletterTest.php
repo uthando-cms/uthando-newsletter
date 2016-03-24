@@ -12,6 +12,10 @@ namespace UthandoNewsletterTest\Form;
 
 use UthandoNewsletter\Form\Newsletter;
 use UthandoNewsletterTest\Framework\TestCase;
+use Zend\Form\Element\Checkbox;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Text;
 
 class NewsletterTest extends TestCase
 {
@@ -23,10 +27,10 @@ class NewsletterTest extends TestCase
 
         $this->assertInstanceOf(Newsletter::class, $form);
 
-        $this->assertTrue($form->has('newsletterId'));
-        $this->assertTrue($form->has('name'));
-        $this->assertTrue($form->has('description'));
-        $this->assertTrue($form->has('visible'));
-        $this->assertTrue($form->has('security'));
+        $this->assertInstanceOf(Hidden::class, $form->get('newsletterId'));
+        $this->assertInstanceOf(Text::class, $form->get('name'));
+        $this->assertInstanceOf(Text::class, $form->get('description'));
+        $this->assertInstanceOf(Checkbox::class, $form->get('visible'));
+        $this->assertInstanceOf(Csrf::class, $form->get('security'));
     }
 }

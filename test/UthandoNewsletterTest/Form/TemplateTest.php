@@ -13,6 +13,10 @@ namespace UthandoNewsletterTest\Form;
 
 use UthandoNewsletter\Form\Template;
 use UthandoNewsletterTest\Framework\TestCase;
+use Zend\Form\Element\Csrf;
+use Zend\Form\Element\Hidden;
+use Zend\Form\Element\Text;
+use Zend\Form\Element\Textarea;
 
 class TemplateTest extends TestCase
 {
@@ -24,10 +28,10 @@ class TemplateTest extends TestCase
 
         $this->assertInstanceOf(Template::class, $form);
 
-        $this->assertTrue($form->has('templateId'));
-        $this->assertTrue($form->has('name'));
-        $this->assertTrue($form->has('params'));
-        $this->assertTrue($form->has('body'));
-        $this->assertTrue($form->has('security'));
+        $this->assertInstanceOf(Hidden::class, $form->get('templateId'));
+        $this->assertInstanceOf(Text::class, $form->get('name'));
+        $this->assertInstanceOf(Textarea::class, $form->get('params'));
+        $this->assertInstanceOf(Textarea::class, $form->get('body'));
+        $this->assertInstanceOf(Csrf::class, $form->get('security'));
     }
 }

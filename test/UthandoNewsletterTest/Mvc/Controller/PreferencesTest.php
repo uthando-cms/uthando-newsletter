@@ -22,6 +22,7 @@ class PreferencesTest extends ApplicationTestCase
     public function testIndexActionCanBeAccessed()
     {
         $this->dispatch('/newsletter');
+        $this->assertResponseStatusCode(200);
         $this->assertModuleName('UthandoNewsletter');
         $this->assertControllerName('UthandoNewsletter\Controller\Preferences');
         $this->assertControllerClass('Preferences');
