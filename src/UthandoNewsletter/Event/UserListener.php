@@ -76,8 +76,12 @@ class UserListener implements ListenerAggregateInterface
             ->get('FormElementManager')
             ->get('UthandoNewsletterSubscriptionList');
 
+        if (0 === count($subscriptionList->getValueOptions())) {
+            return;
+        }
+
         $subscriptionList->setOptions([
-            'label' => 'Subscriptions',
+            'label' => 'Newsletter',
             'twb-layout' => TwbBundleForm::LAYOUT_HORIZONTAL,
             'column-size' => 'sm-10',
             'label_attributes' => [

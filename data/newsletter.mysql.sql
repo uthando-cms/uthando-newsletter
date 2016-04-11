@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS `newsletter` (
 --
 
 DROP TABLE IF EXISTS `newsletterMessage`;
-REATE TABLE IF NOT EXISTS `newsletterMessage` (
+CREATE TABLE IF NOT EXISTS `newsletterMessage` (
 `messageId` int(10) unsigned NOT NULL,
 `templateId` int(10) unsigned NOT NULL,
 `newsletterId` int(10) unsigned NOT NULL,
