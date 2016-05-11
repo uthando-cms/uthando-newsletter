@@ -104,10 +104,5 @@ class Subscriber extends Form
                 'disabled' => true,
             ]
         ]);
-
-        $this->add([
-            'name' => 'security',
-            'type' => 'csrf',
-        ]);
     }
 }
