@@ -43,7 +43,8 @@ class NewsletterTest extends TestCase
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletter');
-
+        $service->setUseCache(false);
+        
         $result = $service->fetchVisibleNewsletters();
 
         $this->assertSame($result[0], $model);
@@ -69,6 +70,7 @@ class NewsletterTest extends TestCase
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletter');
+        $service->setUseCache(false);
 
         $result = $service->toggleVisible($model);
 
