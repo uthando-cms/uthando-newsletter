@@ -98,7 +98,7 @@ class Subscriber extends InputFilter implements ServiceLocatorAwareInterface
         $this->get('email')
             ->getValidatorChain()
             ->attachByName('Zend\Validator\Db\NoRecordExists', [
-                'table'     => 'newsletter',
+                'table'     => 'newsletterSubscriber',
                 'field'     => 'email',
                 'adapter'   => $this->getServiceLocator()
                                     ->getServiceLocator()

@@ -43,6 +43,14 @@ class Subscriber extends AbstractRelationalMapperService
     public function attachEvents()
     {
         $this->getEventManager()->attach([
+            'pre.add'
+        ], [$this, 'preAdd']);
+
+        $this->getEventManager()->attach([
+            'pre.edit'
+        ], [$this, 'preEdit']);
+        
+        $this->getEventManager()->attach([
             'post.edit', 'post.add',
         ], [$this, 'updateSubscriptions']);
     }
@@ -98,6 +106,40 @@ class Subscriber extends AbstractRelationalMapperService
         $this->populate($model, true);
 
         return $model;
+    }
+
+    /**
+     * Pre subscriber add checks
+     *
+     * @param Event $e
+     */
+    public function preAdd(Event $e)
+    {
+        $form = $e->getParam('form');
+        /* @var $inputFilter \UthandoUser\InputFilter\User */
+        $inputFilter = $form->getInputFilter();
+        $inputFilter->addEmailNoRecordExists();
+    }
+
+    /**
+     * prepare data to be updated and saved into database.
+     *
+     * @param Event $e
+     */
+    public function preEdit(Event $e)
+    {
+        $model = $e->getParam('model');
+        $form = $e->getParam('form');
+        $post = $e->getParam('post');
+
+        // we need to find if this email has changed,
+        // if not then exclude it from validation,
+        // if changed then reevaluate it.
+        $email = ($model->getEmail() === $post['email']) ? $model->getEmail() : null;
+
+        /* @var $inputFilter \UthandoUser\InputFilter\User */
+        $inputFilter = $form->getInputFilter();
+        $inputFilter->addEmailNoRecordExists($email);
     }
 
     /**

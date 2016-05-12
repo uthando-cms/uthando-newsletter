@@ -34,7 +34,6 @@ class SubscriberTest extends TestCase
         $this->assertInstanceOf(Email::class, $form->get('email'));
         $this->assertInstanceOf(SubscriptionList::class, $form->get('subscribe'));
         $this->assertInstanceOf(DateTime::class, $form->get('dateCreated'));
-        $this->assertInstanceOf(Csrf::class, $form->get('security'));
     }
 
     public function testCanUseNameAsOptions()
