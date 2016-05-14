@@ -71,9 +71,16 @@ class Message extends AbstractRelationalMapperService
             throw new UthandoException('Cannot send message out again.');
         }
 
+        // we need to set the server url before add to mail queue
+        $serverUrlHelper    = $this->getService('ViewHelperManager')->get('ServerUrl');
+        $basePathUrlHelper  = $this->getService('ViewHelperManager')->get('BasePath');
+        $serverUrl          = $serverUrlHelper() . $basePathUrlHelper();
+        $params             = $message->getParams() . 'server_url=' . $serverUrl . PHP_EOL;
+        $message->setParams($params);
+
         $viewModel = new NewsletterModel();
         $viewModel->setTemplate('message/' . $message->getMessageId());
-
+        
         /* @var $subscriptionMapper SubscriptionMapper */
         $subscriptionMapper = $this->getService('UthandoNewsletterSubscription')->getMapper();
         $subscriptions = $subscriptionMapper->getSubscriptionsByNewsletterId($message->getNewsletterId());

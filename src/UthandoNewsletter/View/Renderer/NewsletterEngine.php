@@ -174,9 +174,7 @@ class NewsletterEngine
     public function setUnsubscribeLink()
     {
         $urlHelper  = $this->getUrlHelper();
-        $url        = $urlHelper('newsletter', [], [
-            'force_canonical' => true,
-        ]);
+        $url        = $this->getVariable('server_url') . $urlHelper('newsletter');
 
         $this->setVariable('unsubscribe', $url);
     }

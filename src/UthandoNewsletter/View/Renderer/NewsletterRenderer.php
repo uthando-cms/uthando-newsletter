@@ -16,7 +16,6 @@ use UthandoNewsletter\View\Model\NewsletterModel;
 use UthandoNewsletter\View\Resolver\NewsletterResolver;
 use Zend\View\Exception\DomainException;
 use Zend\View\Exception\RuntimeException;
-use Zend\View\Model\ModelInterface;
 use Zend\View\Renderer\RendererInterface;
 use Zend\View\Resolver\ResolverInterface;
 
