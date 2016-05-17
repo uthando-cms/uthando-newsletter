@@ -17,6 +17,8 @@ use UthandoNewsletter\Mapper\Subscription as SubscriptionMapper;
 use UthandoNewsletter\Model\Subscriber as SubscriberModel;
 use UthandoNewsletter\Model\Subscription as SubscriptionModel;
 use UthandoNewsletter\View\Model\NewsletterModel;
+use Zend\Config\Reader\Ini as IniReader;
+use Zend\Config\Writer\Ini as IniWriter;
 
 /**
  * Class Message
@@ -75,15 +77,20 @@ class Message extends AbstractRelationalMapperService
         $serverUrlHelper    = $this->getService('ViewHelperManager')->get('ServerUrl');
         $basePathUrlHelper  = $this->getService('ViewHelperManager')->get('BasePath');
         $serverUrl          = $serverUrlHelper() . $basePathUrlHelper();
-        $params             = $message->getParams() . 'server_url=' . $serverUrl . PHP_EOL;
-        $message->setParams($params);
+
+        $iniReader              = new IniReader();
+        $iniWriter              = new IniWriter();
+        $params                 = $iniReader->fromString($message->getParams());
+        $params['server_url']   = $serverUrl;
+
+        $message->setParams($iniWriter->toString($params));
 
         $viewModel = new NewsletterModel();
         $viewModel->setTemplate('message/' . $message->getMessageId());
-        
+
         /* @var $subscriptionMapper SubscriptionMapper */
         $subscriptionMapper = $this->getService('UthandoNewsletterSubscription')->getMapper();
-        $subscriptions = $subscriptionMapper->getSubscriptionsByNewsletterId($message->getNewsletterId());
+        $subscriptions      = $subscriptionMapper->getSubscriptionsByNewsletterId($message->getNewsletterId());
 
         $subscriberIds = [];
 

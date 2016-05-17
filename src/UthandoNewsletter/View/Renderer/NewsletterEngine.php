@@ -12,6 +12,7 @@ namespace UthandoNewsletter\View\Renderer;
 
 use UthandoNewsletter\Model\Message;
 use UthandoNewsletter\Model\Template;
+use Zend\Config\Reader\Ini;
 use Zend\View\Helper\Url;
 
 /**
@@ -159,7 +160,8 @@ class NewsletterEngine
      */
     public function parseParams($model)
     {
-        $params = parse_ini_string($model->getParams());
+        $iniReader = new Ini();
+        $params = $iniReader->fromString($model->getParams());
 
         if ($model instanceof Message) {
             $params = array_merge(parse_ini_string($model->getTemplate()->getParams()), $params);
