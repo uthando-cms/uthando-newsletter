@@ -19,16 +19,24 @@ return [
                 'resource' => 'menu:admin',
                 'pages' => [
                     'list' => [
-                        'label'     => 'List All Newsletters',
+                        'label'     => 'List Newsletters',
                         'action'    => 'index',
                         'route'     => 'admin/newsletter',
                         'resource'  => 'menu:admin'
                     ],
                     'add' => [
-                        'label'     => 'Add New Newsletter',
+                        'label'     => 'Add Newsletter',
                         'action'    => 'add',
                         'route'     => 'admin/newsletter/edit',
-                        'resource'  => 'menu:admin'
+                        'resource'  => 'menu:admin',
+                        'visible'   => false,
+                    ],
+                    'edit' => [
+                        'label'     => 'Edit Newsletter',
+                        'action'    => 'edit',
+                        'route'     => 'admin/newsletter/edit',
+                        'resource'  => 'menu:admin',
+                        'visible'   => false,
                     ],
                     'messages' => [
                         'label' => 'Messages',
@@ -36,16 +44,25 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label'     => 'List All Messages',
+                                'label'     => 'List Messages',
                                 'action'    => 'index',
                                 'route'     => 'admin/newsletter/message',
-                                'resource'  => 'menu:admin'
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
                             ],
                             'add' => [
-                                'label'     => 'Add New Message',
+                                'label'     => 'Add Message',
                                 'action'    => 'add',
                                 'route'     => 'admin/newsletter/message/edit',
-                                'resource'  => 'menu:admin'
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
+                            ],
+                            'edit' => [
+                                'label'     => 'Edit Message',
+                                'action'    => 'edit',
+                                'route'     => 'admin/newsletter/message/edit',
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
                             ],
                         ],
                     ],
@@ -55,16 +72,25 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label'     => 'List All Subscribers',
+                                'label'     => 'List Subscribers',
                                 'action'    => 'index',
                                 'route'     => 'admin/newsletter/subscriber',
-                                'resource'  => 'menu:admin'
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
                             ],
                             'add' => [
-                                'label'     => 'Add New Subscriber',
+                                'label'     => 'Add Subscriber',
                                 'action'    => 'add',
                                 'route'     => 'admin/newsletter/subscriber/edit',
-                                'resource'  => 'menu:admin'
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
+                            ],
+                            'edit' => [
+                                'label'     => 'Edit Subscriber',
+                                'action'    => 'edit',
+                                'route'     => 'admin/newsletter/subscriber/edit',
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
                             ],
                         ],
                     ],
@@ -74,16 +100,25 @@ return [
                         'resource' => 'menu:admin',
                         'pages' => [
                             'list' => [
-                                'label'     => 'List All Templates',
+                                'label'     => 'List Templates',
                                 'action'    => 'index',
                                 'route'     => 'admin/newsletter/template',
-                                'resource'  => 'menu:admin'
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
                             ],
                             'add' => [
-                                'label'     => 'Add New Template',
+                                'label'     => 'Add Template',
                                 'action'    => 'add',
                                 'route'     => 'admin/newsletter/template/edit',
-                                'resource'  => 'menu:admin'
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
+                            ],
+                            'edit' => [
+                                'label'     => 'Edit Template',
+                                'action'    => 'edit',
+                                'route'     => 'admin/newsletter/template/edit',
+                                'resource'  => 'menu:admin',
+                                'visible'   => false,
                             ],
                         ],
                     ],

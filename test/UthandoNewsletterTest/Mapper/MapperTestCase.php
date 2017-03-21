@@ -21,16 +21,18 @@ class MapperTestCase extends TestCase
         parent::setUp();
 
         // mock the adapter, driver, and parts
-        $mockResult = $this->getMock('Zend\Db\Adapter\Driver\ResultInterface');
-        $mockStatement = $this->getMock('Zend\Db\Adapter\Driver\StatementInterface');
+        $mockResult = $this->createMock('Zend\Db\Adapter\Driver\ResultInterface');
+        $mockStatement = $this->createMock('Zend\Db\Adapter\Driver\StatementInterface');
         $mockStatement->expects($this->any())->method('execute')->will($this->returnValue($mockResult));
-        $mockConnection = $this->getMock('Zend\Db\Adapter\Driver\ConnectionInterface');
-        $mockDriver = $this->getMock('Zend\Db\Adapter\Driver\DriverInterface');
+        $mockConnection = $this->createMock('Zend\Db\Adapter\Driver\ConnectionInterface');
+        $mockDriver = $this->createMock('Zend\Db\Adapter\Driver\DriverInterface');
         $mockDriver->expects($this->any())->method('createStatement')->will($this->returnValue($mockStatement));
         $mockDriver->expects($this->any())->method('getConnection')->will($this->returnValue($mockConnection));
         $mockDriver->expects($this->any())->method('formatParameterName')->will($this->returnValue('?'));
         // setup mock adapter
-        $this->mockAdapter = $this->getMock('Zend\Db\Adapter\Adapter', null, [$mockDriver, new TrustingMysqlPlatform()]);
+        $this->mockAdapter = $this->getMockObjectGenerator()->getMock(
+            'Zend\Db\Adapter\Adapter', null, [$mockDriver, new TrustingMysqlPlatform()]
+        );
 
         $this->serviceManager->setAllowOverride(true);
         $this->serviceManager->setService('Zend\Db\Adapter\Adapter', $this->mockAdapter);
