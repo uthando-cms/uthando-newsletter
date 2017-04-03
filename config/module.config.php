@@ -103,7 +103,6 @@ return [
                         '__NAMESPACE__' => 'UthandoNewsletter\Controller',
                         'controller' => 'Preferences',
                         'action' => 'index',
-                        'force-ssl' => true,
                     ],
                 ],
                 'may_terminate' => true,
@@ -115,7 +114,6 @@ return [
                             'defaults' => [
                                 'controller' => 'Subscriber',
                                 'action' => 'add-subscriber',
-                                'force-ssl' => true,
                             ],
                         ],
                     ],

@@ -13,7 +13,6 @@ return [
                                 '__NAMESPACE__' => 'UthandoNewsletter\Controller',
                                 'controller' => 'Newsletter',
                                 'action' => 'index',
-                                'force-ssl' => 'ssl'
                             ],
                         ],
                         'may_terminate' => true,
@@ -28,7 +27,6 @@ return [
                                     ],
                                     'defaults'      => [
                                         'action'        => 'edit',
-                                        'force-ssl'     => 'ssl'
                                     ],
                                 ],
                             ],
@@ -42,7 +40,6 @@ return [
                                     'defaults'      => [
                                         'action'        => 'list',
                                         'page'          => 1,
-                                        'force-ssl'     => 'ssl'
                                     ],
                                 ],
                             ],
@@ -53,7 +50,6 @@ return [
                                     'defaults' => [
                                         'controller' => 'Message',
                                         'action' => 'index',
-                                        'force-ssl' => 'ssl'
                                     ],
                                 ],
                                 'may_terminate' => true,
@@ -68,7 +64,6 @@ return [
                                             ],
                                             'defaults'      => [
                                                 'action'        => 'edit',
-                                                'force-ssl'     => 'ssl'
                                             ],
                                         ],
                                     ],
@@ -82,7 +77,6 @@ return [
                                             'defaults'      => [
                                                 'action'        => 'list',
                                                 'page'          => 1,
-                                                'force-ssl'     => 'ssl'
                                             ],
                                         ],
                                     ],
@@ -95,7 +89,6 @@ return [
                                     'defaults' => [
                                         'controller' => 'SubscriberAdmin',
                                         'action' => 'index',
-                                        'force-ssl' => 'ssl'
                                     ],
                                 ],
                                 'may_terminate' => true,
@@ -110,7 +103,6 @@ return [
                                             ],
                                             'defaults'      => [
                                                 'action'        => 'edit',
-                                                'force-ssl'     => 'ssl'
                                             ],
                                         ],
                                     ],
@@ -124,7 +116,6 @@ return [
                                             'defaults'      => [
                                                 'action'        => 'list',
                                                 'page'          => 1,
-                                                'force-ssl'     => 'ssl'
                                             ],
                                         ],
                                     ],
@@ -137,7 +128,6 @@ return [
                                     'defaults' => [
                                         'controller' => 'Template',
                                         'action' => 'index',
-                                        'force-ssl' => 'ssl'
                                     ],
                                 ],
                                 'may_terminate' => true,
@@ -152,7 +142,6 @@ return [
                                             ],
                                             'defaults'      => [
                                                 'action'        => 'edit',
-                                                'force-ssl'     => 'ssl'
                                             ],
                                         ],
                                     ],
@@ -166,7 +155,6 @@ return [
                                             'defaults'      => [
                                                 'action'        => 'list',
                                                 'page'          => 1,
-                                                'force-ssl'     => 'ssl'
                                             ],
                                         ],
                                     ],
