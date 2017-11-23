@@ -124,7 +124,6 @@ return [
                             'defaults' => [
                                 'controller' => 'Subscriber',
                                 'action' => 'update-subscription',
-                                'force-ssl' => true,
                             ],
                             'constraints'   => [
                                 'email'    => '[a-zA-Z][a-zA-Z0-9]*',
