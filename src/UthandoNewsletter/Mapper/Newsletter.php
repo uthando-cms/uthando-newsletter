@@ -33,5 +33,4 @@ class Newsletter extends AbstractDbMapper
         $rowSet = $this->fetchResult($select);
         return $rowSet;
     }
-
 }
