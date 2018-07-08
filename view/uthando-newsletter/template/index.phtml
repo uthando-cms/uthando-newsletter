@@ -29,7 +29,7 @@
     </div>
 </div>
 
-
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
     $(document).ready(function(){
         $('#table-newsletter-template').dataGrid({
@@ -41,3 +41,5 @@
         });
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
+

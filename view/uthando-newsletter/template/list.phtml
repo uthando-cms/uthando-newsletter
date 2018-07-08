@@ -45,6 +45,7 @@
     <h4><?=$this->translate('There are no Templates yet.');?></h4>
 <?php endif; ?>
 
+<?php $this->placeholder('js-scripts')->captureStart();?>
 <script>
     $('table').on('click', 'a.message-preview', function(e) {
         e.preventDefault();
@@ -63,3 +64,4 @@
         });
     });
 </script>
+<?php $this->placeholder('js-scripts')->captureEnd();?>
