@@ -10,12 +10,12 @@
 
 namespace UthandoNewsletterTest\Service;
 
-use UthandoNewsletter\Model\Message as MessageModel;
-use UthandoNewsletter\Model\Newsletter as NewsletterModel;
-use UthandoNewsletter\Model\Subscriber;
-use UthandoNewsletter\Model\Subscription;
-use UthandoNewsletter\Model\Template as TemplateModel;
-use UthandoNewsletter\Service\Message;
+use UthandoNewsletter\Model\MessageModel as MessageModel;
+use UthandoNewsletter\Model\NewsletterModel as NewsletterModel;
+use UthandoNewsletter\Model\SubscriberModel;
+use UthandoNewsletter\Model\SubscriptionModel;
+use UthandoNewsletter\Model\TemplateModel as TemplateModel;
+use UthandoNewsletter\Service\MessageService;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class MessageTest extends TestCase
@@ -26,18 +26,18 @@ class MessageTest extends TestCase
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterMessage');
 
-        $this->assertInstanceOf(Message::class, $service);
+        $this->assertInstanceOf(MessageService::class, $service);
     }
 
     public function testGetById()
     {
-        $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\Message');
+        $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\MessageMapper');
         $messageMapperMock->expects($this->once())->method('getById')->willReturn(new MessageModel());
 
-        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\Newsletter');
+        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\NewsletterService');
         $newsletterServiceMock->expects($this->once())->method('getById')->willReturn(new NewsletterModel());
 
-        $templateServiceMock = $this->getMock('UthandoNewsletter\Service\Template');
+        $templateServiceMock = $this->getMock('UthandoNewsletter\Service\TemplateService');
         $templateServiceMock->expects($this->once())->method('getById')->willReturn(new TemplateModel());
 
         $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
@@ -46,7 +46,7 @@ class MessageTest extends TestCase
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletter', $newsletterServiceMock);
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterTemplate', $templateServiceMock);
 
-        /* @var Message $service */
+        /* @var MessageService $service */
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterMessage');
@@ -65,27 +65,27 @@ class MessageTest extends TestCase
         $messageModel->setNewsletterId(1);
 
         $subscriptions = [
-            new Subscription(),
+            new SubscriptionModel(),
         ];
 
         $subscribers = [
-            new Subscriber(),
+            new SubscriberModel(),
         ];
 
-        $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\Message');
+        $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\MessageMapper');
         $messageMapperMock->expects($this->once())->method('getById')->willReturn($messageModel);
         $messageMapperMock->expects($this->once())->method('getPrimaryKey')->willReturn('messageId');
 
-        $subscriptionMapperMock = $this->getMock('UthandoNewsletter\Mapper\Subscription');
+        $subscriptionMapperMock = $this->getMock('UthandoNewsletter\Mapper\SubscriptionMapper');
         $subscriptionMapperMock->expects($this->once())->method('getSubscriptionsByNewsletterId')->willReturn($subscriptions);
 
-        $subscriberMapperMock = $this->getMock('UthandoNewsletter\Mapper\Subscriber');
+        $subscriberMapperMock = $this->getMock('UthandoNewsletter\Mapper\SubscriberMapper');
         $subscriberMapperMock->expects($this->once())->method('getSubscribersById')->willReturn($subscribers);
 
-        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\Newsletter');
+        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\NewsletterService');
         $newsletterServiceMock->expects($this->once())->method('getById')->willReturn(new NewsletterModel());
 
-        $templateServiceMock = $this->getMock('UthandoNewsletter\Service\Template');
+        $templateServiceMock = $this->getMock('UthandoNewsletter\Service\TemplateService');
         $templateServiceMock->expects($this->once())->method('getById')->willReturn(new TemplateModel());
 
 
@@ -98,7 +98,7 @@ class MessageTest extends TestCase
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletter', $newsletterServiceMock);
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterTemplate', $templateServiceMock);
 
-        /* @var Message $service */
+        /* @var MessageService $service */
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterMessage');
@@ -120,20 +120,20 @@ class MessageTest extends TestCase
             ->setSent(true);
 
         $subscriptions = [
-            new Subscription(),
+            new SubscriptionModel(),
         ];
 
         $subscribers = [
-            new Subscriber(),
+            new SubscriberModel(),
         ];
 
-        $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\Message');
+        $messageMapperMock = $this->getMock('UthandoNewsletter\Mapper\MessageMapper');
         $messageMapperMock->expects($this->once())->method('getById')->willReturn($messageModel);
 
-        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\Newsletter');
+        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\NewsletterService');
         $newsletterServiceMock->expects($this->once())->method('getById')->willReturn(new NewsletterModel());
 
-        $templateServiceMock = $this->getMock('UthandoNewsletter\Service\Template');
+        $templateServiceMock = $this->getMock('UthandoNewsletter\Service\TemplateService');
         $templateServiceMock->expects($this->once())->method('getById')->willReturn(new TemplateModel());
 
 
@@ -144,7 +144,7 @@ class MessageTest extends TestCase
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletter', $newsletterServiceMock);
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterTemplate', $templateServiceMock);
 
-        /* @var Message $service */
+        /* @var MessageService $service */
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterMessage');

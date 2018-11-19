@@ -10,9 +10,9 @@
 
 namespace UthandoNewsletterTest\Mvc\Controller;
 
-use UthandoNewsletter\Form\Preferences as PreferencesForm;
-use UthandoNewsletter\Mvc\Controller\Preferences;
-use UthandoNewsletter\Service\Subscriber;
+use UthandoNewsletter\Form\PreferencesForm as PreferencesForm;
+use UthandoNewsletter\Mvc\Controller\PreferencesController;
+use UthandoNewsletter\Service\SubscriberService;
 use UthandoNewsletterTest\Framework\ApplicationTestCase;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\Plugin\PostRedirectGet;
@@ -49,7 +49,7 @@ class PreferencesTest extends ApplicationTestCase
             'email' => 'joe@bloggs.com',
         ];
 
-        $messageServiceMock = $this->getMock(Subscriber::class);
+        $messageServiceMock = $this->getMock(SubscriberService::class);
         $messageServiceMock->method('getForm')->willReturn(new PreferencesForm());
         $messageServiceMock->method('removeSubscriberFromList')->willReturn(new PreferencesForm());
 
@@ -62,7 +62,7 @@ class PreferencesTest extends ApplicationTestCase
         $pluginManager = $serviceManager->get('ControllerPluginManager');
         $pluginManager->setService('prg', $oPrg);
 
-        $controller = new Preferences();
+        $controller = new PreferencesController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($pluginManager);
 
@@ -77,7 +77,7 @@ class PreferencesTest extends ApplicationTestCase
             'email' => 'joe@bloggs.com',
         ];
 
-        $messageServiceMock = $this->getMock(Subscriber::class);
+        $messageServiceMock = $this->getMock(SubscriberService::class);
         $messageServiceMock->method('getForm')->willReturn(new PreferencesForm());
         $messageServiceMock->method('removeSubscriberFromList')->willReturn(1);
 
@@ -90,7 +90,7 @@ class PreferencesTest extends ApplicationTestCase
         $pluginManager = $serviceManager->get('ControllerPluginManager');
         $pluginManager->setService('prg', $oPrg);
 
-        $controller = new Preferences();
+        $controller = new PreferencesController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($pluginManager);
 

@@ -10,18 +10,18 @@
 
 namespace UthandoNewsletterTest\InputFilter;
 
-use UthandoNewsletter\InputFilter\Message;
+use UthandoNewsletter\InputFilter\MessageInputFilter;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class MessageTest extends TestCase
 {
     public function testCanGetFromServiceManager()
     {
-        /* @var Message $inputFilter */
+        /* @var MessageInputFilter $inputFilter */
         $inputFilter = $this->serviceManager
             ->get('InputFilterManager')
             ->get('UthandoNewsletterMessage');
-        $this->assertInstanceOf(Message::class, $inputFilter);
+        $this->assertInstanceOf(MessageInputFilter::class, $inputFilter);
 
         $this->assertTrue($inputFilter->has('messageId'));
         $this->assertTrue($inputFilter->has('newsletterId'));

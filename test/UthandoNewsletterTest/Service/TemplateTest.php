@@ -10,18 +10,18 @@
 
 namespace UthandoNewsletterTest\Service;
 
-use UthandoNewsletter\Service\Template;
+use UthandoNewsletter\Service\TemplateService;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class TemplateTest extends TestCase
 {
     public function testCanGetFromServiceManager()
     {
-        /* @var Template $service */
+        /* @var TemplateService $service */
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterTemplate');
 
-        $this->assertInstanceOf(Template::class, $service);
+        $this->assertInstanceOf(TemplateService::class, $service);
     }
 }

@@ -11,7 +11,7 @@
 namespace UthandoNewsletterTest\Form;
 
 use UthandoCommon\Form\Element\Captcha;
-use UthandoNewsletter\Form\Preferences;
+use UthandoNewsletter\Form\PreferencesForm;
 use UthandoNewsletterTest\Framework\TestCase;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Email;
@@ -25,7 +25,7 @@ class PreferencesTest extends TestCase
             ->get('FormElementManager')
             ->get('UthandoNewsletterPreferences');
 
-        $this->assertInstanceOf(Preferences::class, $form);
+        $this->assertInstanceOf(PreferencesForm::class, $form);
 
         $this->assertInstanceOf(Email::class, $form->get('email'));
         $this->assertInstanceOf(Captcha::class, $form->get('captcha'));

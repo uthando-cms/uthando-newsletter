@@ -10,8 +10,8 @@
 
 namespace UthandoNewsletterTest\Hydrator;
 
-use UthandoNewsletter\Hydrator\Template;
-use UthandoNewsletter\Model\Template as TemplateModel;
+use UthandoNewsletter\Hydrator\TemplateHydrator;
+use UthandoNewsletter\Model\TemplateModel as TemplateModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class TemplateTest extends TestCase
@@ -21,7 +21,7 @@ class TemplateTest extends TestCase
         $hydrator = $this->serviceManager
             ->get('HydratorManager')
             ->get('UthandoNewsletterTemplate');
-        $this->assertInstanceOf(Template::class, $hydrator);
+        $this->assertInstanceOf(TemplateHydrator::class, $hydrator);
     }
 
     public function testExtract()
@@ -33,7 +33,7 @@ class TemplateTest extends TestCase
             'body'          => file_get_contents(__DIR__ . '/../TestAssets/body.phtml'),
         ];
 
-        $hydrator = new Template();
+        $hydrator = new TemplateHydrator();
         $model = $hydrator->hydrate($data, new TemplateModel());
         $this->assertSame($data, $hydrator->extract($model));
     }

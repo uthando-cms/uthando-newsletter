@@ -10,8 +10,8 @@
 
 namespace UthandoNewsletterTest\Mvc\Controller;
 
-use UthandoNewsletter\Mvc\Controller\Message;
-use UthandoNewsletter\Service\Message as MessageService;
+use UthandoNewsletter\Mvc\Controller\MessageController;
+use UthandoNewsletter\Service\MessageService as MessageService;
 use UthandoNewsletterTest\Framework\ApplicationTestCase;
 
 class MessageTest extends ApplicationTestCase
@@ -29,7 +29,7 @@ class MessageTest extends ApplicationTestCase
 
     public function testPreviewAction()
     {
-        $controller = new Message();
+        $controller = new MessageController();
     }
 
     public function testIndexActionCanBeAccessed()

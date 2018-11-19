@@ -11,7 +11,7 @@
 namespace UthandoNewsletterTest\Form;
 
 use UthandoNewsletter\Form\Element\SubscriptionList;
-use UthandoNewsletter\Form\SubscriberUserEdit;
+use UthandoNewsletter\Form\SubscriberFormUserEdit;
 use UthandoNewsletterTest\Framework\TestCase;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\DateTime;
@@ -28,7 +28,7 @@ class SubscriberUserEditTest extends TestCase
             ->get('FormElementManager')
             ->get('UthandoNewsletterSubscriberUserEdit');
 
-        $this->assertInstanceOf(SubscriberUserEdit::class, $form);
+        $this->assertInstanceOf(SubscriberFormUserEdit::class, $form);
 
         $this->assertInstanceOf(Hidden::class, $form->get('subscriberId'));
         $this->assertInstanceOf(Text::class, $form->get('name'));

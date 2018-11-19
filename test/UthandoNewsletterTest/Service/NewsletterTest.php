@@ -10,8 +10,8 @@
 
 namespace UthandoNewsletterTest\Service;
 
-use UthandoNewsletter\Model\Newsletter as NewsletterModel;
-use UthandoNewsletter\Service\Newsletter;
+use UthandoNewsletter\Model\NewsletterModel as NewsletterModel;
+use UthandoNewsletter\Service\NewsletterService;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class NewsletterTest extends TestCase
@@ -22,7 +22,7 @@ class NewsletterTest extends TestCase
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletter');
 
-        $this->assertInstanceOf(Newsletter::class, $service);
+        $this->assertInstanceOf(NewsletterService::class, $service);
     }
 
     public function testFetchVisibleNewsletters()
@@ -33,13 +33,13 @@ class NewsletterTest extends TestCase
             ->setName('Test')
             ->setVisible(true);
 
-        $newsletterMapperMock = $this->getMock('UthandoNewsletter\Mapper\Newsletter');
+        $newsletterMapperMock = $this->getMock('UthandoNewsletter\Mapper\NewsletterMapper');
         $newsletterMapperMock->expects($this->once())->method('fetchAllVisible')->willReturn([$model]);
 
         $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
         $this->serviceManager->get('UthandoMapperManager')->setService('UthandoNewsletter', $newsletterMapperMock);
 
-        /* @var Newsletter $service */
+        /* @var NewsletterService $service */
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletter');
@@ -58,7 +58,7 @@ class NewsletterTest extends TestCase
             ->setName('Test')
             ->setVisible(true);
 
-        $newsletterMapperMock = $this->getMock('UthandoNewsletter\Mapper\Newsletter');
+        $newsletterMapperMock = $this->getMock('UthandoNewsletter\Mapper\NewsletterMapper');
         $newsletterMapperMock->expects($this->once())->method('update')->willReturn(1);
         $newsletterMapperMock->expects($this->once())->method('getPrimaryKey')->willReturn('newsletterId');
         $newsletterMapperMock->expects($this->once())->method('getById')->willReturn($model);
@@ -66,7 +66,7 @@ class NewsletterTest extends TestCase
         $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
         $this->serviceManager->get('UthandoMapperManager')->setService('UthandoNewsletter', $newsletterMapperMock);
 
-        /* @var Newsletter $service */
+        /* @var NewsletterService $service */
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletter');

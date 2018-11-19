@@ -11,9 +11,12 @@
 namespace UthandoNewsletter\Event;
 
 use TwbBundle\Form\View\Helper\TwbBundleForm;
-use UthandoNewsletter\Model\Subscriber;
-use UthandoUser\Form\Register;
-use UthandoUser\Model\User;
+use UthandoNewsletter\Form\Element\SubscriptionList;
+use UthandoNewsletter\Model\SubscriberModel;
+use UthandoNewsletter\Service\SubscriberService;
+use UthandoUser\Form\RegisterForm;
+use UthandoUser\Model\UserModel;
+use UthandoUser\Service\UserService;
 use Zend\EventManager\Event;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
@@ -24,7 +27,7 @@ class UserListener implements ListenerAggregateInterface
     use ListenerAggregateTrait;
 
     /**
-     * @var User
+     * @var UserModel
      */
     protected $userEmail;
 
@@ -36,19 +39,19 @@ class UserListener implements ListenerAggregateInterface
         $events = $events->getSharedManager();
 
         $this->listeners[] = $events->attach([
-            'UthandoUser\Service\User',
+            UserService::class,
         ], ['pre.add', 'post.form.init'], [$this, 'getSubscriptionList']);
 
         $this->listeners[] = $events->attach([
-            'UthandoUser\Service\User',
+            UserService::class,
         ], ['post.add'], [$this, 'addSubscriber']);
 
         $this->listeners[] = $events->attach([
-            'UthandoUser\Service\User',
+            UserService::class,
         ], ['post.edit'], [$this, 'emailUpdate']);
 
         $this->listeners[] = $events->attach([
-            'UthandoUser\Service\User',
+            UserService::class,
         ], ['pre.edit'], [$this, 'setUserModel']);
     }
 
@@ -62,11 +65,11 @@ class UserListener implements ListenerAggregateInterface
      */
     public function getSubscriptionList(Event $e)
     {
-        /* @var $form \UthandoUser\Form\Register */
+        /* @var $form \UthandoUser\Form\RegisterForm */
         $form = $e->getParam('form');
         $post = $e->getParam('post');
 
-        if (!$form instanceof Register) {
+        if (!$form instanceof RegisterForm) {
             return;
         }
 
@@ -74,7 +77,7 @@ class UserListener implements ListenerAggregateInterface
         $subscriptionList = $e->getTarget()
             ->getServiceLocator()
             ->get('FormElementManager')
-            ->get('UthandoNewsletterSubscriptionList');
+            ->get(SubscriptionList::class);
 
         if (0 === count($subscriptionList->getValueOptions())) {
             return;
@@ -111,16 +114,16 @@ class UserListener implements ListenerAggregateInterface
 
         if (isset($data['subscribe'])) {
             $userId = $e->getParam('saved', null);
-            /* @var User $model */
+            /* @var UserModel $model */
             $model = $e->getTarget()->getById($userId);
 
-            if ($model instanceof User) {
-                /* @var $subscriberService \UthandoNewsletter\Service\Subscriber */
-                $subscriberService = $e->getTarget()->getService('UthandoNewsletterSubscriber');
+            if ($model instanceof UserModel) {
+                /* @var $subscriberService SubscriberService */
+                $subscriberService = $e->getTarget()->getService(SubscriberService::class);
 
                 $subscriber = $subscriberService->getSubscriberByEmail($model->getEmail());
 
-                if (!$subscriber instanceof Subscriber || $subscriber->getSubscriberId()) {
+                if (!$subscriber instanceof SubscriberModel || $subscriber->getSubscriberId()) {
                     return;
                 }
 
@@ -145,12 +148,12 @@ class UserListener implements ListenerAggregateInterface
     {
         $data = $e->getParam('post');
 
-        /* @var $subscriberService \UthandoNewsletter\Service\Subscriber */
-        $subscriberService = $e->getTarget()->getService('UthandoNewsletterSubscriber');
+        /* @var $subscriberService SubscriberService */
+        $subscriberService = $e->getTarget()->getService(SubscriberService::class);
 
         $subscriber = $subscriberService->getSubscriberByEmail($this->userEmail);
 
-        if (!$subscriber instanceof Subscriber || null === $subscriber->getSubscriberId()) {
+        if (!$subscriber instanceof SubscriberModel || null === $subscriber->getSubscriberId()) {
             return;
         }
 

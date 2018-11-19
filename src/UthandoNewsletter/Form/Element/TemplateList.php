@@ -10,7 +10,9 @@
 
 namespace UthandoNewsletter\Form\Element;
 
-use UthandoNewsletter\Model\Template;
+use UthandoCommon\Service\ServiceManager;
+use UthandoNewsletter\Model\TemplateModel;
+use UthandoNewsletter\Service\TemplateService;
 use Zend\Form\Element\Select;
 use Zend\Form\FormElementManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -41,13 +43,13 @@ class TemplateList extends Select implements ServiceLocatorAwareInterface
     {
         $templates = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
-            ->get('UthandoNewsletterTemplate')
+            ->get(ServiceManager::class)
+            ->get(TemplateService::class)
             ->fetchAll();
 
         $templateOptions = [];
 
-        /* @var $template Template */
+        /* @var $template TemplateModel */
         foreach($templates as $template) {
             $templateOptions[$template->getTemplateId()] = $template->getName();
         }

@@ -10,13 +10,13 @@
 
 namespace UthandoNewsletterTest\Mvc\Controller;
 
-use UthandoNewsletter\Mvc\Controller\Message;
-use UthandoNewsletter\Mvc\Controller\Newsletter;
-use UthandoNewsletter\Mvc\Controller\Preferences;
-use UthandoNewsletter\Mvc\Controller\Settings;
-use UthandoNewsletter\Mvc\Controller\Subscriber;
+use UthandoNewsletter\Mvc\Controller\MessageController;
+use UthandoNewsletter\Mvc\Controller\NewsletterController;
+use UthandoNewsletter\Mvc\Controller\PreferencesController;
+use UthandoNewsletter\Mvc\Controller\SettingsController;
+use UthandoNewsletter\Mvc\Controller\SubscriberController;
 use UthandoNewsletter\Mvc\Controller\SubscriberAdmin;
-use UthandoNewsletter\Mvc\Controller\Template;
+use UthandoNewsletter\Mvc\Controller\TemplateController;
 use UthandoNewsletterTest\Framework\TestCase;
 use Zend\Permissions\Acl\Role\GenericRole;
 
@@ -32,7 +32,7 @@ class AclTest extends TestCase
         $serviceManager = $this->getServiceManager();
 
         $resource = 'UthandoNewsletter\Controller\Message';
-        $controller = new Message();
+        $controller = new MessageController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
         /* @var \UthandoUser\Controller\Plugin\IsAllowed $acl */
@@ -80,7 +80,7 @@ class AclTest extends TestCase
         $serviceManager = $this->getServiceManager();
 
         $resource = 'UthandoNewsletter\Controller\Newsletter';
-        $controller = new Newsletter();
+        $controller = new NewsletterController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
         /* @var \UthandoUser\Controller\Plugin\IsAllowed $acl */
@@ -126,7 +126,7 @@ class AclTest extends TestCase
         $serviceManager = $this->getServiceManager();
 
         $resource = 'UthandoNewsletter\Controller\Preferences';
-        $controller = new Preferences();
+        $controller = new PreferencesController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
         /* @var \UthandoUser\Controller\Plugin\IsAllowed $acl */
@@ -157,7 +157,7 @@ class AclTest extends TestCase
         $serviceManager = $this->getServiceManager();
 
         $resource = 'UthandoNewsletter\Controller\Settings';
-        $controller = new Settings();
+        $controller = new SettingsController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
         /* @var \UthandoUser\Controller\Plugin\IsAllowed $acl */
@@ -188,7 +188,7 @@ class AclTest extends TestCase
         $serviceManager = $this->getServiceManager();
 
         $resource = 'UthandoNewsletter\Controller\Subscriber';
-        $controller = new Subscriber();
+        $controller = new SubscriberController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
         /* @var \UthandoUser\Controller\Plugin\IsAllowed $acl */
@@ -221,7 +221,7 @@ class AclTest extends TestCase
     {
         $serviceManager = $this->getServiceManager();
 
-        $resource = 'UthandoNewsletter\Controller\SubscriberAdmin';
+        $resource = 'UthandoNewsletter\Controller\SubscriberAdminController';
         $controller = new SubscriberAdmin();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
@@ -265,7 +265,7 @@ class AclTest extends TestCase
         $serviceManager = $this->getServiceManager();
 
         $resource = 'UthandoNewsletter\Controller\Template';
-        $controller = new Template();
+        $controller = new TemplateController();
         $controller->setServiceLocator($serviceManager);
         $controller->setPluginManager($serviceManager->get('ControllerPluginManager'));
         /* @var \UthandoUser\Controller\Plugin\IsAllowed $acl */

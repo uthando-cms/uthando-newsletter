@@ -10,24 +10,24 @@
 
 namespace UthandoNewsletterTest\Mapper;
 
-use UthandoNewsletter\Mapper\Message;
+use UthandoNewsletter\Mapper\MessageMapper;
 
 class MessageTest extends MapperTestCase
 {
     public function testCanCreateFromServiceManager()
     {
-        /* @var Message $mapper */
+        /* @var MessageMapper $mapper */
         $mapper = $this->serviceManager
             ->get('UthandoMapperManager')
             ->get('UthandoNewsletterMessage');
 
-        $this->assertInstanceOf(Message::class, $mapper);
+        $this->assertInstanceOf(MessageMapper::class, $mapper);
     }
 
     public function testHasPrimaryKeySet()
     {
         $pk = 'messageId';
-        $mapper = new Message();
+        $mapper = new MessageMapper();
 
         $this->assertEquals($pk, $mapper->getPrimaryKey());
     }
@@ -35,7 +35,7 @@ class MessageTest extends MapperTestCase
     public function testHasTableNameSet()
     {
         $table = 'newsletterMessage';
-        $mapper = new Message();
+        $mapper = new MessageMapper();
 
         $this->assertEquals($table, $mapper->getTable());
     }

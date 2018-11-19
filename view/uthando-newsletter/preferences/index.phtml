@@ -1,6 +1,6 @@
 <?php $this->headTitle('Newsletter Preferences') ?>
 
-<?php if ($this->form instanceof \UthandoNewsletter\Form\Preferences): ?>
+<?php if ($this->form instanceof \UthandoNewsletter\Form\PreferencesForm): ?>
 <?php $this->form->setAttributes([
     'method' => 'post',
     'action' => $this->url('newsletter'),

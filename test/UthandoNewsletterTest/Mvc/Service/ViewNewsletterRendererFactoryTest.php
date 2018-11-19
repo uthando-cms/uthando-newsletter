@@ -11,8 +11,8 @@
 namespace UthandoNewsletterTest\Mvc\Service;
 
 use UthandoNewsletter\Mvc\Service\ViewNewsletterRendererFactory;
-use UthandoNewsletter\Service\Message;
-use UthandoNewsletter\Service\Template;
+use UthandoNewsletter\Service\MessageService;
+use UthandoNewsletter\Service\TemplateService;
 use UthandoNewsletter\View\Renderer\NewsletterEngine;
 use UthandoNewsletter\View\Renderer\NewsletterRenderer;
 use UthandoNewsletter\View\Resolver\NewsletterResolver;
@@ -48,7 +48,7 @@ class ViewNewsletterRendererFactoryTest extends TestCase
         $this->assertInstanceOf(NewsletterEngine::class, $service->getEngine());
 
         $this->assertInstanceOf(Url::class, $service->getEngine()->getUrlHelper());
-        $this->assertInstanceOf(Template::class, $service->resolver()->getTemplateService());
-        $this->assertInstanceOf(Message::class, $service->resolver()->getMessageService());
+        $this->assertInstanceOf(TemplateService::class, $service->resolver()->getTemplateService());
+        $this->assertInstanceOf(MessageService::class, $service->resolver()->getMessageService());
     }
 }

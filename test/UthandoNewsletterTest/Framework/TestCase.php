@@ -3,7 +3,7 @@
 namespace UthandoNewsletterTest\Framework;
 
 use UthandoNewsletterTest\Bootstrap;
-use UthandoUser\Model\User;
+use UthandoUser\Model\UserModel;
 
 class TestCase extends \PHPUnit_Framework_TestCase
 {
@@ -40,7 +40,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         /* @var $auth \UthandoUser\Service\Authentication */
         $auth = $this->getServiceManager()
             ->get('Zend\Authentication\AuthenticationService');
-        $user = new User();
+        $user = new UserModel();
 
         $user->setFirstname('Joe')
             ->setLastname('Bloggs')
@@ -57,7 +57,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
         /* @var $auth \UthandoUser\Service\Authentication */
         $auth = $this->getServiceManager()
             ->get('Zend\Authentication\AuthenticationService');
-        $user = new User();
+        $user = new UserModel();
 
         $user->setFirstname('Joe')
             ->setLastname('Bloggs')

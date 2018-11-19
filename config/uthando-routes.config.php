@@ -1,5 +1,10 @@
 <?php
 
+use UthandoNewsletter\Controller\MessageController;
+use UthandoNewsletter\Controller\NewsletterController;
+use UthandoNewsletter\Controller\SubscriberAdminController;
+use UthandoNewsletter\Controller\TemplateController;
+
 return [
     'router' => [
         'routes' => [
@@ -11,7 +16,7 @@ return [
                             'route' => '/newsletter',
                             'defaults' => [
                                 '__NAMESPACE__' => 'UthandoNewsletter\Controller',
-                                'controller' => 'Newsletter',
+                                'controller' => NewsletterController::class,
                                 'action' => 'index',
                             ],
                         ],
@@ -48,7 +53,7 @@ return [
                                 'options' => [
                                     'route' => '/message',
                                     'defaults' => [
-                                        'controller' => 'Message',
+                                        'controller' => MessageController::class,
                                         'action' => 'index',
                                     ],
                                 ],
@@ -87,7 +92,7 @@ return [
                                 'options' => [
                                     'route' => '/subscriber',
                                     'defaults' => [
-                                        'controller' => 'SubscriberAdmin',
+                                        'controller' => SubscriberAdminController::class,
                                         'action' => 'index',
                                     ],
                                 ],
@@ -126,7 +131,7 @@ return [
                                 'options' => [
                                     'route' => '/template',
                                     'defaults' => [
-                                        'controller' => 'Template',
+                                        'controller' => TemplateController::class,
                                         'action' => 'index',
                                     ],
                                 ],

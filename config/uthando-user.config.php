@@ -1,5 +1,13 @@
 <?php
 
+use UthandoNewsletter\Controller\MessageController;
+use UthandoNewsletter\Controller\NewsletterController;
+use UthandoNewsletter\Controller\PreferencesController;
+use UthandoNewsletter\Controller\SettingsController;
+use UthandoNewsletter\Controller\SubscriberAdminController;
+use UthandoNewsletter\Controller\SubscriberController;
+use UthandoNewsletter\Controller\TemplateController;
+
 return [
     'uthando_user' => [
         'acl' => [
@@ -8,8 +16,8 @@ return [
                     'privileges'    => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoNewsletter\Controller\Preferences' => ['action' => ['index',]],
-                                'UthandoNewsletter\Controller\Subscriber' => ['action' => ['add-subscriber']],
+                                PreferencesController::class => ['action' => ['index',]],
+                                SubscriberController::class => ['action' => ['add-subscriber']],
                             ],
                         ],
                     ],
@@ -18,7 +26,7 @@ return [
                     'privileges'    => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoNewsletter\Controller\Subscriber' => ['action' => ['update-subscription']],
+                                SubscriberController::class => ['action' => ['update-subscription']],
                             ],
                         ],
                     ],
@@ -27,24 +35,24 @@ return [
                     'privileges'    => [
                         'allow' => [
                             'controllers' => [
-                                'UthandoNewsletter\Controller\Message' => ['action' => 'all'],
-                                'UthandoNewsletter\Controller\Newsletter' => ['action' => 'all'],
-                                'UthandoNewsletter\Controller\Settings' => ['action' => 'all'],
-                                'UthandoNewsletter\Controller\SubscriberAdmin' => ['action' => 'all'],
-                                'UthandoNewsletter\Controller\Template' => ['action' => 'all'],
+                                MessageController::class => ['action' => 'all'],
+                                NewsletterController::class => ['action' => 'all'],
+                                SettingsController::class => ['action' => 'all'],
+                                SubscriberAdminController::class => ['action' => 'all'],
+                                TemplateController::class => ['action' => 'all'],
                             ],
                         ],
                     ],
                 ],
             ],
             'resources' => [
-                'UthandoNewsletter\Controller\Message',
-                'UthandoNewsletter\Controller\Newsletter',
-                'UthandoNewsletter\Controller\Preferences',
-                'UthandoNewsletter\Controller\Settings',
-                'UthandoNewsletter\Controller\Subscriber',
-                'UthandoNewsletter\Controller\SubscriberAdmin',
-                'UthandoNewsletter\Controller\Template',
+                MessageController::class,
+                NewsletterController::class,
+                PreferencesController::class,
+                SettingsController::class,
+                SubscriberController::class,
+                SubscriberAdminController::class,
+                TemplateController::class,
             ],
         ],
     ],

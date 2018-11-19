@@ -12,7 +12,7 @@ namespace UthandoNewsletterTest\Form;
 
 use UthandoNewsletter\Form\Element\NewsletterList;
 use UthandoNewsletter\Form\Element\TemplateList;
-use UthandoNewsletter\Form\Message;
+use UthandoNewsletter\Form\MessageForm;
 use UthandoNewsletterTest\Framework\TestCase;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Hidden;
@@ -27,7 +27,7 @@ class MessageTest extends TestCase
             ->get('FormElementManager')
             ->get('UthandoNewsletterMessage');
 
-        $this->assertInstanceOf(Message::class, $form);
+        $this->assertInstanceOf(MessageForm::class, $form);
 
         $this->assertInstanceOf(Hidden::class, $form->get('messageId'));
         $this->assertInstanceOf(NewsletterList::class, $form->get('newsletterId'));

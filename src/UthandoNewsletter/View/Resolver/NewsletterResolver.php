@@ -10,10 +10,10 @@
 
 namespace UthandoNewsletter\View\Resolver;
 
-use UthandoNewsletter\Model\Message as MessageModel;
-use UthandoNewsletter\Model\Template as TemplateModel;
-use UthandoNewsletter\Service\Message;
-use UthandoNewsletter\Service\Template;
+use UthandoNewsletter\Model\MessageModel as MessageModel;
+use UthandoNewsletter\Model\TemplateModel as TemplateModel;
+use UthandoNewsletter\Service\MessageService;
+use UthandoNewsletter\Service\TemplateService;
 use Zend\View\Renderer\RendererInterface as Renderer;
 use Zend\View\Resolver\ResolverInterface;
 
@@ -25,12 +25,12 @@ use Zend\View\Resolver\ResolverInterface;
 class NewsletterResolver implements ResolverInterface
 {
     /**
-     * @var Template
+     * @var TemplateService
      */
     protected $templateService;
 
     /**
-     * @var Message
+     * @var MessageService
      */
     protected $messageService;
 
@@ -60,7 +60,7 @@ class NewsletterResolver implements ResolverInterface
     }
 
     /**
-     * @return Template
+     * @return TemplateService
      */
     public function getTemplateService()
     {
@@ -68,17 +68,17 @@ class NewsletterResolver implements ResolverInterface
     }
 
     /**
-     * @param Template $templateService
+     * @param TemplateService $templateService
      * @return $this
      */
-    public function setTemplateService(Template $templateService)
+    public function setTemplateService(TemplateService $templateService)
     {
         $this->templateService = $templateService;
         return $this;
     }
 
     /**
-     * @return Message
+     * @return MessageService
      */
     public function getMessageService()
     {
@@ -86,10 +86,10 @@ class NewsletterResolver implements ResolverInterface
     }
 
     /**
-     * @param Message $messageService
+     * @param MessageService $messageService
      * @return $this
      */
-    public function setMessageService(Message $messageService)
+    public function setMessageService(MessageService $messageService)
     {
         $this->messageService = $messageService;
         return $this;

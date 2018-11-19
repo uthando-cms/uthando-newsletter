@@ -10,8 +10,8 @@
 
 namespace UthandoNewsletter\View\Renderer;
 
-use UthandoNewsletter\Model\Message;
-use UthandoNewsletter\Model\Template;
+use UthandoNewsletter\Model\MessageModel;
+use UthandoNewsletter\Model\TemplateModel;
 use Zend\Config\Reader\Ini;
 use Zend\View\Helper\Url;
 
@@ -155,7 +155,7 @@ class NewsletterEngine
     }
 
     /**
-     * @param Template|Message $model
+     * @param TemplateModel|MessageModel $model
      * @return string
      */
     public function parseParams($model)
@@ -163,7 +163,7 @@ class NewsletterEngine
         $iniReader = new Ini();
         $params = $iniReader->fromString($model->getParams());
 
-        if ($model instanceof Message) {
+        if ($model instanceof MessageModel) {
             $params = array_merge(parse_ini_string($model->getTemplate()->getParams()), $params);
         }
 
@@ -182,14 +182,14 @@ class NewsletterEngine
     }
 
     /**
-     * @param Template|Message $model
+     * @param TemplateModel|MessageModel $model
      * @return string
      */
     public function render($model)
     {
         $this->parseParams($model);
 
-        if ($model instanceof Template) {
+        if ($model instanceof TemplateModel) {
             $body = $model->getBody();
         } else {
             $this->setVariable('content', $model->getMessage());

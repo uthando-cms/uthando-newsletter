@@ -11,7 +11,7 @@
 namespace UthandoNewsletterTest\Form;
 
 
-use UthandoNewsletter\Form\Template;
+use UthandoNewsletter\Form\TemplateForm;
 use UthandoNewsletterTest\Framework\TestCase;
 use Zend\Form\Element\Csrf;
 use Zend\Form\Element\Hidden;
@@ -26,7 +26,7 @@ class TemplateTest extends TestCase
             ->get('FormElementManager')
             ->get('UthandoNewsletterTemplate');
 
-        $this->assertInstanceOf(Template::class, $form);
+        $this->assertInstanceOf(TemplateForm::class, $form);
 
         $this->assertInstanceOf(Hidden::class, $form->get('templateId'));
         $this->assertInstanceOf(Text::class, $form->get('name'));

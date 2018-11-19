@@ -10,28 +10,28 @@
 
 namespace UthandoNewsletterTest\Mapper;
 
-use UthandoNewsletter\Hydrator\Subscriber as SubscriberHydrator;
-use UthandoNewsletter\Mapper\Subscriber;
-use UthandoNewsletter\Model\Subscriber as SubscriberModel;
+use UthandoNewsletter\Hydrator\SubscriberHydrator as SubscriberHydrator;
+use UthandoNewsletter\Mapper\SubscriberMapper;
+use UthandoNewsletter\Model\SubscriberModel as SubscriberModel;
 use Zend\Db\ResultSet\HydratingResultSet;
 
 class SubscriberTest extends MapperTestCase
 {
     public function testCanCreateFromServiceManager()
     {
-        /* @var Subscriber $mapper */
+        /* @var SubscriberMapper $mapper */
         $mapper = $this->serviceManager
             ->get('UthandoMapperManager')
             ->get('UthandoNewsletterSubscriber');
 
-        $this->assertInstanceOf(Subscriber::class, $mapper);
+        $this->assertInstanceOf(SubscriberMapper::class, $mapper);
         $this->assertSame('subscriberId', $mapper->getPrimaryKey());
         $this->assertSame('newsletterSubscriber', $mapper->getTable());
     }
 
     public function testGetByEmail()
     {
-        $mapper = new Subscriber();
+        $mapper = new SubscriberMapper();
         $mapper->setDbAdapter($this->mockAdapter);
         $mapper->setHydrator(new SubscriberHydrator());
         $mapper->setModel(new SubscriberModel());
@@ -41,7 +41,7 @@ class SubscriberTest extends MapperTestCase
 
     public function testGetSubscribersById()
     {
-        $mapper = new Subscriber();
+        $mapper = new SubscriberMapper();
         $mapper->setDbAdapter($this->mockAdapter);
         $mapper->setHydrator(new SubscriberHydrator());
         $mapper->setModel(new SubscriberModel());

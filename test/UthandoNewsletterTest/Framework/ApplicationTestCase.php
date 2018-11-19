@@ -4,7 +4,7 @@ namespace UthandoNewsletterTest\Framework;
 
 use UthandoNewsletterTest\Bootstrap;
 use UthandoNewsletterTest\Mapper\TrustingMysqlPlatform;
-use UthandoUser\Model\User as TestUserModel;
+use UthandoUser\Model\UserModel as TestUserModel;
 use Zend\Test\PHPUnit\Controller\AbstractHttpControllerTestCase;
 
 class ApplicationTestCase extends AbstractHttpControllerTestCase

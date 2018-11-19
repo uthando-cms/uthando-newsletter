@@ -10,7 +10,7 @@
 
 namespace UthandoNewsletter\View\Strategy;
 
-use UthandoNewsletter\View\Model\NewsletterModel;
+use UthandoNewsletter\View\Model\NewsletterViewModel;
 use UthandoNewsletter\View\Renderer\NewsletterRenderer;
 use Zend\EventManager\AbstractListenerAggregate;
 use Zend\EventManager\EventManagerInterface;
@@ -68,7 +68,7 @@ class NewsletterStrategy extends AbstractListenerAggregate
     {
         $model = $e->getModel();
 
-        if ($model instanceof NewsletterModel) {
+        if ($model instanceof NewsletterViewModel) {
             return $this->renderer;
         }
 

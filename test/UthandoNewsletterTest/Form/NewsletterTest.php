@@ -10,7 +10,7 @@
 
 namespace UthandoNewsletterTest\Form;
 
-use UthandoNewsletter\Form\Newsletter;
+use UthandoNewsletter\Form\NewsletterForm;
 use UthandoNewsletterTest\Framework\TestCase;
 use Zend\Form\Element\Checkbox;
 use Zend\Form\Element\Csrf;
@@ -25,7 +25,7 @@ class NewsletterTest extends TestCase
             ->get('FormElementManager')
             ->get('UthandoNewsletter');
 
-        $this->assertInstanceOf(Newsletter::class, $form);
+        $this->assertInstanceOf(NewsletterForm::class, $form);
 
         $this->assertInstanceOf(Hidden::class, $form->get('newsletterId'));
         $this->assertInstanceOf(Text::class, $form->get('name'));

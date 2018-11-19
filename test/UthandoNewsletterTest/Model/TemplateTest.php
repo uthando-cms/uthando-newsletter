@@ -11,20 +11,20 @@
 namespace UthandoNewsletterTest\Model;
 
 
-use UthandoNewsletter\Model\Template;
+use UthandoNewsletter\Model\TemplateModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class TemplateTest extends TestCase
 {
     /**
-     * @var Template
+     * @var TemplateModel
      */
     protected $model;
 
     public function setUp()
     {
         parent::setUp();
-        $model = new Template();
+        $model = new TemplateModel();
         $this->model = $model;
     }
 

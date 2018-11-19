@@ -10,10 +10,11 @@
 
 namespace UthandoNewsletter\Form\Element;
 
-use UthandoNewsletter\Service\Subscription;
-use UthandoNewsletter\Model\Newsletter as NewsletterModel;
-use UthandoNewsletter\Service\Newsletter;
-use uthandoNewsletter\Model\Subscription as SubscriptionModel;
+use UthandoCommon\Service\ServiceManager;
+use UthandoNewsletter\Service\SubscriptionService;
+use UthandoNewsletter\Model\NewsletterModel as NewsletterModel;
+use UthandoNewsletter\Service\NewsletterService;
+use uthandoNewsletter\Model\SubscriptionModel as SubscriptionModel;
 use Zend\Form\Element\MultiCheckbox;
 use Zend\Form\FormElementManager;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
@@ -109,16 +110,16 @@ class SubscriptionList extends MultiCheckbox implements ServiceLocatorAwareInter
      */
     public function getSubscribers()
     {
-        /* @var $sm \UthandoCommon\Service\ServiceManager */
+        /* @var $sm ServiceManager */
         $sm = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager');
+            ->get(ServiceManager::class);
 
-        /* @var $newsletterService Newsletter */
-        $newsletterService = $sm->get('UthandoNewsletter');
+        /* @var $newsletterService NewsletterService */
+        $newsletterService = $sm->get(NewsletterService::class);
 
-        /* @var $subscriptionsService Subscription */
-        $subscriptionsService = $sm->get('UthandoNewsletterSubscription');
+        /* @var $subscriptionsService SubscriptionService */
+        $subscriptionsService = $sm->get(SubscriptionService::class);
 
         $newsletters = ($this->isIncludeHidden()) ? $newsletterService->fetchAll() : $newsletterService->fetchVisibleNewsletters();
         $subscriptions = $subscriptionsService->getMapper()

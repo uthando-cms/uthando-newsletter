@@ -10,18 +10,18 @@
 
 namespace UthandoNewsletterTest\InputFilter;
 
-use UthandoNewsletter\InputFilter\Subscriber;
+use UthandoNewsletter\InputFilter\SubscriberInputFilter;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class SubscriberTest extends TestCase
 {
     public function testCanGetFromServiceManager()
     {
-        /* @var Subscriber $inputFilter */
+        /* @var SubscriberInputFilter $inputFilter */
         $inputFilter = $this->serviceManager
             ->get('InputFilterManager')
             ->get('UthandoNewsletterSubscriber');
-        $this->assertInstanceOf(Subscriber::class, $inputFilter);
+        $this->assertInstanceOf(SubscriberInputFilter::class, $inputFilter);
 
         $this->assertTrue($inputFilter->has('subscriberId'));
         $this->assertTrue($inputFilter->has('name'));
@@ -40,7 +40,7 @@ class SubscriberTest extends TestCase
         $this->serviceManager->setAllowOverride(true);
         $this->serviceManager->setService('Zend\Db\Adapter\Adapter', $dbAdapterMock);
 
-        /* @var Subscriber $inputFilter */
+        /* @var SubscriberInputFilter $inputFilter */
         $inputFilter = $this->serviceManager
             ->get('InputFilterManager')
             ->get('UthandoNewsletterSubscriber');

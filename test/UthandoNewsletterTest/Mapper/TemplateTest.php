@@ -10,18 +10,18 @@
 
 namespace UthandoNewsletterTest\Mapper;
 
-use UthandoNewsletter\Mapper\Template;
+use UthandoNewsletter\Mapper\TemplateMapper;
 
 class TemplateTest extends MapperTestCase
 {
     public function testCanCreateFromServiceManager()
     {
-        /* @var Template $mapper */
+        /* @var TemplateMapper $mapper */
         $mapper = $this->serviceManager
             ->get('UthandoMapperManager')
             ->get('UthandoNewsletterTemplate');
 
-        $this->assertInstanceOf(Template::class, $mapper);
+        $this->assertInstanceOf(TemplateMapper::class, $mapper);
         $this->assertSame('templateId', $mapper->getPrimaryKey());
         $this->assertSame('newsletterTemplate', $mapper->getTable());
     }

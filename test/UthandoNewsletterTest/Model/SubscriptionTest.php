@@ -10,20 +10,20 @@
 
 namespace UthandoNewsletterTest\Model;
 
-use UthandoNewsletter\Model\Subscription;
+use UthandoNewsletter\Model\SubscriptionModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class SubscriptionTest extends TestCase
 {
     /**
-     * @var Subscription
+     * @var SubscriptionModel
      */
     protected $model;
 
     public function setUp()
     {
         parent::setUp();
-        $model = new Subscription();
+        $model = new SubscriptionModel();
         $this->model = $model;
     }
 

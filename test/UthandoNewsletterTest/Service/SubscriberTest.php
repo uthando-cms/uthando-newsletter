@@ -10,11 +10,11 @@
 
 namespace UthandoNewsletterTest\Service;
 
-use UthandoNewsletter\Form\Preferences;
-use UthandoNewsletter\Model\Newsletter;
-use UthandoNewsletter\Model\Subscriber as SubscriberModel;
-use UthandoNewsletter\Model\Subscription;
-use UthandoNewsletter\Service\Subscriber;
+use UthandoNewsletter\Form\PreferencesForm;
+use UthandoNewsletter\Model\NewsletterModel;
+use UthandoNewsletter\Model\SubscriberModel as SubscriberModel;
+use UthandoNewsletter\Model\SubscriptionModel;
+use UthandoNewsletter\Service\SubscriberService;
 use UthandoNewsletterTest\Framework\TestCase;
 use Zend\EventManager\Event;
 
@@ -24,7 +24,7 @@ class SubscriberTest extends TestCase
     {
         parent::setUp();
 
-        $subscriptionModel = new Subscription();
+        $subscriptionModel = new SubscriptionModel();
         $subscriptionModel->setSubscriptionId(1)
             ->setNewsletterId(1)
             ->setSubscriberId(1);
@@ -39,7 +39,7 @@ class SubscriberTest extends TestCase
             ->setName('Joe Bloggs')
             ->setSubscriptions($subscriptions);
 
-        $subscriberMapperMock = $this->getMock('UthandoNewsletter\Mapper\Subscriber');
+        $subscriberMapperMock = $this->getMock('UthandoNewsletter\Mapper\SubscriberMapper');
         $subscriberMapperMock->expects($this->any())->method('getById')->willReturn($subscriber);
         $subscriberMapperMock->expects($this->any())->method('getByEmail')->willReturn($subscriber);
         $subscriberMapperMock->expects($this->any())->method('getPrimaryKey')->willReturn('subscriberId');
@@ -48,17 +48,17 @@ class SubscriberTest extends TestCase
         $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
         $this->serviceManager->get('UthandoMapperManager')->setService('UthandoNewsletterSubscriber', $subscriberMapperMock);
 
-        $subscriptionServiceMock = $this->getMock('UthandoNewsletter\Service\Subscription');
+        $subscriptionServiceMock = $this->getMock('UthandoNewsletter\Service\SubscriptionService');
         $subscriptionServiceMock->expects($this->any())->method('getSubscriptionsBySubscriberId')->willReturn($subscriptions);
         $subscriptionServiceMock->expects($this->any())->method('delete')->willReturn(1);
 
         $this->serviceManager->get('UthandoServiceManager')->setAllowOverride(true);
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterSubscription', $subscriptionServiceMock);
 
-        $newsletterModel = new Newsletter();
+        $newsletterModel = new NewsletterModel();
         $newsletterModel->setNewsletterId(1);
 
-        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\Newsletter');
+        $newsletterServiceMock = $this->getMock('UthandoNewsletter\Service\NewsletterService');
         $newsletterServiceMock->expects($this->any())->method('fetchAll')->willReturn([$newsletterModel]);
 
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletter', $newsletterServiceMock);
@@ -66,11 +66,11 @@ class SubscriberTest extends TestCase
     }
 
     /**
-     * @return Subscriber
+     * @return SubscriberService
      */
     public function getService()
     {
-        $service = new Subscriber();
+        $service = new SubscriberService();
         $service->setUseCache(false);
         $service->setServiceLocator($this->serviceManager->get('UthandoServiceManager'));
         return $service;
@@ -82,7 +82,7 @@ class SubscriberTest extends TestCase
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterSubscriber');
 
-        $this->assertInstanceOf(Subscriber::class, $service);
+        $this->assertInstanceOf(SubscriberService::class, $service);
     }
 
     public function testGetSubscriberByEmail()
@@ -102,10 +102,10 @@ class SubscriberTest extends TestCase
 
         $result = $service->removeSubscriberFromList([], $form);
 
-        $this->assertInstanceOf(Preferences::class, $result);
+        $this->assertInstanceOf(PreferencesForm::class, $result);
 
         // test form pass returns affected row.
-        $formMock = $this->getMock('UthandoNewsletter\Form\Preferences');
+        $formMock = $this->getMock('UthandoNewsletter\Form\PreferencesForm');
         $formMock->expects($this->once())->method('isValid')->willReturn($this->returnValue(true));
 
         $this->serviceManager->get('FormElementManager')->setAllowOverride(true);
@@ -140,7 +140,7 @@ class SubscriberTest extends TestCase
             ->setName('Joe Bloggs')
             ->setSubscribe([1]);
 
-        $form = $this->getMock('UthandoNewsletter\Form\Subscriber');
+        $form = $this->getMock('UthandoNewsletter\Form\SubscriberForm');
         $form->expects($this->once())->method('getData')->willReturn($subscriberModel);
 
         $event->setParams([
@@ -164,7 +164,7 @@ class SubscriberTest extends TestCase
             ->setName('Joe Bloggs')
             ->setSubscribe([]);
 
-        $form = $this->getMock('UthandoNewsletter\Form\Subscriber');
+        $form = $this->getMock('UthandoNewsletter\Form\SubscriberForm');
         $form->expects($this->once())->method('getData')->willReturn($subscriberModel);
 
         $event->setParams([
@@ -188,7 +188,7 @@ class SubscriberTest extends TestCase
             ->setName('Joe Bloggs')
             ->setSubscribe([1]);
 
-        $form = $this->getMock('UthandoNewsletter\Form\Subscriber');
+        $form = $this->getMock('UthandoNewsletter\Form\SubscriberForm');
         $form->expects($this->once())->method('getData')->willReturn($subscriberModel);
 
         $event->setParams([
@@ -196,7 +196,7 @@ class SubscriberTest extends TestCase
             'saved' => 1,
         ]);
 
-        $subscriptionServiceMock = $this->getMock('UthandoNewsletter\Service\Subscription');
+        $subscriptionServiceMock = $this->getMock('UthandoNewsletter\Service\SubscriptionService');
         $subscriptionServiceMock->expects($this->any())->method('getSubscriptionsBySubscriberId')->willReturn([]);
         $subscriptionServiceMock->expects($this->any())->method('save')->willReturn(1);
         $this->serviceManager->get('UthandoServiceManager')->setService('UthandoNewsletterSubscription', $subscriptionServiceMock);

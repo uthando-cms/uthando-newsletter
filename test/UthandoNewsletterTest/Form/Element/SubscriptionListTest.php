@@ -11,8 +11,8 @@
 namespace UthandoNewsletterTest\Form\Element;
 
 use UthandoNewsletter\Form\Element\SubscriptionList;
-use UthandoNewsletter\Model\Newsletter;
-use UthandoNewsletter\Model\Subscription;
+use UthandoNewsletter\Model\NewsletterModel;
+use UthandoNewsletter\Model\SubscriptionModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class SubscriptionListTest extends TestCase
@@ -55,8 +55,8 @@ class SubscriptionListTest extends TestCase
 
     public function testGetSubscribers()
     {
-        $newsletterModel = new Newsletter();
-        $subscriptionModel = new Subscription();
+        $newsletterModel = new NewsletterModel();
+        $subscriptionModel = new SubscriptionModel();
 
         $newsletterModel->setName('Test')
             ->setNewsletterId(1);
@@ -71,15 +71,15 @@ class SubscriptionListTest extends TestCase
             $subscriptionModel,
         ];
 
-        $newsletterServiceMock = $this->getMockBuilder('UthandoNewsletter\Service\Newsletter')
+        $newsletterServiceMock = $this->getMockBuilder('UthandoNewsletter\Service\NewsletterService')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $subscriptionServiceMock = $this->getMockBuilder('UthandoNewsletter\Service\Subscription')
+        $subscriptionServiceMock = $this->getMockBuilder('UthandoNewsletter\Service\SubscriptionService')
             ->disableOriginalConstructor()
             ->getMock();
 
-        $subscriptionMapperMock = $this->getMockBuilder('UthandoNewsletter\Mapper\Subscription')
+        $subscriptionMapperMock = $this->getMockBuilder('UthandoNewsletter\Mapper\SubscriptionMapper')
             ->disableOriginalConstructor()
             ->getMock();
 

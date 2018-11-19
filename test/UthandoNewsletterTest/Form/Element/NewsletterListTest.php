@@ -11,7 +11,7 @@
 namespace UthandoNewsletterTest\Form\Element;
 
 use UthandoNewsletter\Form\Element\NewsletterList;
-use UthandoNewsletter\Model\Newsletter;
+use UthandoNewsletter\Model\NewsletterModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class NewsletterListTest extends TestCase
@@ -28,11 +28,11 @@ class NewsletterListTest extends TestCase
 
     public function testGetNewsletters()
     {
-        $model = new Newsletter();
+        $model = new NewsletterModel();
         $model->setNewsletterId(1)
             ->setName('Test');
 
-        $mapperMock = $this->getMockBuilder('UthandoNewsletter\Mapper\Newsletter')
+        $mapperMock = $this->getMockBuilder('UthandoNewsletter\Mapper\NewsletterMapper')
             ->disableOriginalConstructor()
             ->getMock();
 

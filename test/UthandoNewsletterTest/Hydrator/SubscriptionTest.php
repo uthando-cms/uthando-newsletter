@@ -10,8 +10,8 @@
 
 namespace UthandoNewsletterTest\Hydrator;
 
-use UthandoNewsletter\Hydrator\Subscription;
-use UthandoNewsletter\Model\Subscription as SubscriptionModel;
+use UthandoNewsletter\Hydrator\SubscriptionHydrator;
+use UthandoNewsletter\Model\SubscriptionModel as SubscriptionModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class SubscriptionTest extends TestCase
@@ -21,7 +21,7 @@ class SubscriptionTest extends TestCase
         $hydrator = $this->serviceManager
             ->get('HydratorManager')
             ->get('UthandoNewsletterSubscription');
-        $this->assertInstanceOf(Subscription::class, $hydrator);
+        $this->assertInstanceOf(SubscriptionHydrator::class, $hydrator);
     }
 
     public function testExtract()
@@ -32,7 +32,7 @@ class SubscriptionTest extends TestCase
             'subscriberId'      => 1,
         ];
 
-        $hydrator = new Subscription();
+        $hydrator = new SubscriptionHydrator();
         $model = $hydrator->hydrate($data, new SubscriptionModel());
         $this->assertSame($data, $hydrator->extract($model));
     }

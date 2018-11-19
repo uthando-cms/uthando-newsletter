@@ -10,7 +10,9 @@
 
 namespace UthandoNewsletter\Form\Element;
 
-use UthandoNewsletter\Model\Newsletter;
+use UthandoCommon\Service\ServiceManager;
+use UthandoNewsletter\Model\NewsletterModel;
+use UthandoNewsletter\Service\NewsletterService;
 use Zend\Form\Element\Select;
 use Zend\ServiceManager\ServiceLocatorAwareInterface;
 use Zend\ServiceManager\ServiceLocatorAwareTrait;
@@ -39,13 +41,13 @@ class NewsletterList extends Select implements ServiceLocatorAwareInterface
     {
         $newsletters = $this->getServiceLocator()
             ->getServiceLocator()
-            ->get('UthandoServiceManager')
-            ->get('UthandoNewsletter')
+            ->get(ServiceManager::class)
+            ->get(NewsletterService::class)
             ->fetchAll();
 
         $newsletterOptions = [];
 
-        /* @var $newsletter Newsletter */
+        /* @var $newsletter NewsletterModel */
         foreach($newsletters as $newsletter) {
             $newsletterOptions[$newsletter->getNewsletterId()] = $newsletter->getName();
         }

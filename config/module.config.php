@@ -1,5 +1,21 @@
 <?php
 
+use UthandoNewsletter\Controller\MessageController;
+use UthandoNewsletter\Controller\NewsletterController;
+use UthandoNewsletter\Controller\PreferencesController;
+use UthandoNewsletter\Controller\SubscriberAdminController;
+use UthandoNewsletter\Controller\SubscriberController;
+use UthandoNewsletter\Controller\TemplateController;
+use UthandoNewsletter\Service\MessageService;
+use UthandoNewsletter\Service\NewsletterService;
+use UthandoNewsletter\Service\SubscriberService;
+use UthandoNewsletter\Service\SubscriptionService;
+use UthandoNewsletter\Service\TemplateService;
+use UthandoNewsletter\View\Renderer\NewsletterRenderer;
+use UthandoNewsletter\View\Service\NewsletterRendererFactory;
+use UthandoNewsletter\View\Service\NewsletterStrategyFactory;
+use UthandoNewsletter\View\Strategy\NewsletterStrategy;
+
 return [
     'asset_manager' => [
         'resolver_configs' => [
@@ -15,81 +31,32 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'UthandoNewsletter\Controller\Message'          => 'UthandoNewsletter\Mvc\Controller\Message',
-            'UthandoNewsletter\Controller\Newsletter'       => 'UthandoNewsletter\Mvc\Controller\Newsletter',
-            'UthandoNewsletter\Controller\Preferences'      => 'UthandoNewsletter\Mvc\Controller\Preferences',
-            'UthandoNewsletter\Controller\Subscriber'       => 'UthandoNewsletter\Mvc\Controller\Subscriber',
-            'UthandoNewsletter\Controller\SubscriberAdmin'  => 'UthandoNewsletter\Mvc\Controller\SubscriberAdmin',
-            'UthandoNewsletter\Controller\Template'         => 'UthandoNewsletter\Mvc\Controller\Template',
-        ],
-    ],
-    'form_elements' => [
-        'invokables' => [
-            'UthandoNewsletterMessage'              => 'UthandoNewsletter\Form\Message',
-            'UthandoNewsletter'                     => 'UthandoNewsletter\Form\Newsletter',
-            'UthandoNewsletterPreferences'          => 'UthandoNewsletter\Form\Preferences',
-            'UthandoNewsletterSubscriber'           => 'UthandoNewsletter\Form\Subscriber',
-            'UthandoNewsletterSubscriberUserEdit'   => 'UthandoNewsletter\Form\SubscriberUserEdit',
-            'UthandoNewsletterTemplate'             => 'UthandoNewsletter\Form\Template',
-
-            'UthandoNewsletterList'                 => 'UthandoNewsletter\Form\Element\NewsletterList',
-            'UthandoNewsletterSubscriptionList'     => 'UthandoNewsletter\Form\Element\SubscriptionList',
-            'UthandoNewsletterTemplateList'         => 'UthandoNewsletter\Form\Element\TemplateList',
-        ],
-    ],
-    'hydrators' => [
-        'invokables' => [
-            'UthandoNewsletterMessage'      => 'UthandoNewsletter\Hydrator\Message',
-            'UthandoNewsletter'             => 'UthandoNewsletter\Hydrator\Newsletter',
-            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Hydrator\Subscriber',
-            'UthandoNewsletterSubscription' => 'UthandoNewsletter\Hydrator\Subscription',
-            'UthandoNewsletterTemplate'     => 'UthandoNewsletter\Hydrator\Template',
-        ],
-    ],
-    'input_filters' => [
-        'invokables' => [
-            'UthandoNewsletterMessage'      => 'UthandoNewsletter\InputFilter\Message',
-            'UthandoNewsletter'             => 'UthandoNewsletter\InputFilter\Newsletter',
-            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\InputFilter\Subscriber',
-            'UthandoNewsletterTemplate'     => 'UthandoNewsletter\InputFilter\Template',
+            MessageController::class            => MessageController::class,
+            NewsletterController::class         => NewsletterController::class,
+            PreferencesController::class        => PreferencesController::class,
+            SubscriberAdminController::class    => SubscriberAdminController::class,
+            SubscriberController::class         => SubscriberController::class,
+            TemplateController::class           => TemplateController::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
-            'ViewNewsletterRenderer' => 'UthandoNewsletter\Mvc\Service\ViewNewsletterRendererFactory',
-            'ViewNewsletterStrategy' => 'UthandoNewsletter\Mvc\Service\ViewNewsletterStrategyFactory',
+            NewsletterRenderer::class => NewsletterRendererFactory::class,
+            NewsletterStrategy::class => NewsletterStrategyFactory::class,
         ]
-    ],
-    'uthando_mappers' => [
-        'invokables' => [
-            'UthandoNewsletterMessage'      => 'UthandoNewsletter\Mapper\Message',
-            'UthandoNewsletter'             => 'UthandoNewsletter\Mapper\Newsletter',
-            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Mapper\Subscriber',
-            'UthandoNewsletterSubscription' => 'UthandoNewsletter\Mapper\Subscription',
-            'UthandoNewsletterTemplate'     => 'UthandoNewsletter\Mapper\Template',
-        ],
-    ],
-    'uthando_models' => [
-        'invokables' => [
-            'UthandoNewsletterMessage'      => 'UthandoNewsletter\Model\Message',
-            'UthandoNewsletter'             => 'UthandoNewsletter\Model\Newsletter',
-            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Model\Subscriber',
-            'UthandoNewsletterSubscription' => 'UthandoNewsletter\Model\Subscription',
-            'UthandoNewsletterTemplate'     => 'UthandoNewsletter\Model\Template',
-        ],
     ],
     'uthando_services' => [
         'invokables' => [
-            'UthandoNewsletterMessage'      => 'UthandoNewsletter\Service\Message',
-            'UthandoNewsletter'             => 'UthandoNewsletter\Service\Newsletter',
-            'UthandoNewsletterSubscriber'   => 'UthandoNewsletter\Service\Subscriber',
-            'UthandoNewsletterSubscription' => 'UthandoNewsletter\Service\Subscription',
-            'UthandoNewsletterTemplate'     => 'UthandoNewsletter\Service\Template',
+            MessageService::class       => MessageService::class,
+            NewsletterService::class    => NewsletterService::class,
+            SubscriberService::class    => SubscriberService::class,
+            SubscriptionService::class  => SubscriptionService::class,
+            TemplateService::class      => TemplateService::class,
         ],
     ],
     'view_manager' => [
         'strategies' => [
-            'ViewNewsletterStrategy',
+            NewsletterStrategy::class,
         ],
         'template_map' => include __DIR__ . '/../template_map.php'
     ],
@@ -101,7 +68,7 @@ return [
                     'route' => '/newsletter',
                     'defaults' => [
                         '__NAMESPACE__' => 'UthandoNewsletter\Controller',
-                        'controller' => 'Preferences',
+                        'controller' => PreferencesController::class,
                         'action' => 'index',
                     ],
                 ],
@@ -122,7 +89,7 @@ return [
                         'options' => [
                             'route' => '/update',
                             'defaults' => [
-                                'controller' => 'Subscriber',
+                                'controller' => SubscriberController::class,
                                 'action' => 'update-subscription',
                             ],
                             'constraints'   => [

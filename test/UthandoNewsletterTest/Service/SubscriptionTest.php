@@ -10,8 +10,8 @@
 
 namespace UthandoNewsletterTest\Service;
 
-use UthandoNewsletter\Model\Subscription as SubscriptionModel;
-use UthandoNewsletter\Service\Subscription;
+use UthandoNewsletter\Model\SubscriptionModel as SubscriptionModel;
+use UthandoNewsletter\Service\SubscriptionService;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class SubscriptionTest extends TestCase
@@ -22,14 +22,14 @@ class SubscriptionTest extends TestCase
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterSubscription');
 
-        $this->assertInstanceOf(Subscription::class, $service);
+        $this->assertInstanceOf(SubscriptionService::class, $service);
     }
 
     public function testGetSubscriptionsBySubscriberId()
     {
         $subscriptionModel = new SubscriptionModel();
 
-        $subscriptionMapperMock = $this->getMock('UthandoNewsletter\Mapper\Subscription');
+        $subscriptionMapperMock = $this->getMock('UthandoNewsletter\Mapper\SubscriptionMapper');
         $subscriptionMapperMock->expects($this->once())
             ->method('getSubscriptionsBySubscriberId')
             ->willReturn([$subscriptionModel]);
@@ -37,7 +37,7 @@ class SubscriptionTest extends TestCase
         $this->serviceManager->get('UthandoMapperManager')->setAllowOverride(true);
         $this->serviceManager->get('UthandoMapperManager')->setService('UthandoNewsletterSubscription', $subscriptionMapperMock);
 
-        /* @var Subscription $service */
+        /* @var SubscriptionService $service */
         $service = $this->serviceManager
             ->get('UthandoServiceManager')
             ->get('UthandoNewsletterSubscription');

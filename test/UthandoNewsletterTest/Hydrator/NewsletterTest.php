@@ -11,8 +11,8 @@
 namespace UthandoNewsletterTest\Hydrator;
 
 use UthandoCommon\Hydrator\Strategy\TrueFalse;
-use UthandoNewsletter\Hydrator\Newsletter;
-use UthandoNewsletter\Model\Newsletter as NewsletterModel;
+use UthandoNewsletter\Hydrator\NewsletterHydrator;
+use UthandoNewsletter\Model\NewsletterModel as NewsletterModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class NewsletterTest extends TestCase
@@ -22,12 +22,12 @@ class NewsletterTest extends TestCase
         $hydrator = $this->serviceManager
             ->get('HydratorManager')
             ->get('UthandoNewsletter');
-        $this->assertInstanceOf(Newsletter::class, $hydrator);
+        $this->assertInstanceOf(NewsletterHydrator::class, $hydrator);
     }
 
     public function testHydratorHasCorrectStrategiesSet()
     {
-        $hydrator = new Newsletter();
+        $hydrator = new NewsletterHydrator();
 
         $this->assertTrue($hydrator->hasStrategy('visible'));
         $this->assertInstanceOf(TrueFalse::class , $hydrator->getStrategy('visible'));
@@ -42,7 +42,7 @@ class NewsletterTest extends TestCase
             'visible'       => 1,
         ];
 
-        $hydrator = new Newsletter();
+        $hydrator = new NewsletterHydrator();
         $model = $hydrator->hydrate($data, new NewsletterModel());
         $this->assertSame($data, $hydrator->extract($model));
     }

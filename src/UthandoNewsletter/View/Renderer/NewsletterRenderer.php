@@ -10,9 +10,9 @@
 
 namespace UthandoNewsletter\View\Renderer;
 
-use UthandoNewsletter\Model\Message;
-use UthandoNewsletter\Model\Template;
-use UthandoNewsletter\View\Model\NewsletterModel;
+use UthandoNewsletter\Model\MessageModel;
+use UthandoNewsletter\Model\TemplateModel;
+use UthandoNewsletter\View\Model\NewsletterViewModel;
 use UthandoNewsletter\View\Resolver\NewsletterResolver;
 use Zend\View\Exception\DomainException;
 use Zend\View\Exception\RuntimeException;
@@ -48,7 +48,7 @@ class NewsletterRenderer implements RendererInterface
 
     /**
      * @param null $name
-     * @return array|null|Message|Template|NewsletterResolver
+     * @return array|null|MessageModel|TemplateModel|NewsletterResolver
      */
     public function resolver($name = null)
     {
@@ -84,7 +84,7 @@ class NewsletterRenderer implements RendererInterface
      */
     public function render($nameOrModel, $values = null)
     {
-        if ($nameOrModel instanceof NewsletterModel) {
+        if ($nameOrModel instanceof NewsletterViewModel) {
             $model       = $nameOrModel;
             $nameOrModel = $model->getTemplate();
 

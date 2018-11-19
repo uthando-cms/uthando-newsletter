@@ -11,22 +11,22 @@
 namespace UthandoNewsletterTest\Model;
 
 use DateTime;
-use UthandoNewsletter\Model\Message;
-use UthandoNewsletter\Model\Newsletter;
-use UthandoNewsletter\Model\Template;
+use UthandoNewsletter\Model\MessageModel;
+use UthandoNewsletter\Model\NewsletterModel;
+use UthandoNewsletter\Model\TemplateModel;
 use UthandoNewsletterTest\Framework\TestCase;
 
 class MessageTest extends TestCase
 {
     /**
-     * @var Message
+     * @var MessageModel
      */
     protected $model;
 
     public function setUp()
     {
         parent::setUp();
-        $model = new Message();
+        $model = new MessageModel();
         $this->model = $model;
     }
 
@@ -68,14 +68,14 @@ class MessageTest extends TestCase
 
     public function testSetGetNewsletter()
     {
-        $this->model->setNewsletter(new Newsletter());
-        $this->assertInstanceOf(Newsletter::class, $this->model->getNewsletter());
+        $this->model->setNewsletter(new NewsletterModel());
+        $this->assertInstanceOf(NewsletterModel::class, $this->model->getNewsletter());
     }
 
     public function testSetGetTemplate()
     {
-        $this->model->setTemplate(new Template());
-        $this->assertInstanceOf(Template::class, $this->model->getTemplate());
+        $this->model->setTemplate(new TemplateModel());
+        $this->assertInstanceOf(TemplateModel::class, $this->model->getTemplate());
     }
 
     public function testSetGetSent()
